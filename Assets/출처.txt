@@ -1,0 +1,26 @@
+플레이어 메인 모델링 - 사이트(cgtrader) Roman Yuldashev
+https://www.cgtrader.com/free-3d-models/character/sci-fi-character/robot-01a69f32-a54d-475a-a6cc-7708879c2f34
+
+검 - "Sci-fi sword" (https://skfb.ly/oETZq) by Tronin Dmitry is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+EnemyHealth Bar - https://opengameart.org/content/animated-loading-bar
+
+Enemy 캐릭터 - 사이트(mixamo), Unity 에셋(Skeleton Warrior 1)
+
+캐릭터 복싱공격 애니매이션 - 사이트(mixamo)
+
+PlayerHealthBar - 출처 <a href="https://kr.freepik.com/free-vector/gradient-colorful-sliders-collection_21077638.htm#query=Healthbar&position=16&from_view=search&track=ais">Freepik</a>
+
+버튼 및 패널 - <a href="https://kr.freepik.com/free-vector/vector-game-template-gui-kit_15637412.htm#page=6&query=ui%20button&position=35&from_view=search&track=ais">작가 jcomp</a> 출처 Freepik
+
+스킬 아이콘 -https://opengameart.org/content/skill-item-and-spell-icons
+
+Anton구글 폰트 : https://fonts.google.com/specimen/Anton?preview.text=START&preview.text_type=custom
+
+Main Menu 버튼 이미지 : 출처 <a href="https://kr.freepik.com/free-vector/twitch-stream-panels_9158953.htm#page=4&query=Button&position=2&from_view=search&track=sph">Freepik</a>
+
+우주전갈 몹 3D모델링 : "O.U.R.S: Enemy #1" //가로 친개 접속사이트 입니다.(https://skfb.ly/o9xWQ) by Kuruzeus is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+팔라딘 (검이랑 방패들고있는 Enemy) 모델링 및 애니메이션 : 믹스아모
+
+타켓 이미지 : https://opengameart.org/content/crosshairs-and-reticles
