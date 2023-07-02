@@ -136,7 +136,7 @@ public class PlayerNewInputController : MonoBehaviour
 
             Vector3 tadir = PlayerTargeting.targetEnemy.transform.position - cinemachineCameraTarget.transform.position;
 
-            cinemachineCameraTarget.transform.forward = tadir; // 애니메이션 뒷거름 옆걸음 밑 여러가지 추가 옆구루기 등등
+            cinemachineCameraTarget.transform.forward = tadir;
             Quaternion lookRot = cinemachineCameraTarget.transform.rotation;
 
             cameraRotation = new Vector2(lookRot.eulerAngles.y , lookRot.eulerAngles.x); // Quaternion.Euler(cameraRotation.y, cameraRotation.x, 0); y가 x로 가고 x가 y로 가니깐 이런식으로 주는게 맞다.

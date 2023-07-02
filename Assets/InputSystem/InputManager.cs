@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class InputManager : Singleton<InputManager>
@@ -21,8 +23,9 @@ public class InputManager : Singleton<InputManager>
     public bool weapon2Key;
     [HideInInspector]
     public bool weapon3Key;
-    [HideInInspector]
-    public bool actionKey;
+
+    public UnityAction actions;
+
 
     // 직접 구한 값을 통해 할것인가
     public bool analogMovement;
@@ -103,7 +106,7 @@ public class InputManager : Singleton<InputManager>
         {
             attackKey = true;
             PlayerNewInputController.animator.SetTrigger(AnimString.Instance.attack);
-            // 여기에서 추가적인 공격 동작을 호출하거나 다른 동작을 수행할 수 있습니다.
+            // 여기에서 추가적인 공격 동작을 호출하거나 다른 동작을 수행할 수 있습니다. 델리게이트를 이용하면 좋을거 같기도
 
         }
         else if (context.canceled)
@@ -154,19 +157,15 @@ public class InputManager : Singleton<InputManager>
             weapon3Key = false;
         }
     }
-    public void Action(InputAction.CallbackContext context)
+
+    public void OnAction(InputAction.CallbackContext context)
     {
-        if (context.started && !actionKey)
+        if (context.started)
         {
-            actionKey = true;
-        }
-        else if (context.canceled)
-        {
-            actionKey = false;
+            actions?.Invoke();
+            
         }
     }
-
-
 
     private void OnApplicationFocus(bool hasFocus)
     {

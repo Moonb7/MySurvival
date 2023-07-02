@@ -6,8 +6,10 @@ public class TestSpawn_enemies : Interactive
     public float range;
     private Vector3 randomPos;
 
-    private void Update()
+    public override void Update()
     {
+        base.Update();
+
         randomPos = new Vector3(
             Random.Range(player.transform.localPosition.x + range, player.transform.localPosition.x - range),
             enemyPrefab.transform.localPosition.y,
@@ -17,6 +19,8 @@ public class TestSpawn_enemies : Interactive
 
     public override void DoAction()
     {
+        base.DoAction();
+
         Instantiate(enemyPrefab, randomPos, Quaternion.identity);
     }
 }

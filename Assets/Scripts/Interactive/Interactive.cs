@@ -1,5 +1,4 @@
 using TMPro;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class Interactive : MonoBehaviour
@@ -18,7 +17,12 @@ public class Interactive : MonoBehaviour
     [Tooltip("체크시 기본적인 상호작용이 안되게 설정가능")]
     public bool unIntreractive = false;
 
-    private void Update()
+    /*public void Start()
+    {
+        InputManager.Instance.actions += Action; //액션키를 이용해서 사용하였다.
+    }*/
+
+    public virtual void Update()
     {
         theDistance = Vector3.Distance(transform.position,player.position);
         {
@@ -26,22 +30,13 @@ public class Interactive : MonoBehaviour
                 return;
 
             //거리 계산해서 UI 보이게 처리
-            if (theDistance <= minDistance)
+            if (theDistance <= minDistance) // 이게 약간 그런가 보네 그냥 여기 자체에 범위를 만들고 범위안으로 "Player가 들어오면 뜨게 하자
             {
                 ShowActionUI();
             }
             else
             {
                 HiddenActionUI();
-            }
-
-            //Action 처리
-            if (InputManager.Instance.actionKey && theDistance <= minDistance)
-            {
-                HiddenActionUI();
-
-                // 액션
-                DoAction();
             }
         }
     }
@@ -59,8 +54,17 @@ public class Interactive : MonoBehaviour
         actionText.text = "";
     }
 
+    void Action()
+    {
+        if (theDistance <= minDistance)
+        { 
+            // 액션
+            DoAction();
+        }
+    }
+
     public virtual void DoAction()
     {
-        // 해당 오브젝트를 없애도 되고 여러가지 원하는 액션 취하기
+        HiddenActionUI();
     }
 }
