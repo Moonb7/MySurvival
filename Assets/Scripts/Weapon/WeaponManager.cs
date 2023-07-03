@@ -11,7 +11,7 @@ public class WeaponManager : MonoBehaviour
 
     // 시작무기 설정 - Player가 가질 무기를 3개로 정했다
     public List<WeaponController> startingWeapons = new List<WeaponController>();
-    public WeaponController[] weaponSlots = new WeaponController[3];
+    public WeaponController[] weaponSlots = new WeaponController[2];
 
     public static WeaponController activeWeapon;
 
@@ -118,7 +118,6 @@ public class WeaponManager : MonoBehaviour
     public float layerSpeed = 1.5f;
     void UpadateChange()
     {
-        
         // 무기 변환은 상체 애니 매이션만 쓸려고 마스크를 만들어 이용하였습니다.
         PlayerNewInputController.animator.SetLayerWeight(2, layerSwapTime);
         if (notChange)
@@ -142,7 +141,7 @@ public class WeaponManager : MonoBehaviour
     // 무기를 바꾸거나 꺼내는 함수
     IEnumerator WeaponInChange(int ActiveWeaponIndex)
     {
-        if (weaponSlots[ActiveWeaponIndex] == activeWeapon || PlayerNewInputController.animator.GetBool(AnimString.Instance.isAttack))
+        if (weaponSlots[ActiveWeaponIndex] == activeWeapon || PlayerNewInputController.animator.GetBool(AnimString.Instance.isAttack)) // 현재 무기인가 또는 공격중인가
         {
             yield break; // 실행 하면 안되는 조건들
         }

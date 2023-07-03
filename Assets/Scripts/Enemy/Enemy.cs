@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         stats = GetComponent<CharacterStats>();
-
         player = GameObject.FindGameObjectWithTag("Player");
 
         attackRange = agent.stoppingDistance - 0.1f;
