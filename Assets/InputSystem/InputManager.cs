@@ -24,9 +24,6 @@ public class InputManager : Singleton<InputManager>
     [HideInInspector]
     public bool weapon3Key;
 
-    public UnityAction actions;
-
-
     // 직접 구한 값을 통해 할것인가
     public bool analogMovement;
 
@@ -105,7 +102,7 @@ public class InputManager : Singleton<InputManager>
         if (context.started && !attackKey)
         {
             attackKey = true;
-            PlayerNewInputController.animator.SetTrigger(AnimString.Instance.attack);
+            //PlayerNewInputController.animator.SetTrigger(AnimString.Instance.attack);
             // 여기에서 추가적인 공격 동작을 호출하거나 다른 동작을 수행할 수 있습니다. 델리게이트를 이용하면 좋을거 같기도
 
         }
@@ -155,15 +152,6 @@ public class InputManager : Singleton<InputManager>
         else if (context.canceled)
         {
             weapon3Key = false;
-        }
-    }
-
-    public void OnAction(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            actions?.Invoke();
-            
         }
     }
 

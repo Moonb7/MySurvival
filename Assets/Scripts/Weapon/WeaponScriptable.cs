@@ -1,25 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 // 무기에 필요한 옵션을 외부에서 설정할수 있게 만들기
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon")]
-public class WeaponScriptable : ScriptableObject
+public class WeaponScriptable : ScriptableObject // 이 클래스는 무기마다의 특징 정보들 입력하기위해
 {
-    // 무기가 만들어 졌을때 사용되는 프리팹
-    public GameObject SourcePrefab;
+    public WeaponType attackType;           // 무기 타입
+    public string weaponName;               // 무기 이름
+    public string weapondescription;        // 무기 설명
+    public Sprite weaponImage;              // 무기 이미지
+    public Sprite skillImage1;              // 스킬1이미지
+    public Sprite skillImage2;              // 스킬2이미지
 
-    public WeaponAttackType attackType;
-
-    //new public string name;
-    public int nuber;
-
-    public Sprite weaponImage;
-    public Sprite skillImage1;
-    public Sprite skillImage2;
-
-    public float atk;    // 데미지
-
+    public float atk;                       // 해당 무기 대미지
+    public float rateSpeed;                 // 기본 공격 속도
+}
+public enum WeaponType
+{
+    meleeweapon,
+    rangedweapon,
 }

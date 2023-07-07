@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Tooltip("여러번 실행하면서 간단하게 몇가지 시험하기 위해 만듬 나중에 이 코드는 지우든지 체크 필수")]
+    public bool notSpawn; // 여러번 실행하면서 간단하게 몇가지 시험하기 위해 만듬 나중에 이 코드는 지우든지 체크 필수
+
     public TextMeshProUGUI playTime;
     private float startTime;
     private float elapsedTime; // 경과 시간 계산
@@ -43,6 +46,9 @@ public class GameManager : MonoBehaviour
 
     private void DefaultSpawnEnemy() //Enemy Spawn
     {
+        if (notSpawn)
+            return;
+
         for (int i = 0;i < 5; i++)
         {
             randomPos = new Vector3(
@@ -51,7 +57,8 @@ public class GameManager : MonoBehaviour
             Random.Range(player.transform.localPosition.z + range, player.transform.localPosition.z - range)
             );
 
-            Instantiate(defaultEnemyPrefab, randomPos, Quaternion.identity);
+            if(randomPos != player.transform.localPosition) // 플레이어 위치와 동일하지 않으면 
+            Instantiate(defaultEnemyPrefab, randomPos, Quaternion.identity); // 적 생성
         }
     }
 

@@ -7,16 +7,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c46bbadeaedc9294391aebe0dd92fadd, type: 3}
   m_Name: Gun
   m_EditorClassIdentifier: 
-  SourcePrefab: {fileID: 7974365627297299236, guid: 8fd26e845037efd488efbb52704aebed,
+  attackType: 1
+  weaponPrefab: {fileID: 7974365627297299236, guid: 8fd26e845037efd488efbb52704aebed,
     type: 3}
-  attackType: 2
-  nuber: 2
+  attackSoundPrefab: {fileID: 5387577125817732491, guid: fbca36bd1244a094498880d21e913775,
+    type: 3}
+  hitEffectPrefab: {fileID: 5387577125817732491, guid: fbca36bd1244a094498880d21e913775,
+    type: 3}
+  hitSoundPrefab: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
+    type: 3}
   weaponImage: {fileID: 21300000, guid: 13c949d57cd6d714493e86730f264df7, type: 3}
   skillImage1: {fileID: 21300000, guid: 13c949d57cd6d714493e86730f264df7, type: 3}
   skillImage2: {fileID: 21300000, guid: 13c949d57cd6d714493e86730f264df7, type: 3}
-  atk: 10
+  atk: 5
+  rateSpeed: 1

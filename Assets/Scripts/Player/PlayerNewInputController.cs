@@ -284,7 +284,6 @@ public class PlayerNewInputController : MonoBehaviour
         if (animator.GetBool(AnimString.Instance.isGround)) // 땅에 있으면
         {
             animator.SetBool(AnimString.Instance.jump, false);
-            animator.SetBool(AnimString.Instance.freeFall, false);
 
             if (verticalVelocity < 0) // 혹시 값이 작으면
             {

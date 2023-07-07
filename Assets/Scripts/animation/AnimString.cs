@@ -19,7 +19,6 @@ public class AnimString : Singleton<AnimString>
     public string move = "Move";
     public string roll = "Roll";
     public string jump = "Jump";
-    public string freeFall = "FreeFall";
     public string attack = "Attack";
     public string attackMode = "AttackMode";
     public string weaponStats = "WeaponStats"; // Weaon≈∏¿‘

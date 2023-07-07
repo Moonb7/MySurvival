@@ -16,8 +16,8 @@ public class SkillUI : MonoBehaviour
 
     void SetskillInage()
     {
-        weaponImage.sprite = WeaponManager.activeWeapon.weapon.weaponImage;
-        skillImage1.sprite = WeaponManager.activeWeapon.weapon.skillImage1;
-        skillImage2.sprite = WeaponManager.activeWeapon.weapon.skillImage2;
+        weaponImage.sprite = WeaponManager.activeWeapon.weaponScriptable.weaponImage;
+        skillImage1.sprite = WeaponManager.activeWeapon.weaponScriptable.skillImage1;
+        skillImage2.sprite = WeaponManager.activeWeapon.weaponScriptable.skillImage2;
     }
 }

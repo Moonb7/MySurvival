@@ -7,7 +7,6 @@ public enum EnemyState //애니메이션은 변수순서대로 하였다.
     Idle,   // 대기
     Chase,  // 타켓 찾기
     Attack, // 공격
-    Defence
 }
 public class Enemy : MonoBehaviour
 {
@@ -79,10 +78,6 @@ public class Enemy : MonoBehaviour
                 {
                     SetState(EnemyState.Chase);
                 }
-                break;
-
-            case EnemyState.Defence: // 방어 모드
-                transform.LookAt(target);
                 break;
         }
 
