@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponScriptable : ScriptableObject // 이 클래스는 무기마다의 특징 정보들 입력하기위해
 {
     public WeaponType attackType;           // 무기 타입
+    public short weaponNum;                 // 무기 번호
     public string weaponName;               // 무기 이름
     public string weapondescription;        // 무기 설명
     public Sprite weaponImage;              // 무기 이미지
@@ -13,6 +14,7 @@ public class WeaponScriptable : ScriptableObject // 이 클래스는 무기마다의 특징 
 
     public float atk;                       // 해당 무기 대미지
     public float rateSpeed;                 // 기본 공격 속도
+    public float atkRange;                  // 공격범위
 }
 public enum WeaponType
 {

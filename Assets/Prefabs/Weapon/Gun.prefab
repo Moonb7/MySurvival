@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7974365627297535972}
   - component: {fileID: 7974365627296172178}
   - component: {fileID: 7974365627295106148}
-  - component: {fileID: 7176180675018456077}
   - component: {fileID: 5266854778277227040}
   m_Layer: 0
   m_Name: Gun
@@ -85,21 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7176180675018456077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7974365627297299236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70945613b7d34c446b26be1e6648fd22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponScriptable: {fileID: 11400000, guid: 63579ddb1ea46ab4dac5e64a15925a86, type: 2}
-  meleeArea: {fileID: 0}
-  audioSource: {fileID: 5266854778277227040}
 --- !u!82 &5266854778277227040
 AudioSource:
   m_ObjectHideFlags: 0

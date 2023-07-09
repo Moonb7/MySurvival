@@ -1921,7 +1921,7 @@ PrefabInstance:
     - target: {fileID: 7828547735636017855, guid: 6f01c1c0785cd7f46b4f337c659c3cab,
         type: 3}
       propertyPath: m_Name
-      value: Sowrd
+      value: Sword
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f01c1c0785cd7f46b4f337c659c3cab, type: 3}
@@ -3610,6 +3610,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f14375c868ceb454f88ccfcb9e483430, type: 3}
+--- !u!1 &1895720432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7828547735636017855, guid: 6f01c1c0785cd7f46b4f337c659c3cab,
+    type: 3}
+  m_PrefabInstance: {fileID: 778344126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1895720438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895720432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c9a6a0226ddcd41ae735bb0047b71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponScriptable: {fileID: 0}
+  weaponAnimator: {fileID: 0}
+  attackEffect: {fileID: 0}
+  dashAttackEffect: {fileID: 0}
+  chargingEffect: {fileID: 0}
+  chargingAttackEffect: {fileID: 0}
+  skill1Effect: {fileID: 0}
+  skill2Effect: {fileID: 0}
+  ultimateSkillEffect: {fileID: 0}
+  attackSound: {fileID: 0}
+  dashAttackSound: {fileID: 0}
+  chargingSound: {fileID: 0}
+  chargingAttackSound: {fileID: 0}
+  skill1Sound: {fileID: 0}
+  skill2Sound: {fileID: 0}
+  ultimateSkillSound: {fileID: 0}
 --- !u!1 &1944029322 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1089377386902081984, guid: 50a903431bde5ed48a83d4cbb60d2d34,
@@ -4861,6 +4895,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 72fc1da46d30baf44893af33e5bc6b90,
         type: 2}
+    - target: {fileID: 5959883597898436864, guid: 50a903431bde5ed48a83d4cbb60d2d34,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8082775733347577425, guid: 50a903431bde5ed48a83d4cbb60d2d34,
         type: 3}
       propertyPath: targetUI
