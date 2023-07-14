@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1308283002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1308283003}
+  m_Layer: 0
+  m_Name: EffectGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1308283003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308283002}
+  m_LocalRotation: {x: -0.15603262, y: -0.68967664, z: -0.15603262, w: 0.68967664}
+  m_LocalPosition: {x: 0, y: 1.15, z: 1.91}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 312417822541351802}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -25.496, y: -90, z: 0}
 --- !u!1 &164497610794772591
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +477,7 @@ Transform:
   - {fileID: 5345145705172566876}
   - {fileID: 300914305941654643}
   - {fileID: 1687316294489534538}
+  - {fileID: 1308283003}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -590,6 +622,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d29b6eb0d115134fb8cdacc78c7886b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingWeapons:
+  - {fileID: 1895720438, guid: 6f01c1c0785cd7f46b4f337c659c3cab, type: 3}
+  effectGenerator: {fileID: 0}
+  defaultWeaponPos: {fileID: 279037529212907692}
+  weaponmountPos: {fileID: 279037530537025951}
+  attackModeTime: 5
+  layerAtkModeTime: 0
 --- !u!114 &279037530417785988
 MonoBehaviour:
   m_ObjectHideFlags: 0

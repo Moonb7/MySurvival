@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class InputManager : Singleton<InputManager>
 {
@@ -15,8 +16,6 @@ public class InputManager : Singleton<InputManager>
     public bool sprintKey;
     [HideInInspector]
     public bool rollKey;
-    [HideInInspector]
-    public bool attackKey;
     [HideInInspector]
     public bool weapon1Key;
     [HideInInspector]
@@ -99,17 +98,29 @@ public class InputManager : Singleton<InputManager>
 
     public void OnAttack(InputAction.CallbackContext context) // 기본 공격
     {
-        if (context.started && !attackKey)
+        if (WeaponManager.activeWeapon != null && WeaponManager.isChangeReady && // 공격 준비상태인지
+            PlayerNewInputController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false )                            // 땅에 있는지체크
         {
-            attackKey = true;
-            //PlayerNewInputController.animator.SetTrigger(AnimString.Instance.attack);
-            // 여기에서 추가적인 공격 동작을 호출하거나 다른 동작을 수행할 수 있습니다. 델리게이트를 이용하면 좋을거 같기도
-
+            if (context.performed)
+            {
+                if (context.interaction is HoldInteraction)      // 차징 공격
+                {
+                    float chagingEnergy = +Time.deltaTime;
+                    // 여기에 모으는 이벤트 액션이 들어가야된다.
+                    Debug.Log($"차징 : {chagingEnergy}");
+                    if (chagingEnergy > WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime /*&& */) // 모으는 시간을 넘기고 키를 때면
+                    {
+                        // 조건 완료 표시도 있어야 할거 같다. 이펙트활용을 하자
+                        WeaponManager.activeWeapon.ChargingAttack();
+                    }
+                }
+                else if (context.interaction is PressInteraction) // 일반 공격
+                {
+                    WeaponManager.activeWeapon.Attack();
+                }
+            }
         }
-        else if (context.canceled)
-        {
-            attackKey = false;
-        }
+        
     }
 
     public void OnTargetting(InputAction.CallbackContext context) // 고정할 타켓 설정 자세한건 PlayerTargetting 참고
@@ -141,17 +152,6 @@ public class InputManager : Singleton<InputManager>
         else if (context.canceled)
         {
             weapon2Key = false;
-        }
-    }
-    public void Weapon3(InputAction.CallbackContext context)
-    {
-        if (context.started && !weapon3Key)
-        {
-            weapon3Key = true;
-        }
-        else if (context.canceled)
-        {
-            weapon3Key = false;
         }
     }
 

@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9067879781861144435
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f90b215686dd44085a751e4088782f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boolName: IsAttack
+  updateOnState: 1
+  updateOnStateMachine: 0
+  valueEnter: 1
+  valueExit: 0
 --- !u!206 &-8924004556873171702
 BlendTree:
   m_ObjectHideFlags: 1
@@ -825,7 +842,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SowrdAttack1
-  m_Speed: 1
+  m_Speed: 1.25
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5364501489275796655}
@@ -1644,7 +1661,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: IsMounting
+  - m_Name: IsEquip
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1820,7 +1837,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SowrdAttack2
-  m_Speed: 1
+  m_Speed: 1.25
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5478533279884201481}
@@ -1834,7 +1851,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 20adad1b2ce7a5e4d953f3c872b48397, type: 2}
+  m_Motion: {fileID: 7400000, guid: a8f346d1730c34b439b113cd8017e51d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: IsGround
@@ -2358,7 +2375,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: IsMounting
+    m_ConditionEvent: IsEquip
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3680715747386985199}
@@ -2485,7 +2502,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SowrdAttack3
-  m_Speed: 1
+  m_Speed: 1.25
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6829879438599711829}
@@ -2498,7 +2515,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 4811c51ed36172e419cf7b70573ccbc7, type: 2}
+  m_Motion: {fileID: 7400000, guid: 1aabb26f0486be7479efb873e7b92697, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2820,23 +2837,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &8145171537790177898
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66f90b215686dd44085a751e4088782f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boolName: IsAttack
-  updateOnState: 1
-  updateOnStateMachine: 0
-  valueEnter: 1
-  valueExit: 0
 --- !u!1107 &8577080366431317796
 AnimatorStateMachine:
   serializedVersion: 6
@@ -2861,7 +2861,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours:
   - {fileID: -1828866658637275811}
-  - {fileID: 8145171537790177898}
+  - {fileID: -9067879781861144435}
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 40, y: 180, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}

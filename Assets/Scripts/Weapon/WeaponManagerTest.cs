@@ -68,7 +68,7 @@ public class WeaponManagerTest : MonoBehaviour
         PlayerNewInputController.animator.SetLayerWeight(1, layerAtkModeTime);
         PlayerNewInputController.animator.SetBool(AnimString.Instance.attackMode, attackMode);
 
-        if (InputManager.Instance.attackKey && PlayerNewInputController.animator.GetBool(AnimString.Instance.isGround) && notChange)
+        if (/*InputManager.Instance.attackKey &&*/ PlayerNewInputController.animator.GetBool(AnimString.Instance.isGround) && notChange)
         {
             //if(activeWeapon != null)
             {

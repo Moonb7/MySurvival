@@ -126,9 +126,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7828547735636017848}
-  - component: {fileID: 1948280661}
-  - component: {fileID: 5632014974369135112}
   - component: {fileID: 1445953052}
+  - component: {fileID: 1895720438}
   m_Layer: 0
   m_Name: Sowrd
   m_TagString: MeleeWeapon
@@ -152,31 +151,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1948280661
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7828547735636017855}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.029802332, y: 0.04529379, z: 0.9808117}
-  m_Center: {x: -0.000000037806675, y: -0.00000007028092, z: 0.76319426}
---- !u!114 &5632014974369135112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7828547735636017855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66c1f0a8e14ca7e4abe2ea5d4ec914bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1445953052
 AudioSource:
   m_ObjectHideFlags: 0
@@ -234,7 +208,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.85
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -274,6 +248,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1895720438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7828547735636017855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c9a6a0226ddcd41ae735bb0047b71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponScriptable: {fileID: 11400000, guid: 72fc1da46d30baf44893af33e5bc6b90, type: 2}
+  weaponAnimator: {fileID: 0}
+  weaponAudioSource: {fileID: 1445953052}
+  weaponManager: {fileID: 0}
+  attackEffect: {fileID: 206906933502295669, guid: 86f6990ec880fac40a2f7d3253cc8d79,
+    type: 3}
+  dashAttackEffect: {fileID: 0}
+  chargingEffect: {fileID: 0}
+  chargingAttackEffect: {fileID: 0}
+  skill1Effect: {fileID: 0}
+  skill2Effect: {fileID: 0}
+  ultimateSkillEffect: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 62e48d51911a9294aab8284e2a117204, type: 3}
+  dashAttackSound: {fileID: 0}
+  chargingSound: {fileID: 0}
+  chargingAttackSound: {fileID: 0}
+  skill1Sound: {fileID: 0}
+  skill2Sound: {fileID: 0}
+  ultimateSkillSound: {fileID: 0}
 --- !u!1 &8570827522862914011
 GameObject:
   m_ObjectHideFlags: 0

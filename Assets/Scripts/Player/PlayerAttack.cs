@@ -12,12 +12,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void Start()
     {
-        stats = GetComponent<CharacterStats>();
+        stats = GetComponentInParent<CharacterStats>();
         if(stats == null )
             stats = GetComponentInParent<CharacterStats>();
-        weapon= GetComponent<WeaponBase>();
-        if(weapon == null )
-        weapon = GetComponentInParent<WeaponBase>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -26,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
 
         if(other.gameObject.tag == "Enemy")
         {
-            totalAttack = stats.attack.GetValue() + weapon.weaponScriptable.atk;
+            totalAttack = stats.attack.GetValue() + WeaponManager.activeWeapon.weaponScriptable.atk; // 캐릭터의 공격 스텟과 현재 장착중인 무기의 공격력을 더한 값
 
             damageable = other.GetComponent<Damageable>();
             if (damageable == null)
@@ -34,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
                 damageable = other.GetComponentInParent<Damageable>();
             }
             damageable.InflictDamage(totalAttack, false, this.gameObject);
+            this.enabled= false;
         }
     }
 }

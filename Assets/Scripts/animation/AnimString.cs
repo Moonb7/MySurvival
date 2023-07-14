@@ -26,7 +26,7 @@ public class AnimString : Singleton<AnimString>
     
     // 무기 관련
     public string weaponChange = "WeaponChange";
-    public string isMounting = "IsMounting";
+    public string isMounting = "IsEquip";
 
     [Header("Enemy")]
     public string enemyState = "EnemyState";

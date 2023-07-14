@@ -13,16 +13,11 @@ MonoBehaviour:
   m_Name: Sowrd
   m_EditorClassIdentifier: 
   attackType: 0
-  weaponPrefab: {fileID: 7828547735636017855, guid: 6f01c1c0785cd7f46b4f337c659c3cab,
-    type: 3}
-  attackSound: {fileID: 8300000, guid: 2829a5212f9da134e88443a1f91d0e48, type: 3}
-  slashEffectPrefab: {fileID: 206906933502295669, guid: 86f6990ec880fac40a2f7d3253cc8d79,
-    type: 3}
-  hitEffectPrefab: {fileID: 7159305584267233729, guid: 2f8f1f9c8a5efc24ab9bc48465ad5215,
-    type: 3}
-  hitSound: {fileID: 8300000, guid: ee8244fd830039e42aeec47962ba4051, type: 3}
+  weaponNum: 0
+  weaponName: Sword
+  weapondescription: This is Sword
   weaponImage: {fileID: 21300000, guid: 0d7a0ffbbe4c3af49a24ca75091a5165, type: 3}
   skillImage1: {fileID: 21300000, guid: 8bc2c9d51ca54fb4bafb1902fba95eb3, type: 3}
   skillImage2: {fileID: 21300000, guid: d290fab0034569e41b46a73eaed49e23, type: 3}
-  atk: 10
-  rateSpeed: 1
+  atk: 5
+  chargingEnergyTime: 3

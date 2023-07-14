@@ -1,34 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
     public List<WeaponBase> startingWeapons = new List<WeaponBase>();
-    public WeaponBase[] weaponSlots = new WeaponBase[2];    // 게임 기획에 맞게 2개만 들고 다닐 수 있게 해놓았다. 나중에 privet으로 만들기 잠시 확인용
+    private WeaponBase[] weaponSlots = new WeaponBase[2];               // 게임 기획에 맞게 2개만 들고 다닐 수 있게 해놓았다. 나중에 privet으로 만들기 잠시 확인용
     public Transform defaultWeaponPos;                                  // 무기 대기위치
-    public Transform weaponmountPos;                                    // 무기 장착위치
-    public static WeaponBase activeWeapon;                        // 들고 있는 무기
+    public Transform weaponEquipPos;                                    // 무기 장착위치
+    public static WeaponBase activeWeapon;                              // 현재 장착 무기
 
     [SerializeField]
-    private float attackModeTime = 5f;  // 공격모드 지속시간
-    private float attackDelay = 0;      //
-    
-    private bool attackMode;            // 공격모드 중인지
+    private float attackModeTime = 5f;                                  // 공격모드 지속시간
+    private bool attackMode;                                            // 공격모드 중인지
+    private float layerAtkModeTime;                                     // 공격모드지속 시간
+    private float countDown;                                            //
 
-    public float layerAtkModeTime;      
-    private float countDown;
+    public static bool isChangeReady = true;                                  // 무기 교체가능한지
 
-    private bool isChangeReady = true;         // 무기 교체가능한지
-    private bool isAttackReady;         // 공격 가능한지
-
-    private void Start()
+    private void Awake()
     {
-        foreach (var w in startingWeapons) 
+        foreach (var w in startingWeapons)
         {
             AddWeapon(w);
         }
-        activeWeapon = weaponSlots[0];
+    }
+
+    private void Start()
+    {
+        if (weaponSlots[0] != null) // 시작 무기 장착
+        {
+            activeWeapon = weaponSlots[0];
+            activeWeapon.transform.parent = weaponEquipPos;
+            activeWeapon.transform.localPosition = Vector3.zero;        
+            activeWeapon.transform.localRotation = Quaternion.identity;
+        }
     }
 
     private void Update()
@@ -36,44 +43,48 @@ public class WeaponManager : MonoBehaviour
         AttackMode();
     }
 
-    public void AttackMode()
+    private void AttackMode() // 공격 모드 유지및 공격조건들 초기화용도 이기도 하다.
     {
         PlayerNewInputController.animator.SetLayerWeight(1, layerAtkModeTime);
         PlayerNewInputController.animator.SetBool(AnimString.Instance.attackMode, attackMode);
-
-        attackDelay += Time.deltaTime;
-        isAttackReady = attackDelay > activeWeapon.weaponScriptable.rateSpeed;
-
-        if (activeWeapon != null && InputManager.Instance.attackKey && PlayerNewInputController.animator.GetBool(AnimString.Instance.isGround) // 공격키를 누르고 땅에 있고 무기교체상태가 아니고 공격준비중인지
-            && isChangeReady && isAttackReady)
-        { 
-            Attack();                   // 실제 공격
-
+        attackMode = layerAtkModeTime > 0;
+        if (PlayerNewInputController.animator.GetBool(AnimString.Instance.isAttack))   // 공격 했는지 체크
+        {
             layerAtkModeTime = 1;
             countDown = 0;
-            attackDelay = 0;
-            attackMode = true;
         }
-        else if (countDown > attackModeTime && attackMode)
+        else if (countDown > attackModeTime && attackMode && layerAtkModeTime > 0) // 공격모드지속 시간이 지났고 공격 모드 상태인지
         {
-            if (layerAtkModeTime > 0)
-            {
-                layerAtkModeTime -= Time.deltaTime;
-
-                if (layerAtkModeTime <= 0)
-                {
-                    layerAtkModeTime = 0;
-
-                    attackMode = false;
-                }
-            }
+            layerAtkModeTime -= Time.deltaTime;
         }
         countDown += Time.deltaTime;
     }
 
-    public bool AddWeapon(WeaponBase weapon)
+    private void WeaponEquip(WeaponBase weapon) // 가지고 있는 무기 장착
     {
-        if (HasWeapon(weapon) != null)   // 이미 무기가 있으면
+        if (HasWeapon(weapon) == null) // 무기가 없으면
+            return;
+
+        activeWeapon = weapon;
+        activeWeapon.transform.parent = weaponEquipPos;
+        activeWeapon.transform.localPosition = Vector3.zero;
+        activeWeapon.transform.localRotation = Quaternion.identity;
+    }
+
+    private void WeaponUnequip(WeaponBase weapon) // 가지고있는 무기 장착 해제
+    {
+        if (HasWeapon(weapon) == null) // 무기가 없으면
+            return;
+
+        activeWeapon = weapon;
+        activeWeapon.transform.parent = defaultWeaponPos;
+        activeWeapon.transform.localPosition = Vector3.zero;
+        activeWeapon.transform.localRotation = Quaternion.identity;
+    }
+
+    public bool AddWeapon(WeaponBase weapon) // 무기 추가
+    {
+        if (HasWeapon(weapon) != null) // 이미 무기가 있으면
         {
             Debug.Log("같은 무기 있음");
             return false;
@@ -81,10 +92,9 @@ public class WeaponManager : MonoBehaviour
 
         for (int i = 0; i < weaponSlots.Length; i++)
         {
-            if (weaponSlots[i] == null)
+            if (weaponSlots[i] == null) // 이미 무기가 있으면
             {
-                // 새로 무기 생성
-                WeaponBase weaponInstance = Instantiate(weapon, defaultWeaponPos);
+                WeaponBase weaponInstance = Instantiate(weapon, defaultWeaponPos); // 새로 무기 생성
                 weaponInstance.transform.localPosition = Vector3.zero;
                 weaponInstance.transform.localRotation = Quaternion.identity;
                 weaponInstance.gameObject.SetActive(true); 
@@ -97,21 +107,36 @@ public class WeaponManager : MonoBehaviour
         return false;
     }
 
-    public WeaponBase HasWeapon(WeaponBase weapon)
+    // 무기 삭제
+    public bool RemoveWeapon(WeaponBase weaponInstance)
     {
         for (int i = 0; i < weaponSlots.Length; i++)
         {
-            var w = weaponSlots[i];
-            if (w != null && w == weapon)
+            if (weaponSlots[i] == weaponInstance)
             {
-                return w;
+                weaponSlots[i] = null;      // 슬록에서 null값으로 지정
+                Destroy(weaponInstance);    // 아에 없애기
+
+                int windex = i <= 0 ? i + 1 : i - 1;
+                if(HasWeapon(weaponSlots[windex]) != null) // null이 아니면
+                {
+                    WeaponEquip(weaponSlots[windex]); // 나머지 무기 장착
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public WeaponBase HasWeapon(WeaponBase weapon) // 무기를 갖고 있는지 확인용
+    {
+        for (int i = 0; i < weaponSlots.Length; i++)
+        {
+            if (weaponSlots[i] != null && weaponSlots[i] == weapon)
+            {
+                return weaponSlots[i];
             }
         }
         return null;
-    }
-
-    private void Attack() // 실질적 공격
-    {
-        PlayerNewInputController.animator.SetTrigger(AnimString.Instance.attack);
     }
 }

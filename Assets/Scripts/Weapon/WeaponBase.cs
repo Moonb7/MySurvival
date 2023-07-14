@@ -8,6 +8,13 @@ public abstract class WeaponBase : MonoBehaviour
     public WeaponScriptable weaponScriptable;
     [Tooltip("해당 무기의 애니메이터컨트롤러")] // 이러면 해당 무기의 애니메이터를 만들어 플레이어의 컨트롤러를 교체만 해주면 간단하게 각 해당 무기의 애니매이션을 쉽게 조절 가능할 것 같다.
     public AnimatorController weaponAnimator;
+    public AudioSource weaponAudioSource;
+    public WeaponManager weaponManager;
+
+    private void Start()
+    {
+        weaponManager = GetComponentInParent<WeaponManager>();
+    }
 
     // 무기의 현재 콤보 카운터
     public int comboCount { get; set; }

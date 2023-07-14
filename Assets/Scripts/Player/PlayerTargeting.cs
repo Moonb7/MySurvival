@@ -53,10 +53,8 @@ public class PlayerTargeting : MonoBehaviour // Ground 체크하는 클래스랑 합치던�
             transform.position.z);
 
         collider = Physics.OverlapSphere(spherePosition, radius, EnemyLayer,
-            QueryTriggerInteraction.Ignore);
-
-        // 여기서도 조건으로 넣어 서 카메라에 담긴 놈들만 찾기
-        planes = GeometryUtility.CalculateFrustumPlanes(cam);
+            QueryTriggerInteraction.Ignore);        
+        planes = GeometryUtility.CalculateFrustumPlanes(cam); // 시야에 보이는 적만 찾기위해
 
         float minDistance = float.MaxValue;
 
