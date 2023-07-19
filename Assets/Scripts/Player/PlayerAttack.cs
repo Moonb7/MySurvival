@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    // 나중에 무기 공격력을 합치든 이걸 정하든 설정하자
     private float totalAttack = 0;
 
     private CharacterStats stats;
-    private WeaponBase weapon;
+    
 
     private Damageable damageable;
 
@@ -30,7 +29,8 @@ public class PlayerAttack : MonoBehaviour
             {
                 damageable = other.GetComponentInParent<Damageable>();
             }
-            damageable.InflictDamage(totalAttack, false, this.gameObject);
+            WeaponManager.activeWeapon.multiplierDamage = 0 >= WeaponManager.activeWeapon.multiplierDamage ? 1 : WeaponManager.activeWeapon.multiplierDamage;
+            damageable.InflictDamage(totalAttack * WeaponManager.activeWeapon.multiplierDamage, false, this.gameObject);
             this.enabled= false;
         }
     }

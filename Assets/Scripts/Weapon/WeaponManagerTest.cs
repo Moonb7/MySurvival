@@ -33,8 +33,8 @@ public class WeaponManagerTest : MonoBehaviour
 
     private bool IsMounting
     {
-        get { return PlayerNewInputController.animator.GetBool(AnimString.Instance.isMounting); }
-        set { PlayerNewInputController.animator.SetBool(AnimString.Instance.isMounting, value); }
+        get { return PlayerController.animator.GetBool(AnimString.Instance.isMounting); }
+        set { PlayerController.animator.SetBool(AnimString.Instance.isMounting, value); }
     }
 
     /*void Start()
@@ -65,10 +65,10 @@ public class WeaponManagerTest : MonoBehaviour
     // 공격 애니매이션 실행 및 공격상태 유지 후 공격하지 않을때 대기상태
     public void AttackMode()
     {
-        PlayerNewInputController.animator.SetLayerWeight(1, layerAtkModeTime);
-        PlayerNewInputController.animator.SetBool(AnimString.Instance.attackMode, attackMode);
+        PlayerController.animator.SetLayerWeight(1, layerAtkModeTime);
+        PlayerController.animator.SetBool(AnimString.Instance.attackMode, attackMode);
 
-        if (/*InputManager.Instance.attackKey &&*/ PlayerNewInputController.animator.GetBool(AnimString.Instance.isGround) && notChange)
+        if (/*InputManager.Instance.attackKey &&*/ PlayerController.animator.GetBool(AnimString.Instance.isGround) && notChange)
         {
             //if(activeWeapon != null)
             {

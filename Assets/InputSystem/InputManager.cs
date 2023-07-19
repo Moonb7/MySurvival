@@ -64,10 +64,12 @@ public class InputManager : Singleton<InputManager>
         if (context.started)
         {
             sprintKey = true;
+            PlayerController.animator.SetBool(AnimString.instance.sprint, true); // 상태 체크
         }
         else if (context.canceled)
         {
             sprintKey = false;
+            PlayerController.animator.SetBool(AnimString.instance.sprint, false);
         }
     }
 
@@ -99,15 +101,13 @@ public class InputManager : Singleton<InputManager>
     public void OnAttack(InputAction.CallbackContext context) // 기본 공격
     {
         if (WeaponManager.activeWeapon != null && WeaponManager.isChangeReady && // 공격 준비상태인지
-            PlayerNewInputController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false )                            // 땅에 있는지체크
+            PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false )                            // 땅에 있는지체크
         {
             if (context.performed)
             {
                 if (context.interaction is HoldInteraction)      // 차징 공격
                 {
                     float chagingEnergy = +Time.deltaTime;
-                    // 여기에 모으는 이벤트 액션이 들어가야된다.
-                    Debug.Log($"차징 : {chagingEnergy}");
                     if (chagingEnergy > WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime /*&& */) // 모으는 시간을 넘기고 키를 때면
                     {
                         // 조건 완료 표시도 있어야 할거 같다. 이펙트활용을 하자

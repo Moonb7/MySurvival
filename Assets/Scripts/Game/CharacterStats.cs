@@ -69,7 +69,7 @@ public class CharacterStats : MonoBehaviour
         if(realDamageAcount > 0)
         {
             // 데미지 구현 어떤 움직이나 맞았을때의 효과
-            WeaponManager.activeWeapon.weaponAudioSource.clip = WeaponManager.activeWeapon.attackSound;
+            WeaponManager.activeWeapon.weaponAudioSource.clip = WeaponManager.activeWeapon.attackSound; //임시 소리 바꿔야함 각각의 Hit소리를 집어 넣어야 겠다 음음
             WeaponManager.activeWeapon.weaponAudioSource.Play();
 
             if (animator != null)

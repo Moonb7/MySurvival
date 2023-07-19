@@ -7,15 +7,25 @@ public class HandleAnimationEvents : MonoBehaviour
 {
     public Transform effectGenerator; // 이펙트 생성위치
 
-    // 구르기 애니매이션 끝날때쯤 이벤트 함수를 썻다
-    void FinishedRoll()
+    void FinishedRoll() // 구르기 애니매이션 끝날때쯤 이벤트 함수를 썻다
     {
-        PlayerNewInputController.hasroll = false;
+        PlayerController.hasroll = false;
     }
 
-    void InstantiateEffect() // 이펙트 생성
+    void FinishAttack() // 공격끝난 시점 처리
     {
-        GameObject instance = Instantiate(WeaponManager.activeWeapon.attackEffect, effectGenerator); // 기본 공격 이펙트오브젝트 생성
+        PlayerController.animator.SetBool(AnimString.Instance.isAttack, false);
+    }
+
+    void AttackEffectInstantiate() // 기본 공격 이펙트 및 사운드도 실행
+    {
+        GameObject instance = Instantiate(WeaponManager.activeWeapon.attackEffect); // 기본 공격 이펙트오브젝트 생성
+        instance.transform.localPosition = effectGenerator.transform.position;
+        instance.transform.localRotation = effectGenerator.transform.rotation;
+        instance.transform.localScale = effectGenerator.transform.localScale;
         Destroy(instance, 5f);
+
+        WeaponManager.activeWeapon.weaponAudioSource.clip = WeaponManager.activeWeapon.attackSound;
+        WeaponManager.activeWeapon.weaponAudioSource.Play();
     }
 }

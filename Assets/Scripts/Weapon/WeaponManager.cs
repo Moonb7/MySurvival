@@ -6,7 +6,7 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     public List<WeaponBase> startingWeapons = new List<WeaponBase>();
-    private WeaponBase[] weaponSlots = new WeaponBase[2];               // 게임 기획에 맞게 2개만 들고 다닐 수 있게 해놓았다. 나중에 privet으로 만들기 잠시 확인용
+    private WeaponBase[] weaponSlots = new WeaponBase[2];               // 게임 기획에 맞게 2개제한
     public Transform defaultWeaponPos;                                  // 무기 대기위치
     public Transform weaponEquipPos;                                    // 무기 장착위치
     public static WeaponBase activeWeapon;                              // 현재 장착 무기
@@ -17,7 +17,9 @@ public class WeaponManager : MonoBehaviour
     private float layerAtkModeTime;                                     // 공격모드지속 시간
     private float countDown;                                            //
 
-    public static bool isChangeReady = true;                                  // 무기 교체가능한지
+    public static bool isChangeReady = true;                            // 무기 교체가능한지
+
+    private CharacterStats characterStats;                              // 스텟상태
 
     private void Awake()
     {
@@ -29,6 +31,8 @@ public class WeaponManager : MonoBehaviour
 
     private void Start()
     {
+        characterStats= GetComponent<CharacterStats>();
+
         if (weaponSlots[0] != null) // 시작 무기 장착
         {
             activeWeapon = weaponSlots[0];
@@ -45,10 +49,16 @@ public class WeaponManager : MonoBehaviour
 
     private void AttackMode() // 공격 모드 유지및 공격조건들 초기화용도 이기도 하다.
     {
-        PlayerNewInputController.animator.SetLayerWeight(1, layerAtkModeTime);
-        PlayerNewInputController.animator.SetBool(AnimString.Instance.attackMode, attackMode);
+        if(characterStats.isDeath == true)
+        {
+            PlayerController.animator.SetLayerWeight(1,0);
+            return;
+        }
+
+        PlayerController.animator.SetLayerWeight(1, layerAtkModeTime);
+        PlayerController.animator.SetBool(AnimString.Instance.attackMode, attackMode);
         attackMode = layerAtkModeTime > 0;
-        if (PlayerNewInputController.animator.GetBool(AnimString.Instance.isAttack))   // 공격 했는지 체크
+        if (PlayerController.animator.GetBool(AnimString.Instance.isAttack))   // 공격 했는지 체크
         {
             layerAtkModeTime = 1;
             countDown = 0;

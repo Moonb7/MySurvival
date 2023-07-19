@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerNewInputController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public static Animator animator;
     private CharacterController characterController;
     private GameObject mainCamera;
     private PlayerInput playerInput;
+    private CharacterStats characterStats;
 
     // 애니메이션 스피드 파라미터값
     private float blendSpeed;
@@ -88,6 +89,7 @@ public class PlayerNewInputController : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
+        characterStats = GetComponent<CharacterStats>();
 
         // 다시 초기화 하기위해 회전값 받아놓기
         ratationSmoothValue = rotationSmoothTime;
@@ -98,6 +100,12 @@ public class PlayerNewInputController : MonoBehaviour
 
     private void Update()
     {
+        if(characterStats.isDeath == true)
+        {
+            // 죽었을떄 기능
+            return;
+        }
+
         Move();
         JumpAndGravity();
         Roll();
@@ -171,20 +179,19 @@ public class PlayerNewInputController : MonoBehaviour
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
 
-    float CurrentSpeed()
+    float CurrentSpeed() // 스피드값
     {
         float targetSpeed = InputManager.Instance.sprintKey ? sprintSpeed : moveSpeed;
 
         if (InputManager.Instance.move == Vector2.zero) targetSpeed = 0.0f;
 
         blendSpeed = Mathf.Lerp(blendSpeed, targetSpeed, Time.deltaTime * speedChangeRate);
-        // 약간의 버벅임이 있을수 있으니 이렇게 설정
-        if (blendSpeed < 0.01f) blendSpeed = 0f;
+
+        if (blendSpeed < 0.01f) blendSpeed = 0f; // 약간의 버벅임이 있을수 있으니 이렇게 설정
 
 
         if (CanMove)
         {
-            // 스피드값
             float inputMagnitude = InputManager.Instance.analogMovement ? InputManager.Instance.move.magnitude : 1.0f;
             speed = Mathf.Lerp(speed, targetSpeed * inputMagnitude,
                  speedChangeRate);
@@ -202,7 +209,7 @@ public class PlayerNewInputController : MonoBehaviour
             else
             {
                 // 회전변화 값 초기화
-                rotationSmoothTime = ratationSmoothValue; // 변수하나 설정하기
+                rotationSmoothTime = ratationSmoothValue;
             }
 
             speed = Mathf.Round(speed * 1000f) / 1000f;
@@ -219,8 +226,6 @@ public class PlayerNewInputController : MonoBehaviour
         // 입력방향
         Vector3 inputDirection = new Vector3(InputManager.Instance.move.x, 0f, InputManager.Instance.move.y).normalized;
 
-        
-
         if (InputManager.Instance.move != Vector2.zero && hasroll == false && CanMove) // 움직임임 값이 있을시 로테이션 
         {
             targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
@@ -228,8 +233,7 @@ public class PlayerNewInputController : MonoBehaviour
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity,
                             rotationSmoothTime);
 
-            // 플레이어가 카메라랑 같은 방향 회전
-            transform.rotation = Quaternion.Euler(0f, rotation, 0f);
+            transform.rotation = Quaternion.Euler(0f, rotation, 0f); // 플레이어가 카메라랑 같은 방향 회전
         }
 
         if (PlayerTargeting.fastentargeting && PlayerTargeting.targetEnemy && InputManager.Instance.sprintKey == false && hasroll == false) // 고정 하고 적이 있으면 그리고 달리기 키를 누르지 않으면
@@ -250,10 +254,7 @@ public class PlayerNewInputController : MonoBehaviour
         moveVec = targetDirection.normalized * (CurrentSpeed() * Time.deltaTime) + 
                           new Vector3(0, verticalVelocity, 0) * Time.deltaTime;
 
-        // 플레이어 이동
         characterController.Move(moveVec);
-
-        // 애니
         
         animator.SetBool(AnimString.Instance.move, InputManager.Instance.move != Vector2.zero);
         animator.SetFloat(AnimString.Instance.speed, blendSpeed);
@@ -293,8 +294,7 @@ public class PlayerNewInputController : MonoBehaviour
             // 점프
             if (InputManager.Instance.jumpKey && hasroll == false && CanMove) // 점프키를 누르고 구르지 않고 움직일수 있는 상태면
             {
-                // 제곱근
-                verticalVelocity = Mathf.Sqrt(jumpHeight * -2 * gravity);
+                verticalVelocity = Mathf.Sqrt(jumpHeight * -2 * gravity);     // 제곱근 중력 구하는 식 공부 후 적용
                 animator.SetBool(AnimString.Instance.jump, true);
             }
             else

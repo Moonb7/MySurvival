@@ -18,6 +18,7 @@ public abstract class WeaponBase : MonoBehaviour
 
     // 무기의 현재 콤보 카운터
     public int comboCount { get; set; }
+    public float multiplierDamage { get; set; }
 
     [Header("무기 공격 이펙트")]
     public GameObject attackEffect;         // 기본공격 이펙트

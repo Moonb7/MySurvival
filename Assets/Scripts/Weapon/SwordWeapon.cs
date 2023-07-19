@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class SwordWeapon : WeaponBase
 {
-    public override void Attack()
+    public override void Attack()   // 기본공격
     {
-        PlayerNewInputController.animator.SetTrigger(AnimString.Instance.attack);       // 기본 공격 애니메이션 적용
-        PlayerNewInputController.animator.SetBool(AnimString.Instance.isAttack, true);  // 공격 중 체크 애니메이션스크립트를 이용해서 false만들었다.
+        comboCount++;
+        if (comboCount >= 4)
+        {
+            comboCount = 1;
+        }
+        PlayerController.animator.SetInteger(AnimString.Instance.combo, comboCount);
+        PlayerController.animator.SetTrigger(AnimString.Instance.attack);       // 기본 공격 애니메이션 적용
+        PlayerController.animator.SetBool(AnimString.Instance.isAttack, true);  // 공격 중 체크 애니메이션스크립트를 이용해서 false만들었다.
+        
     }
 
     public override void ChargingAttack()
