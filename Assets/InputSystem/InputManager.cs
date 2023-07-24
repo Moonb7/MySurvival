@@ -28,6 +28,10 @@ public class InputManager : Singleton<InputManager>
 
     public bool cursorLocked = true;       // 커서상태를 물어보는것 
     public bool cursorInputForLook = true; // 마우스의 값을 줄것인가
+    
+    private float chargingEnergy = 0f;     // 차징에너지를 모을 변수
+    private bool isCharging;               // 차징 중인지 체크
+    private Coroutine chargingcoroutine;
 
     private void Start()
     {
@@ -100,28 +104,56 @@ public class InputManager : Singleton<InputManager>
 
     public void OnAttack(InputAction.CallbackContext context) // 기본 공격
     {
-        if (WeaponManager.activeWeapon != null && WeaponManager.isChangeReady && // 공격 준비상태인지
-            PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false )                            // 땅에 있는지체크
+        if (WeaponManager.activeWeapon != null && WeaponManager.isChangeReady &&
+            PlayerController.animator.GetBool(AnimString.Instance.isAttack) == false &&
+            PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false ) // 땅에 있는지체크 다른 행동을 취하고 있는지
         {
-            if (context.performed)
+            if (context.performed) // 키를 누르고 있는 동안
             {
-                if (context.interaction is HoldInteraction)      // 차징 공격
-                {
-                    float chagingEnergy = +Time.deltaTime;
-                    if (chagingEnergy > WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime /*&& */) // 모으는 시간을 넘기고 키를 때면
-                    {
-                        // 조건 완료 표시도 있어야 할거 같다. 이펙트활용을 하자
-                        WeaponManager.activeWeapon.ChargingAttack();
-                    }
-                }
-                else if (context.interaction is PressInteraction) // 일반 공격
-                {
-                    WeaponManager.activeWeapon.Attack();
-                }
+                isCharging = true;
+                // 이펙트나 그런것들
+                if (chargingcoroutine != null)
+                    StopCoroutine(chargingcoroutine);
+                chargingcoroutine = StartCoroutine(charging());
+            }
+            else if (chargingEnergy >= WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime) // 키를 떼었을 때
+            {
+                // 차징 완료, 공격 발동 등
+                WeaponManager.activeWeapon.ChargingAttack();
+                isCharging = false;
+                chargingEnergy = 0;
+                Debug.Log("공격");
+            }
+            else if (context.canceled)
+            {
+                isCharging = false;
+                chargingEnergy = 0;
+                Debug.Log("취소");
+            }
+
+            if (context.interaction is PressInteraction) // 일반 공격
+            {
+                WeaponManager.activeWeapon.Attack();
             }
         }
-        
     }
+
+    IEnumerator charging()
+    {
+        while (isCharging)
+        {
+            chargingEnergy += Time.deltaTime;
+            Debug.Log("헐딩");
+            yield return null;
+            if (chargingEnergy >= WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime)
+            {
+                // 차징에너지가 다모였다는 효과 이펙트가 더화려해 진다던다 그런거
+                yield break;
+            }
+        }
+    }
+
+    
 
     public void OnTargetting(InputAction.CallbackContext context) // 고정할 타켓 설정 자세한건 PlayerTargetting 참고
     {

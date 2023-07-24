@@ -6,39 +6,76 @@ public class SwordWeapon : WeaponBase
 {
     public override void Attack()   // 기본공격
     {
+        startDamageMultiplier = 1;
+        attackState = AttackState.attack;
         comboCount++;
         if (comboCount >= 4)
         {
             comboCount = 1;
         }
-        PlayerController.animator.SetInteger(AnimString.Instance.combo, comboCount);
-        PlayerController.animator.SetTrigger(AnimString.Instance.attack);       // 기본 공격 애니메이션 적용
         PlayerController.animator.SetBool(AnimString.Instance.isAttack, true);  // 공격 중 체크 애니메이션스크립트를 이용해서 false만들었다.
-        
     }
 
     public override void ChargingAttack()
     {
-        Debug.Log("차징공격이요");
+        attackState = AttackState.chargingAttack;
+        PlayerController.animator.SetBool(AnimString.Instance.isAttack, true);
+        PlayerController.animator.SetBool(AnimString.Instance.chargingAtk, true);
     }
 
-    public override void DashAttack()
+    public override void DashAttack() // 대쉬공격
     {
+        attackState = AttackState.dashAttack;
         // 애니
     }
 
-    public override void Skill1()
+    public override void Skill1() // 공격 스킬
     {
+        attackState = AttackState.skill1;
         // 애니
     }
 
-    public override void Skill2()
+    public override void Skill2() // 버프 스킬
     {
+        attackState = AttackState.skill2;
         // 애니
     }
 
     public override void UltimateSkill()
     {
+        attackState = AttackState.UltimataeSkill;
         // 애니
+    }
+
+    public override float AttackStatedamageMultiplier()
+    {
+        switch (attackState)
+        {
+            case AttackState.attack:
+                if(comboCount == 3)
+                {
+                    damageMultiplier = 1.3f;
+                }
+                else
+                {
+                    damageMultiplier = startDamageMultiplier;
+                }
+                break;
+            case AttackState.dashAttack:
+                damageMultiplier = 1.3f;
+                break;
+            case AttackState.chargingAttack:
+                damageMultiplier = 1.5f;
+                break;
+            case AttackState.skill1:
+                damageMultiplier = 1.7f;
+                break;
+            case AttackState.skill2:
+                break;
+            case AttackState.UltimataeSkill:
+                damageMultiplier = 3f;
+                break;
+        }
+        return damageMultiplier;
     }
 }

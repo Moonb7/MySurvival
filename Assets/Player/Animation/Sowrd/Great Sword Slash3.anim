@@ -68334,15 +68334,15 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.73333335
-    functionName: AttackEffectInstantiate
+  - time: 0.1
+    functionName: FinishAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.5333333
-    functionName: FinishAttack
+  - time: 0.73333335
+    functionName: AttackEffectInstantiate
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

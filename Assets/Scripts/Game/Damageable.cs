@@ -6,15 +6,8 @@ using UnityEngine;
 public class Damageable : MonoBehaviour
 {
     private CharacterStats characterStats;
-
-    // 데미지 계수
-    [SerializeField]
-    private float damageMultiplier = 1.0f;
-
-    // 자신이 공격한 범위 폭발공격을 데미지입을시 자신이 입는 데미지가 완전히 입지 않게 해주기 위한 변수
-    [Tooltip("자기 자신의 공격을 당한 데미지 계수")]
-    [SerializeField]
-    private float sensibilityToSelfDamage = 0.5f;
+    public float damageMultiplier = 1.0f; // 데미지 계수
+    public float sensibilityToSelfDamage = 0.5f; // 자신이 공격한 범위 폭발공격을 데미지입을시 자신이 입는 데미지가 완전히 입지 않게 해주기 위한 변수
 
     private void Awake()
     {

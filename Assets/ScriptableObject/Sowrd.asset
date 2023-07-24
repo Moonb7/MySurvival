@@ -20,4 +20,4 @@ MonoBehaviour:
   skillImage1: {fileID: 21300000, guid: 8bc2c9d51ca54fb4bafb1902fba95eb3, type: 3}
   skillImage2: {fileID: 21300000, guid: d290fab0034569e41b46a73eaed49e23, type: 3}
   atk: 5
-  chargingEnergyTime: 3
+  chargingEnergyTime: 2

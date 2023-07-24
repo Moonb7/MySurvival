@@ -15,7 +15,10 @@ public class WeaponManager : MonoBehaviour
     private float attackModeTime = 5f;                                  // 공격모드 지속시간
     private bool attackMode;                                            // 공격모드 중인지
     private float layerAtkModeTime;                                     // 공격모드지속 시간
-    private float countDown;                                            //
+    [SerializeField]
+    private float comboTime = 0.5f;                                            // 콤보공격 유지시간
+    private float countDown;                                            
+    float comboTimeDown;
 
     public static bool isChangeReady = true;                            // 무기 교체가능한지
 
@@ -68,6 +71,18 @@ public class WeaponManager : MonoBehaviour
             layerAtkModeTime -= Time.deltaTime;
         }
         countDown += Time.deltaTime;
+
+        // 일정 시간동안 공격이 안들어 올시 콤보 초기화
+        comboTimeDown += Time.deltaTime; // 흘러가는 시간
+        if (PlayerController.animator.GetBool(AnimString.Instance.isAttack)) // 공격실행 하면
+        {
+            comboTimeDown = 0f;
+        }
+        else if (comboTimeDown > comboTime)
+        {
+            activeWeapon.comboCount = 0; // 다시 처음 콤보 공격이 나가게 콤보카운트 초기화
+        }
+        PlayerController.animator.SetInteger(AnimString.Instance.attackCombo, activeWeapon.comboCount);
     }
 
     private void WeaponEquip(WeaponBase weapon) // 가지고 있는 무기 장착

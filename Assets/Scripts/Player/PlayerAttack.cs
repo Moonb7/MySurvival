@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -5,8 +6,6 @@ public class PlayerAttack : MonoBehaviour
     private float totalAttack = 0;
 
     private CharacterStats stats;
-    
-
     private Damageable damageable;
 
     private void Start()
@@ -29,9 +28,10 @@ public class PlayerAttack : MonoBehaviour
             {
                 damageable = other.GetComponentInParent<Damageable>();
             }
-            WeaponManager.activeWeapon.multiplierDamage = 0 >= WeaponManager.activeWeapon.multiplierDamage ? 1 : WeaponManager.activeWeapon.multiplierDamage;
-            damageable.InflictDamage(totalAttack * WeaponManager.activeWeapon.multiplierDamage, false, this.gameObject);
-            this.enabled= false;
+
+            damageable.damageMultiplier = WeaponManager.activeWeapon.AttackStatedamageMultiplier();  // 공격상태에 따라 데미지 계수 강화
+            damageable.InflictDamage(totalAttack, false, this.gameObject);
+            //this.enabled= false;
         }
     }
 }

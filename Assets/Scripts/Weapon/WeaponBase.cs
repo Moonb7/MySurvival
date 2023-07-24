@@ -10,6 +10,9 @@ public abstract class WeaponBase : MonoBehaviour
     public AnimatorController weaponAnimator;
     public AudioSource weaponAudioSource;
     public WeaponManager weaponManager;
+    public float damageMultiplier;
+    public float startDamageMultiplier;
+    public AttackState attackState;
 
     private void Start()
     {
@@ -18,7 +21,6 @@ public abstract class WeaponBase : MonoBehaviour
 
     // 무기의 현재 콤보 카운터
     public int comboCount { get; set; }
-    public float multiplierDamage { get; set; }
 
     [Header("무기 공격 이펙트")]
     public GameObject attackEffect;         // 기본공격 이펙트
@@ -44,4 +46,10 @@ public abstract class WeaponBase : MonoBehaviour
     public abstract void Skill1();          // 1스킬
     public abstract void Skill2();          // 2스킬
     public abstract void UltimateSkill();   // 궁극기
+
+    public abstract float AttackStatedamageMultiplier(); // 공격상태에 따른 데미지 계수변환
+}
+public enum AttackState
+{
+    attack, dashAttack, chargingAttack, skill1, skill2, UltimataeSkill
 }

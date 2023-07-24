@@ -268,14 +268,15 @@ MonoBehaviour:
     type: 3}
   dashAttackEffect: {fileID: 0}
   chargingEffect: {fileID: 0}
-  chargingAttackEffect: {fileID: 0}
+  chargingAttackEffect: {fileID: 1949624779417528, guid: e73124b5ba126cc499fb7e927b7a79ac,
+    type: 3}
   skill1Effect: {fileID: 0}
   skill2Effect: {fileID: 0}
   ultimateSkillEffect: {fileID: 0}
   attackSound: {fileID: 8300000, guid: 62e48d51911a9294aab8284e2a117204, type: 3}
   dashAttackSound: {fileID: 0}
   chargingSound: {fileID: 0}
-  chargingAttackSound: {fileID: 0}
+  chargingAttackSound: {fileID: 8300000, guid: 0ace0689dc57f4a45a86e59149ad7e8e, type: 3}
   skill1Sound: {fileID: 0}
   skill2Sound: {fileID: 0}
   ultimateSkillSound: {fileID: 0}

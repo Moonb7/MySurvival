@@ -24,7 +24,8 @@ public class AnimString : Singleton<AnimString>
     public string attackMode = "AttackMode";
     public string weaponStats = "WeaponStats"; // Weaon타입
     public string fasten = "Fasten";
-    public string combo = "Combo";
+    public string attackCombo = "AttackCombo";
+    public string chargingAtk = "ChargingAtk";
 
     // 무기 관련
     public string weaponChange = "WeaponChange";
