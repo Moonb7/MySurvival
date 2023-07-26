@@ -15,6 +15,7 @@ public class Slash_GrvityPoint : MonoBehaviour
     {
         ps = GetComponent<ParticleSystem>();
         mainModule = ps.main;
+        Target = transform;
     }
 
     void LateUpdate()
@@ -51,8 +52,12 @@ public class Slash_GrvityPoint : MonoBehaviour
 
                 particles[i].velocity += seekForce;
             }
-        }
 
+            if (InputManager.Instance.chargingEnergy >= WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime) // 차징이 다모이면 루프를끔
+            {
+                ps.loop = false;
+            }
+        }
         ps.SetParticles(particles, particleCount);
     }
 }

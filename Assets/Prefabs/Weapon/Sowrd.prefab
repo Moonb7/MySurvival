@@ -134,7 +134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7828547735636017848
 Transform:
   m_ObjectHideFlags: 0
@@ -208,7 +208,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.8
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -263,18 +263,21 @@ MonoBehaviour:
   weaponScriptable: {fileID: 11400000, guid: 72fc1da46d30baf44893af33e5bc6b90, type: 2}
   weaponAnimator: {fileID: 0}
   weaponAudioSource: {fileID: 1445953052}
-  weaponManager: {fileID: 0}
+  damageMultiplier: 0
+  startDamageMultiplier: 0
+  attackState: 0
   attackEffect: {fileID: 206906933502295669, guid: 86f6990ec880fac40a2f7d3253cc8d79,
     type: 3}
-  dashAttackEffect: {fileID: 0}
-  chargingEffect: {fileID: 0}
-  chargingAttackEffect: {fileID: 1949624779417528, guid: e73124b5ba126cc499fb7e927b7a79ac,
+  chargingEffect: {fileID: 448892067746066297, guid: b71eee2339a6f8049952e1e3e227e1d4,
+    type: 3}
+  chagingFullEff: {fileID: 3980452895012312540, guid: 6d9d44ac4c79cad47a06e880b10a7c0d,
+    type: 3}
+  chargingAttackEffect: {fileID: 1949624779417528, guid: 53d2b03f23b5b2a4da6b56aa9a9ee14d,
     type: 3}
   skill1Effect: {fileID: 0}
   skill2Effect: {fileID: 0}
   ultimateSkillEffect: {fileID: 0}
   attackSound: {fileID: 8300000, guid: 62e48d51911a9294aab8284e2a117204, type: 3}
-  dashAttackSound: {fileID: 0}
   chargingSound: {fileID: 0}
   chargingAttackSound: {fileID: 8300000, guid: 0ace0689dc57f4a45a86e59149ad7e8e, type: 3}
   skill1Sound: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4195259067584748628}
   - component: {fileID: 7014931574779113032}
   m_Layer: 0
-  m_Name: Slash
+  m_Name: AtkSlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

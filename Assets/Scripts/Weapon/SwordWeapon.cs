@@ -23,12 +23,6 @@ public class SwordWeapon : WeaponBase
         PlayerController.animator.SetBool(AnimString.Instance.chargingAtk, true);
     }
 
-    public override void DashAttack() // 대쉬공격
-    {
-        attackState = AttackState.dashAttack;
-        // 애니
-    }
-
     public override void Skill1() // 공격 스킬
     {
         attackState = AttackState.skill1;
@@ -41,7 +35,7 @@ public class SwordWeapon : WeaponBase
         // 애니
     }
 
-    public override void UltimateSkill()
+    public override void UltimateSkill() //
     {
         attackState = AttackState.UltimataeSkill;
         // 애니
@@ -60,9 +54,6 @@ public class SwordWeapon : WeaponBase
                 {
                     damageMultiplier = startDamageMultiplier;
                 }
-                break;
-            case AttackState.dashAttack:
-                damageMultiplier = 1.3f;
                 break;
             case AttackState.chargingAttack:
                 damageMultiplier = 1.5f;

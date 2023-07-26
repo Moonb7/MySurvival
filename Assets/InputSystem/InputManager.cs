@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
@@ -26,12 +25,16 @@ public class InputManager : Singleton<InputManager>
     // 직접 구한 값을 통해 할것인가
     public bool analogMovement;
 
-    public bool cursorLocked = true;       // 커서상태를 물어보는것 
-    public bool cursorInputForLook = true; // 마우스의 값을 줄것인가
+    public bool cursorLocked = true;        // 커서상태를 물어보는것 
+    public bool cursorInputForLook = true;  // 마우스의 값을 줄것인가
     
-    private float chargingEnergy = 0f;     // 차징에너지를 모을 변수
-    private bool isCharging;               // 차징 중인지 체크
+    public float chargingEnergy = 0f;       // 차징에너지를 모을 변수
+    private bool isCharging;                // 차징 중인지 체크
     private Coroutine chargingcoroutine;
+    private GameObject chagingEff;
+    private GameObject chargingFullEff;      
+
+    public Transform weaponEquipPos;
 
     private void Start()
     {
@@ -111,24 +114,29 @@ public class InputManager : Singleton<InputManager>
             if (context.performed) // 키를 누르고 있는 동안
             {
                 isCharging = true;
-                // 이펙트나 그런것들
+                chagingEff = Instantiate(WeaponManager.activeWeapon.chargingEffect, this.transform);
+                chagingEff.transform.localPosition = Vector3.zero;
+                chagingEff.transform.localRotation = Quaternion.identity;
+
                 if (chargingcoroutine != null)
                     StopCoroutine(chargingcoroutine);
                 chargingcoroutine = StartCoroutine(charging());
             }
-            else if (chargingEnergy >= WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime) // 키를 떼었을 때
+            else if (chargingEnergy >= WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime) // 다모으고 키를 떼었을 때
             {
-                // 차징 완료, 공격 발동 등
                 WeaponManager.activeWeapon.ChargingAttack();
                 isCharging = false;
                 chargingEnergy = 0;
                 Debug.Log("공격");
+                Destroy(chagingEff, 1f);
+                Destroy(chargingFullEff, 0.3f);
             }
             else if (context.canceled)
             {
                 isCharging = false;
                 chargingEnergy = 0;
                 Debug.Log("취소");
+                Destroy(chagingEff, 1f);
             }
 
             if (context.interaction is PressInteraction) // 일반 공격
@@ -148,12 +156,13 @@ public class InputManager : Singleton<InputManager>
             if (chargingEnergy >= WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime)
             {
                 // 차징에너지가 다모였다는 효과 이펙트가 더화려해 진다던다 그런거
+                chargingFullEff = Instantiate(WeaponManager.activeWeapon.chagingFullEff, weaponEquipPos);
+                chargingFullEff.transform.localPosition = Vector3.zero;
+                chargingFullEff.transform.localRotation = Quaternion.identity;
                 yield break;
             }
         }
     }
-
-    
 
     public void OnTargetting(InputAction.CallbackContext context) // 고정할 타켓 설정 자세한건 PlayerTargetting 참고
     {
@@ -163,7 +172,6 @@ public class InputManager : Singleton<InputManager>
             PlayerTargeting.fastentargeting = !PlayerTargeting.fastentargeting;
         }
     }
-
     public void Weapon1(InputAction.CallbackContext context)
     {
         if (context.started && !weapon1Key)
