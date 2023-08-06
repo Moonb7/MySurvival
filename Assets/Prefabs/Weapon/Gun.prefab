@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7974365627296172178}
   - component: {fileID: 7974365627295106148}
   - component: {fileID: 5266854778277227040}
+  - component: {fileID: -1054648226729169810}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7974365627297299236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 503.98, y: 11.276, z: 508.878}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -181,3 +182,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-1054648226729169810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7974365627297299236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa809b90a3b3e14b86d80c9ba6b497a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponScriptable: {fileID: 11400000, guid: 63579ddb1ea46ab4dac5e64a15925a86, type: 2}
+  weaponAudioSource: {fileID: 5266854778277227040}
+  damageMultiplier: 0
+  startDamageMultiplier: 0
+  attackEffect: {fileID: 0}
+  chargingEffect: {fileID: 0}
+  chagingFullEff: {fileID: 0}
+  chargingAttackEffect: {fileID: 0}
+  skill1Effect: {fileID: 0}
+  skill2Effect: {fileID: 0}
+  ultimateSkillEffect: {fileID: 0}
+  attackSound: {fileID: 0}
+  chargingSound: {fileID: 0}
+  chargingAttackSound: {fileID: 0}
+  skill1Sound: {fileID: 0}
+  skill2Sound: {fileID: 0}
+  ultimateSkillSound: {fileID: 0}

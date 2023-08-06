@@ -13,16 +13,13 @@ MonoBehaviour:
   m_Name: Gun
   m_EditorClassIdentifier: 
   attackType: 1
-  weaponPrefab: {fileID: 7974365627297299236, guid: 8fd26e845037efd488efbb52704aebed,
-    type: 3}
-  attackSoundPrefab: {fileID: 5387577125817732491, guid: fbca36bd1244a094498880d21e913775,
-    type: 3}
-  hitEffectPrefab: {fileID: 5387577125817732491, guid: fbca36bd1244a094498880d21e913775,
-    type: 3}
-  hitSoundPrefab: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
-    type: 3}
+  weaponNum: 1
+  weaponName: Gun
+  weapondescription: This is Gun
   weaponImage: {fileID: 21300000, guid: 13c949d57cd6d714493e86730f264df7, type: 3}
   skillImage1: {fileID: 21300000, guid: 13c949d57cd6d714493e86730f264df7, type: 3}
   skillImage2: {fileID: 21300000, guid: 13c949d57cd6d714493e86730f264df7, type: 3}
-  atk: 5
-  rateSpeed: 1
+  atk: 3
+  chargingEnergyTime: 1.5
+  skill1Cool: 15
+  skill2Cool: 15

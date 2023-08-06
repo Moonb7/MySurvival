@@ -102,9 +102,9 @@ Material:
     - _DstBlend: 0
     - _EmissionScaleUI: 5
     - _EnvironmentReflections: 1
-    - _GlossMapScale: 1
+    - _GlossMapScale: 0
     - _Glossiness: 0
-    - _GlossyReflections: 1
+    - _GlossyReflections: 0
     - _Lightmapping: 1
     - _Metallic: 0
     - _Mode: 0
@@ -122,14 +122,14 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.15441176, g: 0.15441176, b: 0.15441176, a: 1}
-    - _Color: {r: 0.15441173, g: 0.15441173, b: 0.15441173, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1.9553875, g: 1.9553875, b: 1.9553875, a: 1.9553876}
     - _EmissionColorUI: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColorWithMapUI: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &402467305789653735
+--- !u!114 &5895685285116543020
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

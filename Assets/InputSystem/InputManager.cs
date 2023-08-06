@@ -28,7 +28,7 @@ public class InputManager : Singleton<InputManager>
     public bool cursorLocked = true;        // 커서상태를 물어보는것 
     public bool cursorInputForLook = true;  // 마우스의 값을 줄것인가
     
-    public float chargingEnergy = 0f;       // 차징에너지를 모을 변수
+    public static float chargingEnergy = 0f;       // 차징에너지를 모을 변수
     private bool isCharging;                // 차징 중인지 체크
     private Coroutine chargingcoroutine;
     private GameObject chagingEff;
@@ -68,7 +68,7 @@ public class InputManager : Singleton<InputManager>
 
     public void OnSprint(InputAction.CallbackContext context) // 달리기 키
     {
-        if (context.started)
+        if (context.performed)
         {
             sprintKey = true;
             PlayerController.animator.SetBool(AnimString.instance.sprint, true); // 상태 체크
@@ -82,9 +82,12 @@ public class InputManager : Singleton<InputManager>
 
     public void OnRoll(InputAction.CallbackContext context) // 구르기키
     {
-        if (context.started)
+        if (context.performed)
         {
-            rollKey = true;
+            if (context.interaction is PressInteraction)
+            {
+                rollKey = true;
+            }
         }
         else if (context.canceled)
         {
@@ -127,15 +130,18 @@ public class InputManager : Singleton<InputManager>
                 WeaponManager.activeWeapon.ChargingAttack();
                 isCharging = false;
                 chargingEnergy = 0;
-                Debug.Log("공격");
                 Destroy(chagingEff, 1f);
-                Destroy(chargingFullEff, 0.3f);
+                Destroy(chargingFullEff, 1.5f);
             }
             else if (context.canceled)
             {
                 isCharging = false;
                 chargingEnergy = 0;
                 Debug.Log("취소");
+                /*ParticleSystem particle = chagingEff.GetComponent<ParticleSystem>(); 갑작기 오류 발생
+                if (particle != null)
+                    particle.loop = false;*/
+
                 Destroy(chagingEff, 1f);
             }
 
@@ -172,7 +178,7 @@ public class InputManager : Singleton<InputManager>
             PlayerTargeting.fastentargeting = !PlayerTargeting.fastentargeting;
         }
     }
-    public void Weapon1(InputAction.CallbackContext context)
+    public void OnWeapon1(InputAction.CallbackContext context)
     {
         if (context.started && !weapon1Key)
         {
@@ -183,8 +189,9 @@ public class InputManager : Singleton<InputManager>
             weapon1Key = false;
         }
     }
-    public void Weapon2(InputAction.CallbackContext context)
+    public void OnWeapon2(InputAction.CallbackContext context)
     {
+
         if (context.started && !weapon2Key)
         {
             weapon2Key = true;
@@ -192,6 +199,47 @@ public class InputManager : Singleton<InputManager>
         else if (context.canceled)
         {
             weapon2Key = false;
+        }
+    }
+    public void OnSkill1(InputAction.CallbackContext context)
+    {
+        if (WeaponManager.activeWeapon != null && WeaponManager.isChangeReady &&
+            PlayerController.animator.GetBool(AnimString.Instance.isAttack) == false &&
+            PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false && PlayerController.animator.GetBool(AnimString.Instance.canMove)) // 땅에 있는지체크 다른 행동을 취하고 있는지
+        {
+            if (context.performed)
+            {
+                if (WeaponManager.isSkill1Ready)
+                {
+                    WeaponManager.activeWeapon.Skill1();
+                    WeaponManager.skill1CoolTimedown = 0;
+                }
+                else
+                {
+                    Debug.Log("스킬1 쿨타임 중이다.");
+                }
+            }
+        }
+    }
+
+    public void OnSkill2(InputAction.CallbackContext context)
+    {
+        if (WeaponManager.activeWeapon != null && WeaponManager.isChangeReady &&
+            PlayerController.animator.GetBool(AnimString.Instance.isAttack) == false &&
+            PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false && PlayerController.animator.GetBool(AnimString.Instance.canMove)) // 땅에 있는지체크 다른 행동을 취하고 있는지
+        {
+            if (context.performed)
+            {
+                if (WeaponManager.isSkill2Ready)
+                {
+                    WeaponManager.activeWeapon.Skill2();
+                    WeaponManager.skill2CoolTimedown = 0;
+                }
+                else
+                {
+                    Debug.Log("스킬2 쿨타임 중이다.");
+                }
+            }
         }
     }
 

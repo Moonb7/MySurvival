@@ -16,9 +16,14 @@ public class WeaponManager : MonoBehaviour
     private bool attackMode;                                            // 공격모드 중인지
     private float layerAtkModeTime;                                     // 공격모드지속 시간
     [SerializeField]
-    private float comboTime = 0.5f;                                            // 콤보공격 유지시간
+    private float comboTime = 0.5f;                                     // 콤보공격 유지시간
     private float countDown;                                            
     float comboTimeDown;
+
+    public static bool isSkill1Ready;                                   // 스킬1 공격이 가능한지
+    public static bool isSkill2Ready;                                   // 스킬2 공격이 가능한지
+    public static float skill1CoolTimedown;                             
+    public static float skill2CoolTimedown;                             
 
     public static bool isChangeReady = true;                            // 무기 교체가능한지
 
@@ -30,24 +35,23 @@ public class WeaponManager : MonoBehaviour
         {
             AddWeapon(w);
         }
-    }
 
-    private void Start()
-    {
-        characterStats= GetComponent<CharacterStats>();
-
+        characterStats = GetComponent<CharacterStats>();
         if (weaponSlots[0] != null) // 시작 무기 장착
         {
             activeWeapon = weaponSlots[0];
             activeWeapon.transform.parent = weaponEquipPos;
-            activeWeapon.transform.localPosition = Vector3.zero;        
+            activeWeapon.transform.localPosition = Vector3.zero;
             activeWeapon.transform.localRotation = Quaternion.identity;
+            skill1CoolTimedown = activeWeapon.weaponScriptable.skill1Cool;
+            skill2CoolTimedown = activeWeapon.weaponScriptable.skill2Cool;
         }
     }
 
     private void Update()
     {
         AttackMode();
+        SkillCoolTimeCheck();
     }
 
     private void AttackMode() // 공격 모드 유지및 공격조건들 초기화용도 이기도 하다.
@@ -163,5 +167,14 @@ public class WeaponManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private void SkillCoolTimeCheck() // 쿨타임 체크
+    {
+        skill1CoolTimedown += Time.deltaTime;
+        skill2CoolTimedown += Time.deltaTime;
+
+        isSkill1Ready = activeWeapon.weaponScriptable.skill1Cool <= skill1CoolTimedown;
+        isSkill2Ready = activeWeapon.weaponScriptable.skill2Cool <= skill2CoolTimedown;
     }
 }

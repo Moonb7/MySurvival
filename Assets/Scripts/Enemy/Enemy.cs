@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     }
     private bool CanMove
     {
-        get { return animator.GetBool(AnimString.Instance.canMove); }
+        get {return animator.GetBool(AnimString.Instance.canMove);}
     }
 
     private void Start()
@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
 
         attackRange = agent.stoppingDistance - 0.1f;
 
-        Invoke("StartChase", 3f); // 시작 및 생성 후 3초후에 Player를 추적하게 만듬
+        Invoke("StartChase", 1f); // 시작 및 생성 후 3초후에 Player를 추적하게 만듬
     }
 
     private void Update()

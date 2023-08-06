@@ -14,6 +14,10 @@ public class WeaponScriptable : ScriptableObject // 이 클래스는 무기마다의 특징 
 
     public float atk;                       // 해당 무기 대미지
     public float chargingEnergyTime;        // 차징공격을 하기위해 모아야할 시간
+    public float skill1Cool;                // 스킬 쿨
+    public float skill2Cool;                // 스킬 쿨
+    public float buffValue;                 // 버프값 올릴값
+    public float buffTime;                  // 버프지속시간 각 무기느에 버프스킬은 하나씩만 있는걸로
 }
 public enum WeaponType
 {

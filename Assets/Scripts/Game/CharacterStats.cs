@@ -6,32 +6,31 @@ public class CharacterStats : MonoBehaviour
     public float CurrentHealth { get; private set; }
     public Stats maxMana;
     public float CurrentMana { get; private set; }
-
     public Stats attack;
-    public Stats defense;
-
+    public Stats defence;
     public bool isDeath = false;
     [SerializeField]
     private float DeathDelay = 3f;
-
     private Animator animator;
-
     [Tooltip("무적")]
-    public bool Invincible { get; set; }
+    public bool Invincible { get; set; }                             // 구르기 할때 발동
+    public bool CanPickUP() => CurrentHealth < maxHealth.GetValue(); // 힐 아이템을 먹을수 있는지 체크
 
-    // 힐 아이템을 먹을수 있는지 체크
-    public bool CanPickUP() => CurrentHealth < maxHealth.GetValue();
+    private AudioSource audioSource;
+    public AudioClip hitSound1;                                      // 맞을떄 소리 랜덤으로 2가지 설정
+    public AudioClip hitSound2;                                      // 맞을때 소리
+    public GameObject hitEff;                                        // 히트 이펙트 효과
 
+    private void Start()
+    {
+        SetStats();
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+    }
     void SetStats()
     {
         CurrentHealth = maxHealth.GetValue();
         CurrentMana = maxMana.GetValue();
-    }
-    private void Start()
-    {
-        SetStats();
-
-        animator = GetComponent<Animator>();
     }
 
     public void Heal(float amount)
@@ -59,24 +58,35 @@ public class CharacterStats : MonoBehaviour
             return;
 
         float beforeHealth = CurrentHealth;
-        CurrentHealth -= damage;
+        CurrentHealth = CurrentHealth - (damage - defence.GetValue());
+        if(CurrentHealth >= beforeHealth) // 데미지가 없으면
+            CurrentHealth = beforeHealth; // 그냥 무데미지 적용
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, maxHealth.GetValue());
-
-        // real Damage구하기 데미지 입었는지 확인
-        float realDamageAcount = beforeHealth - CurrentHealth;
-        if(realDamageAcount > 0)
+        float realDamageAcount = beforeHealth - CurrentHealth; // real Damage구하기 데미지 입었는지 확인
+        if (realDamageAcount > 0) // 데미지 구현 어떤 움직이나 맞았을때의 효과
         {
-            // 데미지 구현 어떤 움직이나 맞았을때의 효과
-            WeaponManager.activeWeapon.weaponAudioSource.clip = WeaponManager.activeWeapon.attackSound; //임시 소리 바꿔야함 각각의 Hit소리를 집어 넣어야 겠다 음음
-            WeaponManager.activeWeapon.weaponAudioSource.Play();
-
+            HitSoundEffect();
             if (animator != null)
             {
                 animator.SetTrigger(AnimString.Instance.hit);
             }
-
         }
         OnDeath();
+    }
+
+    void HitSoundEffect() // 맞을때 효과
+    {
+        int randomValue = Random.Range(0,2); // 맞을떄 두가지 패턴으로 변칙주기
+        if(randomValue == 0)
+        {
+            audioSource.clip = hitSound1;
+        }
+        else if(randomValue == 1)
+        {
+            audioSource.clip = hitSound2;
+        }
+        audioSource.Play();
+        Instantiate(hitEff, transform); // 위치는 다시 확인 하기 맞은 부위를 지정하여 찾아서 생성 하게 할수도 있다.
     }
 
     // 마나사용
@@ -85,13 +95,6 @@ public class CharacterStats : MonoBehaviour
         float beforeMana = CurrentMana;
         CurrentMana -= amount;
         CurrentMana = Mathf.Clamp(CurrentMana, 0, maxMana.GetValue());
-
-        // real Mana구하기 데미지 입었는지 확인
-        float realDamageAcount = beforeMana - CurrentMana;
-        if (realDamageAcount > 0)
-        {
-            //
-        }
     }
 
     // 죽음

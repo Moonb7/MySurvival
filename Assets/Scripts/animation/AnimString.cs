@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AnimString : Singleton<AnimString>
 {
-    // 공통 애니매이션 파라미터
+    // 공통 애니매이션 파라미터 이름
     public string hit = "Hit";
     public string isDie = "IsDie";
     public string isAttack = "IsAttack";
@@ -19,10 +19,11 @@ public class AnimString : Singleton<AnimString>
     public string jump = "Jump";
     public string attack = "Attack";
     public string attackMode = "AttackMode";
-    public string weaponStats = "WeaponStats"; // Weaon타입
+    public string weaponNum = "WeaponNum";      // 무기 번호
     public string fasten = "Fasten";
     public string attackCombo = "AttackCombo";
-    public string chargingAtk = "ChargingAtk";
+    public string attackStats = "AttackStats"; // 공격 상태 일반공격인지 차징공격인지 구분하기위해
+
 
     // 무기 관련
     public string weaponChange = "WeaponChange";

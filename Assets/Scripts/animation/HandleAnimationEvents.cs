@@ -15,7 +15,7 @@ public class HandleAnimationEvents : MonoBehaviour
     void FinishAttack() // 공격끝난 시점 처리
     {
         PlayerController.animator.SetBool(AnimString.Instance.isAttack, false);
-        PlayerController.animator.SetBool(AnimString.Instance.chargingAtk, false);
+        PlayerController.animator.SetInteger(AnimString.Instance.attackStats, -1);
     }
 
     void AttackEffectInstantiate() // 기본 공격 이펙트 및 사운드도 실행
@@ -42,4 +42,27 @@ public class HandleAnimationEvents : MonoBehaviour
         WeaponManager.activeWeapon.weaponAudioSource.Play();
     }
 
+    void Skill1EffectInstantiate() // 기본 공격 이펙트 및 사운드도 실행
+    {
+        GameObject instance = Instantiate(WeaponManager.activeWeapon.skill1Effect); // 기본 공격 이펙트오브젝트 생성
+        instance.transform.localPosition = effectGenerator.transform.position;
+        instance.transform.localRotation = effectGenerator.transform.rotation;
+        instance.transform.localScale = effectGenerator.transform.localScale;
+        Destroy(instance, 5f);
+
+        WeaponManager.activeWeapon.weaponAudioSource.clip = WeaponManager.activeWeapon.skill1Sound;
+        WeaponManager.activeWeapon.weaponAudioSource.Play();
+    }
+
+    void Skill2EffectInstantiate() // 기본 공격 이펙트 및 사운드도 실행
+    {
+        GameObject instance = Instantiate(WeaponManager.activeWeapon.skill2Effect); // 기본 공격 이펙트오브젝트 생성
+        instance.transform.localPosition = effectGenerator.transform.position;
+        instance.transform.localRotation = effectGenerator.transform.rotation;
+        instance.transform.localScale = effectGenerator.transform.localScale;
+        Destroy(instance, 5f);
+
+        WeaponManager.activeWeapon.weaponAudioSource.clip = WeaponManager.activeWeapon.skill2Sound;
+        WeaponManager.activeWeapon.weaponAudioSource.Play();
+    }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,32 +14,45 @@ public class SwordWeapon : WeaponBase
         {
             comboCount = 1;
         }
-        PlayerController.animator.SetBool(AnimString.Instance.isAttack, true);  // 공격 중 체크 애니메이션스크립트를 이용해서 false만들었다.
+        AttackSetStats(AttackState.attack);
     }
 
     public override void ChargingAttack()
     {
-        attackState = AttackState.chargingAttack;
-        PlayerController.animator.SetBool(AnimString.Instance.isAttack, true);
-        PlayerController.animator.SetBool(AnimString.Instance.chargingAtk, true);
+        AttackSetStats(AttackState.chargingAttack);
     }
 
-    public override void Skill1() // 공격 스킬
+    public override void Skill1() // 버프 스킬
     {
-        attackState = AttackState.skill1;
-        // 애니
+        AttackSetStats(AttackState.skill1);
+        
+        StartCoroutine(PowerUpSkill1());
+        CreateBuff();
+    }
+    
+    IEnumerator PowerUpSkill1()
+    {
+        characterStats.attack.AddValue(weaponScriptable.buffValue);             // 일단 이렇게 테스트로 하고 스크랩터블오브젝트에 변수 생성할지 고민하자
+        
+        yield return new WaitForSecondsRealtime(weaponScriptable.buffTime);     // 지속시간
+        characterStats.attack.RemoveValue(weaponScriptable.buffValue);          // 다시 없애기
+    }
+    public bool CreateBuff() // 인풋 스킬에다 생성
+    {
+        SkillUI skillUI = GameObject.Find("UIManager").GetComponent<SkillUI>();
+        if (WeaponManager.activeWeapon.buffImage != null)
+        {
+            return Instantiate(WeaponManager.activeWeapon.buffImage, skillUI.statusEffect);
+        }
+        else
+        {
+            return false;
+        }
     }
 
-    public override void Skill2() // 버프 스킬
+    public override void Skill2() // 공격 스킬
     {
-        attackState = AttackState.skill2;
-        // 애니
-    }
-
-    public override void UltimateSkill() //
-    {
-        attackState = AttackState.UltimataeSkill;
-        // 애니
+        AttackSetStats(AttackState.skill2);
     }
 
     public override float AttackStatedamageMultiplier()
@@ -59,12 +73,10 @@ public class SwordWeapon : WeaponBase
                 damageMultiplier = 1.5f;
                 break;
             case AttackState.skill1:
-                damageMultiplier = 1.7f;
+                
                 break;
             case AttackState.skill2:
-                break;
-            case AttackState.UltimataeSkill:
-                damageMultiplier = 3f;
+                damageMultiplier = 1.7f;
                 break;
         }
         return damageMultiplier;

@@ -71,11 +71,11 @@ public class GameManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(elapsedTime / 60f); // 몫을 출력 하므로 분을 나타낼수 있다.
         int seconds = Mathf.FloorToInt(elapsedTime % 60f); // 나머지 출력를 출력하여 초를 나타 낼 수 있다.
 
-        if(elapsedTime >= 60* 15 + 1)
+        if(elapsedTime >= 60* 15 + 1) // 15분아상이 되면 멈추게했다
             return;
+
         // 시간 표시 형식으로 변환
         string timeString = minutes.ToString("00") + " : " + seconds.ToString("00");
-
         playTime.text = timeString;
     }
 }
