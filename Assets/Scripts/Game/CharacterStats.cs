@@ -10,30 +10,30 @@ public class CharacterStats : MonoBehaviour
     public Stats defence;
     public bool isDeath = false;
     [SerializeField]
-    private float DeathDelay = 3f;
-    private Animator animator;
+    protected float DeathDelay = 3f;
+    protected Animator animator;
     [Tooltip("무적")]
-    public bool Invincible { get; set; }                             // 구르기 할때 발동
+    public bool Invincible { get; set; }                             // 무적으로 데미지가 않입게 했다. 구르기 할때 발동
     public bool CanPickUP() => CurrentHealth < maxHealth.GetValue(); // 힐 아이템을 먹을수 있는지 체크
 
-    private AudioSource audioSource;
+    protected AudioSource audioSource;
     public AudioClip hitSound1;                                      // 맞을떄 소리 랜덤으로 2가지 설정
     public AudioClip hitSound2;                                      // 맞을때 소리
     public GameObject hitEff;                                        // 히트 이펙트 효과
 
-    private void Start()
+    protected virtual void Start()
     {
         SetStats();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
-    void SetStats()
+    protected virtual void SetStats()
     {
         CurrentHealth = maxHealth.GetValue();
         CurrentMana = maxMana.GetValue();
     }
 
-    public void Heal(float amount)
+    public virtual void Heal(float amount)
     {
         if (CanPickUP() == false)
             return;
@@ -51,7 +51,7 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         // 무적이면 데미지 처리X
         if (Invincible)
@@ -74,7 +74,7 @@ public class CharacterStats : MonoBehaviour
         OnDeath();
     }
 
-    void HitSoundEffect() // 맞을때 효과
+    public virtual void HitSoundEffect() // 맞을때 효과
     {
         int randomValue = Random.Range(0,2); // 맞을떄 두가지 패턴으로 변칙주기
         if(randomValue == 0)
@@ -90,7 +90,7 @@ public class CharacterStats : MonoBehaviour
     }
 
     // 마나사용
-    public void UseMana(float amount)
+    public virtual void UseMana(float amount)
     {
         float beforeMana = CurrentMana;
         CurrentMana -= amount;
@@ -98,7 +98,7 @@ public class CharacterStats : MonoBehaviour
     }
 
     // 죽음
-    void OnDeath()
+    public virtual void OnDeath()
     {
         if (isDeath) 
             return;

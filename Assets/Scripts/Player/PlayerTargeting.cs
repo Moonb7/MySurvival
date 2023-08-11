@@ -1,18 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerTargeting : MonoBehaviour // Ground 체크하는 클래스랑 합치던가 부모 클래스를 만들어도 될거 같다.
+public class PlayerTargeting : MonoBehaviour
 {
     private Vector3 spherePosition;
     [SerializeField] 
     private float aroundOffset;
     [SerializeField]
     private LayerMask EnemyLayer;
-
-    
-    // 캐릭터 컨트롤러의 Radius랑 같아야한다.
     [SerializeField] 
-    private float radius;
+    private float radius; // 캐릭터 컨트롤러 스크립트의 Radius랑 같아야한다.
 
     [SerializeField] 
     private bool drawGizmo;
@@ -58,7 +55,7 @@ public class PlayerTargeting : MonoBehaviour // Ground 체크하는 클래스랑 합치던�
 
         float minDistance = float.MaxValue;
 
-        if (collider != null && collider.Length > 0 && GeometryUtility.TestPlanesAABB(planes, collider[0].bounds)) // 여기서 조건 추가 카메라에 게임화면에 보이는 적만 찾고 있는지 확인
+        if (collider != null && collider.Length > 0 && GeometryUtility.TestPlanesAABB(planes, collider[0].bounds)) // 여기서 조건 추가 카메라에 콜라이더가 붙은 게임화면에 보이는 적만 찾고 있는지 확인
         {
             for (int i = 0; i < collider.Length; i++)
             {

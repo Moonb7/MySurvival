@@ -47,6 +47,10 @@ public class WeaponManager : MonoBehaviour
             skill2CoolTimedown = activeWeapon.weaponScriptable.skill2Cool;
         }
     }
+    private void Start()
+    {
+        SkillUI.Instance.SetskillImage();
+    }
 
     private void Update()
     {

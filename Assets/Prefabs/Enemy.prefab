@@ -3142,7 +3142,6 @@ GameObject:
   - component: {fileID: 3094003363575655278}
   - component: {fileID: 3094003363575655283}
   - component: {fileID: 3094003363575655282}
-  - component: {fileID: 3094003363575655277}
   - component: {fileID: 3094003363575655276}
   - component: {fileID: 5638413965092392609}
   - component: {fileID: 3067717698267540063}
@@ -3334,19 +3333,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a3825b9c710ec3429808bce03ef6024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackTime: 3
---- !u!114 &3094003363575655277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8600722804738354088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b5612afeb9aa64bb8aa78bf52f6792, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   maxHealth:
     startValue: 100
     values: []
@@ -3361,9 +3347,12 @@ MonoBehaviour:
     values: []
   isDeath: 0
   DeathDelay: 3
-  hitSound1: {fileID: 8300000, guid: 829dfe614e7bcf847ae519942fcb25dd, type: 3}
+  hitSound1: {fileID: 8300000, guid: cce712dcf77576147bc5ca511a3370d7, type: 3}
   hitSound2: {fileID: 8300000, guid: e32ceafbe67c43646b3474d50a888d81, type: 3}
-  hitEff: {fileID: 0}
+  hitEff: {fileID: 6112007891956044430, guid: 8847d39a3884dba4db13b5d11950ae9f, type: 3}
+  attackTime: 3
+  deathGold: 100
+  deathItem: {fileID: 0}
 --- !u!114 &3094003363575655276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3390,7 +3379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9895c0f0e8adbf94e9f3541e5c842316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterStats: {fileID: 3094003363575655277}
+  characterStats: {fileID: 3094003363575655282}
   enemyHpbar: {fileID: 7497078280098421786}
   healthImage: {fileID: 7497078278925106478}
   hideFullHealthBar: 1

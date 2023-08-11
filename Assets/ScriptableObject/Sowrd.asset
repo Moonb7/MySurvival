@@ -25,3 +25,5 @@ MonoBehaviour:
   skill2Cool: 3
   buffValue: 10
   buffTime: 10
+  useSkill1Mana: 10
+  useSkill2Mana: 20

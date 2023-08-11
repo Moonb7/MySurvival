@@ -240,7 +240,7 @@ public class PlayerController : MonoBehaviour
         {
             //animator.SetLayerWeight(3, 1);
             animator.SetBool(AnimString.Instance.fasten, true);
-            transform.rotation = Quaternion.Euler(0, mainCamera.transform.rotation.eulerAngles.y,0);
+            transform.LookAt(PlayerTargeting.targetEnemy.transform);
         }
         else
         {

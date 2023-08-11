@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillUI : MonoBehaviour
+public class SkillUI : Singleton<SkillUI>
 {
     public Image weaponImage;               // 장착 무기이미지
     public Image skillImage1;               // 스킬1 이미지
@@ -15,11 +15,11 @@ public class SkillUI : MonoBehaviour
 
     void Update()
     {
-        SetskillInage();
+        //SetskillImage();
         SetSkillCoolTime();
     }
 
-    public void SetskillInage() // 각각 스킬 이미지 집어 넣기 이거는 나중에 무기교체 줄떄 한번만 실행 하기로하자 일단 Update로 테스트 진행
+    public void SetskillImage() // 각각 스킬 이미지 집어 넣기 이거는 나중에 무기교체 줄떄 한번만 실행 하기로하자 일단 Update로 테스트 진행
     {
         weaponImage.sprite = WeaponManager.activeWeapon.weaponScriptable.weaponImage;
         skillImage1.sprite = WeaponManager.activeWeapon.weaponScriptable.skillImage1;

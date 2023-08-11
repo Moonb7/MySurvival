@@ -20,6 +20,7 @@ public class SwordWeapon : WeaponBase
     public override void ChargingAttack()
     {
         AttackSetStats(AttackState.chargingAttack);
+        // 카메라 흔들림도 고려해보기
     }
 
     public override void Skill1() // 버프 스킬
@@ -39,7 +40,7 @@ public class SwordWeapon : WeaponBase
     }
     public bool CreateBuff() // 인풋 스킬에다 생성
     {
-        SkillUI skillUI = GameObject.Find("UIManager").GetComponent<SkillUI>();
+        SkillUI skillUI = GameObject.Find("UIManager").GetComponent<SkillUI>(); // 스킬UI스크립트에서 statusEffect위치를 찾아 생성하였다.
         if (WeaponManager.activeWeapon.buffImage != null)
         {
             return Instantiate(WeaponManager.activeWeapon.buffImage, skillUI.statusEffect);

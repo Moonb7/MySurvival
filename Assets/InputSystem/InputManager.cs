@@ -123,13 +123,14 @@ public class InputManager : Singleton<InputManager>
 
                 if (chargingcoroutine != null)
                     StopCoroutine(chargingcoroutine);
-                chargingcoroutine = StartCoroutine(charging());
+                chargingcoroutine = StartCoroutine(Charging());
             }
             else if (chargingEnergy >= WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime) // 다모으고 키를 떼었을 때
             {
                 WeaponManager.activeWeapon.ChargingAttack();
                 isCharging = false;
                 chargingEnergy = 0;
+                WeaponManager.activeWeapon.weaponAudioSource.loop = false;
                 Destroy(chagingEff, 1f);
                 Destroy(chargingFullEff, 1.5f);
             }
@@ -138,6 +139,7 @@ public class InputManager : Singleton<InputManager>
                 isCharging = false;
                 chargingEnergy = 0;
                 Debug.Log("취소");
+                WeaponManager.activeWeapon.weaponAudioSource.loop = false;
                 /*ParticleSystem particle = chagingEff.GetComponent<ParticleSystem>(); 갑작기 오류 발생
                 if (particle != null)
                     particle.loop = false;*/
@@ -152,8 +154,12 @@ public class InputManager : Singleton<InputManager>
         }
     }
 
-    IEnumerator charging()
+    IEnumerator Charging()
     {
+        WeaponManager.activeWeapon.weaponAudioSource.clip = WeaponManager.activeWeapon.chargingSound;
+        WeaponManager.activeWeapon.weaponAudioSource.loop= true;
+        WeaponManager.activeWeapon.weaponAudioSource.Play();
+
         while (isCharging)
         {
             chargingEnergy += Time.deltaTime;
@@ -165,6 +171,7 @@ public class InputManager : Singleton<InputManager>
                 chargingFullEff = Instantiate(WeaponManager.activeWeapon.chagingFullEff, weaponEquipPos);
                 chargingFullEff.transform.localPosition = Vector3.zero;
                 chargingFullEff.transform.localRotation = Quaternion.identity;
+                WeaponManager.activeWeapon.weaponAudioSource.loop = false;
                 yield break;
             }
         }
