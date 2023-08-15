@@ -104,7 +104,7 @@ public class InputManager : Singleton<InputManager>
     {
         if (context.started)
         {
-            FindAnyObjectByType<PauseUI>().togle();
+            //FindAnyObjectByType<PauseUI>().togle();
         }
     }
 
@@ -212,7 +212,8 @@ public class InputManager : Singleton<InputManager>
     {
         if (WeaponManager.activeWeapon != null && WeaponManager.isChangeReady &&
             PlayerController.animator.GetBool(AnimString.Instance.isAttack) == false &&
-            PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false && PlayerController.animator.GetBool(AnimString.Instance.canMove)) // 땅에 있는지체크 다른 행동을 취하고 있는지
+            PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false &&
+            PlayerController.animator.GetBool(AnimString.Instance.canMove))
         {
             if (context.performed)
             {
@@ -233,7 +234,8 @@ public class InputManager : Singleton<InputManager>
     {
         if (WeaponManager.activeWeapon != null && WeaponManager.isChangeReady &&
             PlayerController.animator.GetBool(AnimString.Instance.isAttack) == false &&
-            PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false && PlayerController.animator.GetBool(AnimString.Instance.canMove)) // 땅에 있는지체크 다른 행동을 취하고 있는지
+            PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false &&
+            PlayerController.animator.GetBool(AnimString.Instance.canMove))
         {
             if (context.performed)
             {

@@ -15,6 +15,6 @@ public class Gold : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        goldText.text = playerStats.Gold.ToString();
+        goldText.text = playerStats.gold.ToString();
     }
 }

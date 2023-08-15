@@ -276,7 +276,7 @@ MonoBehaviour:
     type: 3}
   attackSound: {fileID: 8300000, guid: 62e48d51911a9294aab8284e2a117204, type: 3}
   chargingSound: {fileID: 8300000, guid: 997f12b4c844a264b8a6ffa303a28abe, type: 3}
-  chargingAttackSound: {fileID: 8300000, guid: 0ace0689dc57f4a45a86e59149ad7e8e, type: 3}
+  chargingAttackSound: {fileID: 8300000, guid: 180f35aef2ea2654086bcbb52d58ec0b, type: 3}
   skill1Sound: {fileID: 8300000, guid: 20a74a44ae4b09b4086211cba4177280, type: 3}
   skill2Sound: {fileID: 8300000, guid: 77f915874954ad4408efd69549a0a40f, type: 3}
   buffImage: {fileID: 7449179162368727741, guid: 65d5f11300f17bd4db8e47cb733a02cc,

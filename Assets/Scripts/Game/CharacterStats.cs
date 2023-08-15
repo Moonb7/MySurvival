@@ -19,7 +19,9 @@ public class CharacterStats : MonoBehaviour
     protected AudioSource audioSource;
     public AudioClip hitSound1;                                      // 맞을떄 소리 랜덤으로 2가지 설정
     public AudioClip hitSound2;                                      // 맞을때 소리
+    public AudioClip deathSound;                                     // 죽는 소리
     public GameObject hitEff;                                        // 히트 이펙트 효과
+    public Transform[] hitPos = new Transform[2];                    // 히트 위치 임의로 지정
 
     protected virtual void Start()
     {
@@ -65,7 +67,7 @@ public class CharacterStats : MonoBehaviour
         float realDamageAcount = beforeHealth - CurrentHealth; // real Damage구하기 데미지 입었는지 확인
         if (realDamageAcount > 0) // 데미지 구현 어떤 움직이나 맞았을때의 효과
         {
-            HitSoundEffect();
+            HitEffect();
             if (animator != null)
             {
                 animator.SetTrigger(AnimString.Instance.hit);
@@ -74,7 +76,7 @@ public class CharacterStats : MonoBehaviour
         OnDeath();
     }
 
-    public virtual void HitSoundEffect() // 맞을때 효과
+    public virtual void HitEffect() // 맞을때 효과
     {
         int randomValue = Random.Range(0,2); // 맞을떄 두가지 패턴으로 변칙주기
         if(randomValue == 0)
@@ -86,7 +88,9 @@ public class CharacterStats : MonoBehaviour
             audioSource.clip = hitSound2;
         }
         audioSource.Play();
-        Instantiate(hitEff, transform); // 위치는 다시 확인 하기 맞은 부위를 지정하여 찾아서 생성 하게 할수도 있다.
+
+        int randm = Random.Range(0,2);
+        Instantiate(hitEff, hitPos[randm]); // 위치는 다시 확인 하기 맞은 부위를 지정하여 찾아서 생성 하게 할수도 있다.
     }
 
     // 마나사용

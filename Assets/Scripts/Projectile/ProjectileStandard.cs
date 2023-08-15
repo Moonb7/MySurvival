@@ -5,10 +5,14 @@ public class ProjectileStandard : MonoBehaviour
     private Collider projectileCollider;
 
     public GameObject Owner { get; private set; } // 주인설정
+    public string targetTag;                      //적중 시킬 적 설정하기
 
     private float totalAttack = 0;
     private CharacterStats stats;
     private Damageable damageable;
+
+    // --------------
+
 
     private void OnEnable()
     {
@@ -17,8 +21,8 @@ public class ProjectileStandard : MonoBehaviour
         {
             projectileCollider = null;
         }
-        Owner = GameObject.FindGameObjectWithTag("Player");
-        stats = Owner.GetComponentInParent<CharacterStats>();
+        Owner = GameObject.FindGameObjectWithTag("Player");     // 임시 방편
+        stats = Owner.GetComponentInParent<CharacterStats>();   // 임시 방편
         if (stats == null)
             stats = Owner.GetComponentInParent<CharacterStats>();
     }
@@ -27,10 +31,8 @@ public class ProjectileStandard : MonoBehaviour
         if (projectileCollider == null)
             return;
 
-        if (stats.isDeath)
-            return;
 
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.CompareTag(targetTag))
         {
             totalAttack = stats.attack.GetValue() + WeaponManager.activeWeapon.weaponScriptable.atk; // 캐릭터의 공격 스텟과 현재 장착중인 무기의 공격력을 더한 값
 
@@ -52,7 +54,7 @@ public class ProjectileStandard : MonoBehaviour
         if (stats.isDeath)
             return;
 
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.CompareTag(targetTag))
         {
             totalAttack = stats.attack.GetValue() + WeaponManager.activeWeapon.weaponScriptable.atk; // 캐릭터의 공격 스텟과 현재 장착중인 무기의 공격력을 더한 값
 

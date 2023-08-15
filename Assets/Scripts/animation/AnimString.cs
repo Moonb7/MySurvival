@@ -30,6 +30,7 @@ public class AnimString : Singleton<AnimString>
     public string isMounting = "IsEquip";
 
     [Header("Enemy")]
+    public string isClose = "IsClose";
     public string enemyState = "EnemyState";
 
 }

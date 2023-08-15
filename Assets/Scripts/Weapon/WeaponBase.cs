@@ -46,7 +46,7 @@ public abstract class WeaponBase : MonoBehaviour
     public abstract void Skill2();          // 2스킬
     public abstract float AttackStatedamageMultiplier(); // 공격상태에 따른 데미지 계수변환
 
-    public void AttackSetStats(AttackState _attackState)
+    public void AttackSetStats(AttackState _attackState) // 이 함수를 통해 공격을 시작하고 그냥 일반공격인지 무슨스킬공격인지 분별하여 실행 하게 만들었다. 공격종로 시점은 애니매이션 이벤트 함수로 실행하였다.
     {
         attackState = _attackState;
         PlayerController.animator.SetBool(AnimString.Instance.isAttack, true);

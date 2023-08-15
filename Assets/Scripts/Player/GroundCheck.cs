@@ -7,13 +7,16 @@ public class GroundCheck : MonoBehaviour
     private Animator animator;
 
     private Vector3 spherePosition;
-    [SerializeField] private float GroundedOffset;
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField]
+    private float GroundedOffset;
+    [SerializeField]
+    private LayerMask groundLayer;
 
     // 캐릭터 컨트롤러의 Radius랑 같아야한다.
-    [SerializeField] private float GroundedRadius = 0.28f;
-
-    [SerializeField] private bool drawGizmo;
+    [SerializeField]
+    private float GroundedRadius = 0.28f;
+    [SerializeField]
+    private bool drawGizmo;
 
     public bool Grounded;
     
@@ -42,8 +45,9 @@ public class GroundCheck : MonoBehaviour
         spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
             transform.position.z);
 
-        Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, groundLayer,
+        Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, groundLayer, // Ground Layer에 접촉해있으면 Ground에 있는걸로 판별
             QueryTriggerInteraction.Ignore);
+
         // 애니
         animator.SetBool("IsGround", Grounded);
     }

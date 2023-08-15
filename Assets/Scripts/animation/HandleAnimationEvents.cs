@@ -14,7 +14,7 @@ public class HandleAnimationEvents : MonoBehaviour
 
     void FinishAttack() // 공격끝난 시점 처리
     {
-        PlayerController.animator.SetBool(AnimString.Instance.isAttack, false);
+        PlayerController.animator.SetBool(AnimString.Instance.isAttack, false);     // 스킬밑 공격을 할때마마다 true시켜준걸 false로 변환해주어 공격을 끝낸다.
         PlayerController.animator.SetInteger(AnimString.Instance.attackStats, -1);
     }
 

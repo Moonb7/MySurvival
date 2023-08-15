@@ -46,6 +46,7 @@ public class SetBoolBehaviour : StateMachineBehaviour
     {
         if (updateOnStateMachine)
             animator.SetBool(boolName, valueEnter);
+        
     }
 
     // OnStateMachineExit is called when exiting a state machine via its Exit Node
@@ -53,5 +54,6 @@ public class SetBoolBehaviour : StateMachineBehaviour
     {
         if (updateOnStateMachine)
             animator.SetBool(boolName, valueExit);
+        
     }
 }
