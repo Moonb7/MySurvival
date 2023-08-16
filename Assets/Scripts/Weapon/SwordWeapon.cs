@@ -7,14 +7,17 @@ public class SwordWeapon : WeaponBase
 {
     public override void Attack()   // 기본공격
     {
-        startDamageMultiplier = 1;
-        attackState = AttackState.attack;
-        comboCount++;
-        if (comboCount >= 4)
-        {
-            comboCount = 1;
-        }
         AttackSetStats(AttackState.attack);
+
+        startDamageMultiplier = 1;
+        if(attackState == AttackState.attack)
+        {
+            comboCount++;
+            if (comboCount >= 4)
+            {
+                comboCount = 1;
+            }
+        }
     }
 
     public override void ChargingAttack()
@@ -34,7 +37,6 @@ public class SwordWeapon : WeaponBase
     IEnumerator PowerUpSkill1()
     {
         characterStats.attack.AddValue(weaponScriptable.buffValue);             // 일단 이렇게 테스트로 하고 스크랩터블오브젝트에 변수 생성할지 고민하자
-        
         yield return new WaitForSecondsRealtime(weaponScriptable.buffTime);     // 지속시간
         characterStats.attack.RemoveValue(weaponScriptable.buffValue);          // 다시 없애기
     }

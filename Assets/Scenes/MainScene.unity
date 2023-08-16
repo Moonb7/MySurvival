@@ -13255,7 +13255,7 @@ MonoBehaviour:
   defaultWeaponPos: {fileID: 1211178020}
   weaponEquipPos: {fileID: 421825815}
   attackModeTime: 12
-  comboTime: 0.6
+  comboOutTime: 0.5
 --- !u!1 &4075018219503884030
 GameObject:
   m_ObjectHideFlags: 0
@@ -17701,7 +17701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &5645638362834487616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17735,6 +17735,9 @@ MonoBehaviour:
   hitPos:
   - {fileID: 3731027316882326574}
   - {fileID: 3731027316882326574}
+  enemyTypes: 1
+  checkRadius: 1
+  drawGizmo: 1
   attackTime: 0.8
   deathGold: 100
   deathExp: 20
@@ -17742,7 +17745,6 @@ MonoBehaviour:
   arrowPos: {fileID: 680937782740793079}
   arrowPrefab: {fileID: 4487121527689730659, guid: 0a3e1407da450dd4396f7fbc4fc83817,
     type: 3}
-  enemyTypes: 1
 --- !u!114 &5645638362834487617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21053,13 +21055,15 @@ MonoBehaviour:
   hitPos:
   - {fileID: 3744703384617381860}
   - {fileID: 7403523589164199091}
+  enemyTypes: 0
+  checkRadius: 0.5
+  drawGizmo: 0
   attackTime: 3
   deathGold: 100
   deathExp: 10
   deathItem: []
   arrowPos: {fileID: 0}
   arrowPrefab: {fileID: 0}
-  enemyTypes: 0
 --- !u!82 &7460674760754496034
 AudioSource:
   m_ObjectHideFlags: 0

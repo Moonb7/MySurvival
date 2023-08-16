@@ -16,7 +16,7 @@ public class WeaponManager : MonoBehaviour
     private bool attackMode;                                            // 공격모드 중인지
     private float layerAtkModeTime;                                     // 공격모드지속 시간
     [SerializeField]
-    private float comboTime = 0.5f;                                     // 콤보공격 유지시간
+    private float comboOutTime = 0.5f;                                  // 콤보공격 유지시간
     private float countDown;                                            
     float comboTimeDown;
 
@@ -86,7 +86,7 @@ public class WeaponManager : MonoBehaviour
         {
             comboTimeDown = 0f;
         }
-        else if (comboTimeDown > comboTime)
+        else if (comboTimeDown > comboOutTime)
         {
             activeWeapon.comboCount = 0; // 다시 처음 콤보 공격이 나가게 콤보카운트 초기화
         }

@@ -28,6 +28,7 @@ public class EnemyProjectileStandard : MonoBehaviour
             stats = GetComponentInParent<CharacterStats>();
 
         rb = GetComponent<Rigidbody>();
+        Destroy(gameObject, 4f);
     }
     private void Update()
     {

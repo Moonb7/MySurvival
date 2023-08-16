@@ -112,7 +112,7 @@ public class InputManager : Singleton<InputManager>
     {
         if (WeaponManager.activeWeapon != null && WeaponManager.isChangeReady &&
             PlayerController.animator.GetBool(AnimString.Instance.isAttack) == false &&
-            PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false ) // 땅에 있는지체크 다른 행동을 취하고 있는지
+            PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false) // 땅에 있는지체크 다른 행동을 취하고 있는지
         {
             if (context.performed) // 키를 누르고 있는 동안
             {
@@ -125,7 +125,7 @@ public class InputManager : Singleton<InputManager>
                     StopCoroutine(chargingcoroutine);
                 chargingcoroutine = StartCoroutine(Charging());
             }
-            else if (chargingEnergy >= WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime) // 다모으고 키를 떼었을 때
+            else if (chargingEnergy >= WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime) // 차징 에너지를 다모으고 키를 떼었을 때
             {
                 WeaponManager.activeWeapon.ChargingAttack();
                 isCharging = false;
@@ -217,7 +217,7 @@ public class InputManager : Singleton<InputManager>
         {
             if (context.performed)
             {
-                if (WeaponManager.isSkill1Ready)
+                if (WeaponManager.isSkill1Ready && WeaponManager.activeWeapon.comboCount == 0) // 일반공격과 겹치는 경향이 있어서 이런식으로 해보았다.
                 {
                     WeaponManager.activeWeapon.Skill1();
                     WeaponManager.skill1CoolTimedown = 0;
@@ -239,7 +239,7 @@ public class InputManager : Singleton<InputManager>
         {
             if (context.performed)
             {
-                if (WeaponManager.isSkill2Ready)
+                if (WeaponManager.isSkill2Ready && WeaponManager.activeWeapon.comboCount == 0)
                 {
                     WeaponManager.activeWeapon.Skill2();
                     WeaponManager.skill2CoolTimedown = 0;
