@@ -33,6 +33,7 @@ public class Enemy : CharacterStats
     private float attackRange;
     private float countDown = 10f;
     public float attackTime = 3f;
+    public float closeAttackTime = 3f;
     
     public int deathGold;               // 죽으면 플레이어가 갖게될 골드량
     public int deathExp;                // 죽으면 플레이어가 갖게될 경험치량
@@ -99,7 +100,7 @@ public class Enemy : CharacterStats
                 {
                     SetState(EnemyState.Attack);
                 }
-                
+                  
                 if (IsClose)
                 {
                     SetState(EnemyState.IsClose);
@@ -109,7 +110,7 @@ public class Enemy : CharacterStats
             case EnemyState.Attack:          // 공격모드로 변경
                 if (countDown > attackTime)
                 {
-                    StartCoroutine(Attack(target));
+                    StartCoroutine(LookTargetAttack(target));
                     countDown = 0;
                 }
                 if (distance > attackRange)  //다시 멀어지면
@@ -124,7 +125,13 @@ public class Enemy : CharacterStats
                 break;
 
             case EnemyState.IsClose:
-                if(IsClose == false)
+                if (countDown > closeAttackTime)
+                {   
+                    StartCoroutine(LookTargetAttack(target)); // 한번 쳐다 근접보고 공격
+                    countDown = 0;
+                }
+                    
+                if (IsClose == false)
                 {
                     SetState(beforStats);
                 }
@@ -148,7 +155,7 @@ public class Enemy : CharacterStats
         Gizmos.DrawSphere(transform.position, checkRadius);
     }
 
-    IEnumerator Attack(Vector3 target)
+    IEnumerator LookTargetAttack(Vector3 target)
     {
         transform.LookAt(target); // 공격할때 한번 쳐다봐야하는데
         IsAttack = true;

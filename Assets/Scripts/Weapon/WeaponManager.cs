@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponManager : MonoBehaviour
 {
+    private CharacterStats characterStats;                              // 스텟상태
+
     public List<WeaponBase> startingWeapons = new List<WeaponBase>();
-    private WeaponBase[] weaponSlots = new WeaponBase[2];               // 게임 기획에 맞게 2개제한
+    public WeaponBase[] weaponSlots = new WeaponBase[2];                // 게임 기획에 맞게 2개제한
     public Transform defaultWeaponPos;                                  // 무기 대기위치
     public Transform weaponEquipPos;                                    // 무기 장착위치
     public static WeaponBase activeWeapon;                              // 현재 장착 무기
@@ -16,40 +19,32 @@ public class WeaponManager : MonoBehaviour
     private bool attackMode;                                            // 공격모드 중인지
     private float layerAtkModeTime;                                     // 공격모드지속 시간
     [SerializeField]
-    private float comboOutTime = 0.5f;                                  // 콤보공격 유지시간
-    private float countDown;                                            
-    float comboTimeDown;
+    private float comboDuration = 0.5f;                                 // 콤보공격 유지시간
+    private float comboTimeDown;
+    private float countDown;
 
     public static bool isSkill1Ready;                                   // 스킬1 공격이 가능한지
     public static bool isSkill2Ready;                                   // 스킬2 공격이 가능한지
-    public static float skill1CoolTimedown;                             
-    public static float skill2CoolTimedown;                             
+    public static float skill1CoolTimedown = 100f;                             
+    public static float skill2CoolTimedown = 100f;
 
-    public static bool isChangeReady = true;                            // 무기 교체가능한지
+    public static UnityAction OnSwichWeapon;
 
-    private CharacterStats characterStats;                              // 스텟상태
+    public static bool isWeaponSwichReady = true;                       // 무기 변경이 가능한지
+    private bool isEquip = true;                                        // 무기 장착중인지 확인용
+    
+    public float weaponSwitchDelay = 1f;                                // 처음 무기변겅 딜레이시간 무기변경할 때의 시각적인 시점을 보이기위해 만들었다.
+    public float weaponSwitchDelay2 = 1f;                               // 두번쨰 무기변겅 딜레이 시간
 
-    private void Awake()
+    private void Start()
     {
+        characterStats = GetComponent<CharacterStats>();
+
         foreach (var w in startingWeapons)
         {
             AddWeapon(w);
         }
-
-        characterStats = GetComponent<CharacterStats>();
-        if (weaponSlots[0] != null) // 시작 무기 장착
-        {
-            activeWeapon = weaponSlots[0];
-            activeWeapon.transform.parent = weaponEquipPos;
-            activeWeapon.transform.localPosition = Vector3.zero;
-            activeWeapon.transform.localRotation = Quaternion.identity;
-            skill1CoolTimedown = activeWeapon.weaponScriptable.skill1Cool;
-            skill2CoolTimedown = activeWeapon.weaponScriptable.skill2Cool;
-        }
-    }
-    private void Start()
-    {
-        SkillUI.Instance.SetskillImage();
+        EquipWeapon(weaponSlots[0]); // 시작 무기 장착
     }
 
     private void Update()
@@ -82,18 +77,42 @@ public class WeaponManager : MonoBehaviour
 
         // 일정 시간동안 공격이 안들어 올시 콤보 초기화
         comboTimeDown += Time.deltaTime; // 흘러가는 시간
+
         if (PlayerController.animator.GetBool(AnimString.Instance.isAttack)) // 공격실행 하면
         {
             comboTimeDown = 0f;
         }
-        else if (comboTimeDown > comboOutTime)
+        else if (comboTimeDown > comboDuration)
         {
+            if(activeWeapon)
             activeWeapon.comboCount = 0; // 다시 처음 콤보 공격이 나가게 콤보카운트 초기화
         }
-        PlayerController.animator.SetInteger(AnimString.Instance.attackCombo, activeWeapon.comboCount);
+        if (activeWeapon)
+            PlayerController.animator.SetInteger(AnimString.Instance.attackCombo, activeWeapon.comboCount);
     }
 
-    private void WeaponEquip(WeaponBase weapon) // 가지고 있는 무기 장착
+    public IEnumerator SwichWeapon(WeaponBase weapon)
+    {
+        if (isWeaponSwichReady)
+        {
+            isWeaponSwichReady = false;
+
+            PlayerController.animator.SetLayerWeight(2, 1);
+            isEquip = false;
+            PlayerController.animator.SetBool(AnimString.Instance.isEquip, isEquip);
+            yield return new WaitForSecondsRealtime(weaponSwitchDelay); // 바꾸는 시간
+            UnequipWeapon(activeWeapon);
+            EquipWeapon(weapon);
+            isEquip = true;
+            PlayerController.animator.SetBool(AnimString.Instance.isEquip, isEquip);
+            yield return new WaitForSecondsRealtime(weaponSwitchDelay2); // 바꾸는 시간
+            PlayerController.animator.SetLayerWeight(2, 0);
+
+            isWeaponSwichReady = true;
+        }
+    }
+
+    private void EquipWeapon(WeaponBase weapon) // 가지고 있는 무기 장착
     {
         if (HasWeapon(weapon) == null) // 무기가 없으면
             return;
@@ -102,9 +121,12 @@ public class WeaponManager : MonoBehaviour
         activeWeapon.transform.parent = weaponEquipPos;
         activeWeapon.transform.localPosition = Vector3.zero;
         activeWeapon.transform.localRotation = Quaternion.identity;
+
+        PlayerController.animator.SetInteger(AnimString.Instance.weaponNum, activeWeapon.weaponScriptable.weaponNum);
+        OnSwichWeapon?.Invoke();
     }
 
-    private void WeaponUnequip(WeaponBase weapon) // 가지고있는 무기 장착 해제
+    private void UnequipWeapon(WeaponBase weapon) // 가지고있는 무기 장착 해제
     {
         if (HasWeapon(weapon) == null) // 무기가 없으면
             return;
@@ -153,7 +175,7 @@ public class WeaponManager : MonoBehaviour
                 int windex = i <= 0 ? i + 1 : i - 1;
                 if(HasWeapon(weaponSlots[windex]) != null) // null이 아니면
                 {
-                    WeaponEquip(weaponSlots[windex]); // 나머지 무기 장착
+                    EquipWeapon(weaponSlots[windex]); // 나머지 무기 장착
                 }
                 return true;
             }
@@ -178,7 +200,10 @@ public class WeaponManager : MonoBehaviour
         skill1CoolTimedown += Time.deltaTime;
         skill2CoolTimedown += Time.deltaTime;
 
-        isSkill1Ready = activeWeapon.weaponScriptable.skill1Cool <= skill1CoolTimedown;
-        isSkill2Ready = activeWeapon.weaponScriptable.skill2Cool <= skill2CoolTimedown;
+        if (activeWeapon)
+        {
+            isSkill1Ready = activeWeapon.weaponScriptable.skill1Cool <= skill1CoolTimedown;
+            isSkill2Ready = activeWeapon.weaponScriptable.skill2Cool <= skill2CoolTimedown;
+        }
     }
 }

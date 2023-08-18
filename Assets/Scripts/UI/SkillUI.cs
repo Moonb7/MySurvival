@@ -13,6 +13,12 @@ public class SkillUI : Singleton<SkillUI>
     public TextMeshProUGUI skill2CoolTime;  // 스킬2 쿨타임 표시
     public Transform statusEffect;    // 버프 UI이미지 생성위치
 
+    protected override void Awake()
+    {
+        base.Awake();
+        WeaponManager.OnSwichWeapon += SetskillImage;
+    }
+    
     void Update()
     {
         //SetskillImage();
@@ -24,10 +30,14 @@ public class SkillUI : Singleton<SkillUI>
         weaponImage.sprite = WeaponManager.activeWeapon.weaponScriptable.weaponImage;
         skillImage1.sprite = WeaponManager.activeWeapon.weaponScriptable.skillImage1;
         skillImage2.sprite = WeaponManager.activeWeapon.weaponScriptable.skillImage2;
+        
     }
 
     void SetSkillCoolTime() // 쿨타임 표시
     {
+        if (WeaponManager.activeWeapon == null)
+            return;
+
         Mathf.Clamp01(skillImage1.fillAmount = WeaponManager.skill1CoolTimedown / WeaponManager.activeWeapon.weaponScriptable.skill1Cool);
         Mathf.Clamp01(skillImage2.fillAmount = WeaponManager.skill2CoolTimedown / WeaponManager.activeWeapon.weaponScriptable.skill2Cool);
 

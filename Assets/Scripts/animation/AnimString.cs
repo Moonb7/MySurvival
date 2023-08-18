@@ -23,6 +23,7 @@ public class AnimString : Singleton<AnimString>
     public string fasten = "Fasten";
     public string attackCombo = "AttackCombo";
     public string attackStats = "AttackStats"; // 공격 상태 일반공격인지 차징공격인지 구분하기위해
+    public string isEquip = "IsEquip";
 
 
     // 무기 관련

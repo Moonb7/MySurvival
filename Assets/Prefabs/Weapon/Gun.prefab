@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7974365627297299236}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -196,18 +196,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponScriptable: {fileID: 11400000, guid: 63579ddb1ea46ab4dac5e64a15925a86, type: 2}
   weaponAudioSource: {fileID: 5266854778277227040}
-  damageMultiplier: 0
-  startDamageMultiplier: 0
-  attackEffect: {fileID: 0}
-  chargingEffect: {fileID: 0}
-  chagingFullEff: {fileID: 0}
-  chargingAttackEffect: {fileID: 0}
-  skill1Effect: {fileID: 0}
-  skill2Effect: {fileID: 0}
-  ultimateSkillEffect: {fileID: 0}
-  attackSound: {fileID: 0}
-  chargingSound: {fileID: 0}
-  chargingAttackSound: {fileID: 0}
-  skill1Sound: {fileID: 0}
-  skill2Sound: {fileID: 0}
-  ultimateSkillSound: {fileID: 0}
+  attackEffect: {fileID: 206906933502295669, guid: 86f6990ec880fac40a2f7d3253cc8d79,
+    type: 3}
+  chargingEffect: {fileID: 448892067746066297, guid: b71eee2339a6f8049952e1e3e227e1d4,
+    type: 3}
+  chagingFullEff: {fileID: 3980452895012312540, guid: 6d9d44ac4c79cad47a06e880b10a7c0d,
+    type: 3}
+  chargingAttackEffect: {fileID: 1949624779417528, guid: 53d2b03f23b5b2a4da6b56aa9a9ee14d,
+    type: 3}
+  skill1Effect: {fileID: 693079922240627212, guid: d09ddde5867474545ac13c1ab70f6efc,
+    type: 3}
+  skill2Effect: {fileID: 3537929064150348675, guid: 6f47ac92f2904ab4996d465a70630b61,
+    type: 3}
+  attackSound: {fileID: 8300000, guid: 62e48d51911a9294aab8284e2a117204, type: 3}
+  chargingSound: {fileID: 8300000, guid: 997f12b4c844a264b8a6ffa303a28abe, type: 3}
+  chargingAttackSound: {fileID: 8300000, guid: 180f35aef2ea2654086bcbb52d58ec0b, type: 3}
+  skill1Sound: {fileID: 8300000, guid: 20a74a44ae4b09b4086211cba4177280, type: 3}
+  skill2Sound: {fileID: 8300000, guid: 77f915874954ad4408efd69549a0a40f, type: 3}
+  buffImage: {fileID: 7449179162368727741, guid: 65d5f11300f17bd4db8e47cb733a02cc,
+    type: 3}

@@ -4,8 +4,8 @@ public class CharacterStats : MonoBehaviour
 {
     public Stats maxHealth;
     public float CurrentHealth { get; private set; }
-    public Stats maxMana;
-    public float CurrentMana { get; private set; }
+    public Stats maxStamina;
+    public float CurrentStamina { get; private set; }
     public Stats attack;
     public Stats defence;
     public bool isDeath = false;
@@ -32,7 +32,7 @@ public class CharacterStats : MonoBehaviour
     protected virtual void SetStats()
     {
         CurrentHealth = maxHealth.GetValue();
-        CurrentMana = maxMana.GetValue();
+        CurrentStamina = maxStamina.GetValue();
     }
 
     public virtual void Heal(float amount)
@@ -98,9 +98,9 @@ public class CharacterStats : MonoBehaviour
     // 마나사용
     public virtual void UseMana(float amount)
     {
-        float beforeMana = CurrentMana;
-        CurrentMana -= amount;
-        CurrentMana = Mathf.Clamp(CurrentMana, 0, maxMana.GetValue());
+        float beforeMana = CurrentStamina;
+        CurrentStamina -= amount;
+        CurrentStamina = Mathf.Clamp(CurrentStamina, 0, maxStamina.GetValue());
     }
 
     // 죽음

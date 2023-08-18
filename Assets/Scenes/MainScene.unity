@@ -1042,85 +1042,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257615376}
   m_CullTransparentMesh: 1
---- !u!1001 &314977668
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 421825815}
-    m_Modifications:
-    - target: {fileID: 7974365627297299236, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_Name
-      value: Gun
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297299236, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297299236, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.069
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.056
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.97920513
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.20287272
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 23.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8fd26e845037efd488efbb52704aebed, type: 3}
 --- !u!1 &324941092
 GameObject:
   m_ObjectHideFlags: 3
@@ -1543,7 +1464,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 790244651}
-  - {fileID: 1291014947}
+  - {fileID: 568204568}
   m_Father: {fileID: 7398547590274313844}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 13.226, y: 9.44, z: 78.512}
@@ -2174,6 +2095,86 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &568204567
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 421825815}
+    m_Modifications:
+    - target: {fileID: 7974365627297299236, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_Name
+      value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974365627297299236, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8fd26e845037efd488efbb52704aebed, type: 3}
+--- !u!4 &568204568 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
+    type: 3}
+  m_PrefabInstance: {fileID: 568204567}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &674759918
 GameObject:
   m_ObjectHideFlags: 0
@@ -3544,12 +3545,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1279940571}
   m_CullTransparentMesh: 1
---- !u!4 &1291014947 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7974365627297535972, guid: 8fd26e845037efd488efbb52704aebed,
-    type: 3}
-  m_PrefabInstance: {fileID: 314977668}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1301068679 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4297186688028711714, guid: 8e0b79a99fbbcc6459f429adf17d8960,
@@ -5351,7 +5346,7 @@ MonoBehaviour:
   jump: Jump
   attack: Attack
   attackMode: AttackMode
-  weaponNum: WeaponStats
+  weaponNum: WeaponNum
   fasten: Fasten
   attackCombo: AttackCombo
   attackStats: AttackStats
@@ -6874,8 +6869,8 @@ MonoBehaviour:
   maxHealth:
     startValue: 100
     values: []
-  maxMana:
-    startValue: 10
+  maxStamina:
+    startValue: 0
     values: []
   attack:
     startValue: 5
@@ -9038,9 +9033,6 @@ MonoBehaviour:
   jumpKey: 0
   sprintKey: 0
   rollKey: 0
-  weapon1Key: 0
-  weapon2Key: 0
-  weapon3Key: 0
   analogMovement: 1
   cursorLocked: 1
   cursorInputForLook: 1
@@ -13252,10 +13244,13 @@ MonoBehaviour:
   startingWeapons:
   - {fileID: 1895720438, guid: 6f01c1c0785cd7f46b4f337c659c3cab, type: 3}
   - {fileID: -1054648226729169810, guid: 8fd26e845037efd488efbb52704aebed, type: 3}
+  weaponSlots:
+  - {fileID: 0}
+  - {fileID: 0}
   defaultWeaponPos: {fileID: 1211178020}
   weaponEquipPos: {fileID: 421825815}
   attackModeTime: 12
-  comboOutTime: 0.5
+  comboDuration: 0.5
 --- !u!1 &4075018219503884030
 GameObject:
   m_ObjectHideFlags: 0
@@ -13537,7 +13532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4190418381280577000
 Transform:
   m_ObjectHideFlags: 0
@@ -17701,7 +17696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &5645638362834487616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17717,7 +17712,7 @@ MonoBehaviour:
   maxHealth:
     startValue: 100
     values: []
-  maxMana:
+  maxStamina:
     startValue: 0
     values: []
   attack:
@@ -17739,6 +17734,7 @@ MonoBehaviour:
   checkRadius: 1
   drawGizmo: 1
   attackTime: 0.8
+  closeAttackTime: 3
   deathGold: 100
   deathExp: 20
   deathItem: []
@@ -18317,7 +18313,10 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'RightHand'\n\tFrom animation clip 'Idle@Sheath
+    A Weapon Out'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -21037,7 +21036,7 @@ MonoBehaviour:
   maxHealth:
     startValue: 100
     values: []
-  maxMana:
+  maxStamina:
     startValue: 0
     values: []
   attack:
@@ -21059,6 +21058,7 @@ MonoBehaviour:
   checkRadius: 0.5
   drawGizmo: 0
   attackTime: 3
+  closeAttackTime: 3
   deathGold: 100
   deathExp: 10
   deathItem: []
@@ -22974,7 +22974,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1637787772605717945}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: Weapon1
+        m_MethodName: OnWeapon1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22990,7 +22990,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1637787772605717945}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: Weapon2
+        m_MethodName: OnWeapon2
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     private GameObject mainCamera;
     private PlayerInput playerInput;
-    private CharacterStats characterStats;
+    private CharacterStats PlayerStats;
 
     // 애니메이션 스피드 파라미터값
     private float blendSpeed;
@@ -83,14 +83,13 @@ public class PlayerController : MonoBehaviour
         {
             mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         }
-    }
-    private void Start()
-    {
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
-        characterStats = GetComponent<CharacterStats>();
-
+        PlayerStats = GetComponent<PlayerStats>();
+    }
+    private void Start()
+    {
         // 다시 초기화 하기위해 회전값 받아놓기
         ratationSmoothValue = rotationSmoothTime;
 
@@ -100,7 +99,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(characterStats.isDeath == true)
+        if(PlayerStats.isDeath == true)
         {
             // 죽었을떄 기능
             return;

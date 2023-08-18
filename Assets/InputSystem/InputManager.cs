@@ -15,12 +15,6 @@ public class InputManager : Singleton<InputManager>
     public bool sprintKey;
     [HideInInspector]
     public bool rollKey;
-    [HideInInspector]
-    public bool weapon1Key;
-    [HideInInspector]
-    public bool weapon2Key;
-    [HideInInspector]
-    public bool weapon3Key;
 
     // 직접 구한 값을 통해 할것인가
     public bool analogMovement;
@@ -36,9 +30,12 @@ public class InputManager : Singleton<InputManager>
 
     public Transform weaponEquipPos;
 
+    WeaponManager weaponManager;
+
     private void Start()
     {
         SetCursorState(cursorLocked);
+        weaponManager = GetComponent<WeaponManager>();
     }
 
     public void OnMove(InputAction.CallbackContext context) // 움직임 값
@@ -110,7 +107,7 @@ public class InputManager : Singleton<InputManager>
 
     public void OnAttack(InputAction.CallbackContext context) // 기본 공격
     {
-        if (WeaponManager.activeWeapon != null && WeaponManager.isChangeReady &&
+        if (WeaponManager.activeWeapon != null && WeaponManager.isWeaponSwichReady &&
             PlayerController.animator.GetBool(AnimString.Instance.isAttack) == false &&
             PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false) // 땅에 있는지체크 다른 행동을 취하고 있는지
         {
@@ -187,30 +184,21 @@ public class InputManager : Singleton<InputManager>
     }
     public void OnWeapon1(InputAction.CallbackContext context)
     {
-        if (context.started && !weapon1Key)
+        if (context.performed)
         {
-            weapon1Key = true;
-        }
-        else if (context.canceled)
-        {
-            weapon1Key = false;
+            StartCoroutine(weaponManager.SwichWeapon(weaponManager.weaponSlots[0]));
         }
     }
     public void OnWeapon2(InputAction.CallbackContext context)
     {
-
-        if (context.started && !weapon2Key)
+        if (context.performed)
         {
-            weapon2Key = true;
-        }
-        else if (context.canceled)
-        {
-            weapon2Key = false;
+            StartCoroutine(weaponManager.SwichWeapon(weaponManager.weaponSlots[1]));
         }
     }
     public void OnSkill1(InputAction.CallbackContext context)
     {
-        if (WeaponManager.activeWeapon != null && WeaponManager.isChangeReady &&
+        if (WeaponManager.activeWeapon != null && WeaponManager.isWeaponSwichReady &&
             PlayerController.animator.GetBool(AnimString.Instance.isAttack) == false &&
             PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false &&
             PlayerController.animator.GetBool(AnimString.Instance.canMove))
@@ -232,7 +220,7 @@ public class InputManager : Singleton<InputManager>
 
     public void OnSkill2(InputAction.CallbackContext context)
     {
-        if (WeaponManager.activeWeapon != null && WeaponManager.isChangeReady &&
+        if (WeaponManager.activeWeapon != null && WeaponManager.isWeaponSwichReady &&
             PlayerController.animator.GetBool(AnimString.Instance.isAttack) == false &&
             PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false &&
             PlayerController.animator.GetBool(AnimString.Instance.canMove))
