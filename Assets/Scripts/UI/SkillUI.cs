@@ -38,27 +38,27 @@ public class SkillUI : Singleton<SkillUI>
         if (WeaponManager.activeWeapon == null)
             return;
 
-        Mathf.Clamp01(skillImage1.fillAmount = WeaponManager.skill1CoolTimedown / WeaponManager.activeWeapon.weaponScriptable.skill1Cool);
-        Mathf.Clamp01(skillImage2.fillAmount = WeaponManager.skill2CoolTimedown / WeaponManager.activeWeapon.weaponScriptable.skill2Cool);
+        Mathf.Clamp01(skillImage1.fillAmount = WeaponManager.activeWeapon.skill1CoolTimedown / WeaponManager.activeWeapon.weaponScriptable.skill1Cool);
+        Mathf.Clamp01(skillImage2.fillAmount = WeaponManager.activeWeapon.skill2CoolTimedown / WeaponManager.activeWeapon.weaponScriptable.skill2Cool);
 
-        if (WeaponManager.isSkill1Ready)
+        if (WeaponManager.activeWeapon.isSkill1Ready)
         {
             skill1CoolTime.enabled = false;
         }
         else
         {
             skill1CoolTime.enabled = true;
-            float coolTime1 = WeaponManager.activeWeapon.weaponScriptable.skill1Cool - WeaponManager.skill1CoolTimedown;
+            float coolTime1 = WeaponManager.activeWeapon.weaponScriptable.skill1Cool - WeaponManager.activeWeapon.skill1CoolTimedown;
             skill1CoolTime.text = coolTime1.ToString("0.0");
         }
-        if (WeaponManager.isSkill2Ready)
+        if (WeaponManager.activeWeapon.isSkill2Ready)
         {
             skill2CoolTime.enabled = false;
         }
         else
         {
             skill2CoolTime.enabled = true;
-            float coolTime2 = WeaponManager.activeWeapon.weaponScriptable.skill2Cool - WeaponManager.skill2CoolTimedown;
+            float coolTime2 = WeaponManager.activeWeapon.weaponScriptable.skill2Cool - WeaponManager.activeWeapon.skill2CoolTimedown;
             skill2CoolTime.text = coolTime2.ToString("0.0");
         }
     }

@@ -205,10 +205,10 @@ public class InputManager : Singleton<InputManager>
         {
             if (context.performed)
             {
-                if (WeaponManager.isSkill1Ready && WeaponManager.activeWeapon.comboCount == 0) // 일반공격과 겹치는 경향이 있어서 이런식으로 해보았다.
+                if (WeaponManager.activeWeapon.isSkill1Ready && WeaponManager.activeWeapon.comboCount == 0) // 일반공격과 겹치는 경향이 있어서 이런식으로 해보았다.
                 {
                     WeaponManager.activeWeapon.Skill1();
-                    WeaponManager.skill1CoolTimedown = 0;
+                    WeaponManager.activeWeapon.skill1CoolTimedown = 0;
                 }
                 else
                 {
@@ -227,10 +227,10 @@ public class InputManager : Singleton<InputManager>
         {
             if (context.performed)
             {
-                if (WeaponManager.isSkill2Ready && WeaponManager.activeWeapon.comboCount == 0)
+                if (WeaponManager.activeWeapon.isSkill2Ready && WeaponManager.activeWeapon.comboCount == 0)
                 {
                     WeaponManager.activeWeapon.Skill2();
-                    WeaponManager.skill2CoolTimedown = 0;
+                    WeaponManager.activeWeapon.skill2CoolTimedown = 0;
                 }
                 else
                 {

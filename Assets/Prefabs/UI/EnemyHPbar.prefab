@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4297186686918310440}
   - component: {fileID: 4297186686918310441}
   - component: {fileID: 4297186686918310422}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4297186687765429765}
   - component: {fileID: 4297186687765429767}
   - component: {fileID: 4297186687765429764}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,8 +165,7 @@ GameObject:
   - component: {fileID: 4297186688028711715}
   - component: {fileID: 4297186688028711712}
   - component: {fileID: 4297186688028711713}
-  - component: {fileID: 4297186688028711726}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: EnemyHPbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +179,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4297186688028711727}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
@@ -255,16 +254,3 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4297186688028711726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4297186688028711727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9895c0f0e8adbf94e9f3541e5c842316, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: {fileID: 4297186686918310422}

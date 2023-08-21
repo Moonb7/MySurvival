@@ -40,11 +40,34 @@ public abstract class WeaponBase : MonoBehaviour
     [Header("버프스킬이 있을시 버프표시용오브젝트 적용")]
     public GameObject buffImage;            // 버프표시용오브젝트
 
+    public bool isSkill1Ready;              // 스킬1 공격이 가능한지
+    public bool isSkill2Ready;              // 스킬2 공격이 가능한지
+    public float skill1CoolTimedown = 100f;
+    public float skill2CoolTimedown = 100f;
+
+
+    protected void Update()
+    {
+        SkillCoolTimeCheck();
+    }
+
     public abstract void Attack();          // 기본 공격
     public abstract void ChargingAttack();  // 차지 공격
     public abstract void Skill1();          // 1스킬
     public abstract void Skill2();          // 2스킬
     public abstract float AttackStatedamageMultiplier(); // 공격상태에 따른 데미지 계수변환
+
+    public void SkillCoolTimeCheck() // 쿨타임 체크
+    {
+        skill1CoolTimedown += Time.deltaTime;
+        skill2CoolTimedown += Time.deltaTime;
+
+        if (WeaponManager.activeWeapon)
+        {
+            isSkill1Ready = WeaponManager.activeWeapon.weaponScriptable.skill1Cool <= skill1CoolTimedown;
+            isSkill2Ready = WeaponManager.activeWeapon.weaponScriptable.skill2Cool <= skill2CoolTimedown;
+        }
+    }
 
     public void AttackSetStats(AttackState _attackState) // 이 함수를 통해 공격을 시작하고 그냥 일반공격인지 무슨스킬공격인지 분별하여 실행 하게 만들었다. 공격종로 시점은 애니매이션 이벤트 함수로 실행하였다.
     {

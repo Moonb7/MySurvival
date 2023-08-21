@@ -23,11 +23,6 @@ public class WeaponManager : MonoBehaviour
     private float comboTimeDown;
     private float countDown;
 
-    public static bool isSkill1Ready;                                   // 스킬1 공격이 가능한지
-    public static bool isSkill2Ready;                                   // 스킬2 공격이 가능한지
-    public static float skill1CoolTimedown = 100f;                             
-    public static float skill2CoolTimedown = 100f;
-
     public static UnityAction OnSwichWeapon;
 
     public static bool isWeaponSwichReady = true;                       // 무기 변경이 가능한지
@@ -50,7 +45,6 @@ public class WeaponManager : MonoBehaviour
     private void Update()
     {
         AttackMode();
-        SkillCoolTimeCheck();
     }
 
     private void AttackMode() // 공격 모드 유지및 공격조건들 초기화용도 이기도 하다.
@@ -195,15 +189,4 @@ public class WeaponManager : MonoBehaviour
         return null;
     }
 
-    private void SkillCoolTimeCheck() // 쿨타임 체크
-    {
-        skill1CoolTimedown += Time.deltaTime;
-        skill2CoolTimedown += Time.deltaTime;
-
-        if (activeWeapon)
-        {
-            isSkill1Ready = activeWeapon.weaponScriptable.skill1Cool <= skill1CoolTimedown;
-            isSkill2Ready = activeWeapon.weaponScriptable.skill2Cool <= skill2CoolTimedown;
-        }
-    }
 }
