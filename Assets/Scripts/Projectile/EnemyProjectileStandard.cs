@@ -10,9 +10,9 @@ public class EnemyProjectileStandard : MonoBehaviour
     public string targetTag;                       // 적중 시킬 적 설정하기
     public float speed;                            // 날아갈 속도
 
-    private float totalAttack = 0;
+    private float totalDamage = 0;
     private CharacterStats stats;
-    private Damageable damageable;
+
 
     private void Start()
     {
@@ -48,16 +48,16 @@ public class EnemyProjectileStandard : MonoBehaviour
 
         if (other.gameObject.CompareTag(targetTag))
         {
-            totalAttack = stats.attack.GetValue(); // 캐릭터의 공격 스텟
+            totalDamage = stats.attack.GetValue(); // 캐릭터의 공격 스텟
 
-            damageable = other.GetComponent<Damageable>();
+            Damageable damageable = other.GetComponent<Damageable>();
             if (damageable == null)
             {
                 damageable = other.GetComponentInParent<Damageable>();
                 if (damageable == null) // 그럼에도 널이면 없는 것이니 그냥 실행시키지 말자
                     return;
             }
-            damageable.InflictDamage(totalAttack, false, stats.gameObject);
+            damageable.InflictDamage(totalDamage, false, stats.gameObject);
             //this.enabled= false;
             Destroy(gameObject);
         }
@@ -72,9 +72,9 @@ public class EnemyProjectileStandard : MonoBehaviour
 
         if (other.gameObject.CompareTag(targetTag))
         {
-            totalAttack = stats.attack.GetValue(); // 캐릭터의 공격 스텟
+            totalDamage = stats.attack.GetValue(); // 캐릭터의 공격 스텟
 
-            damageable = other.GetComponent<Damageable>();
+            Damageable damageable = other.GetComponent<Damageable>();
             if (damageable == null)
             {
                 damageable = other.GetComponentInParent<Damageable>();
@@ -82,7 +82,7 @@ public class EnemyProjectileStandard : MonoBehaviour
                     return;
             }
 
-            damageable.InflictDamage(totalAttack, false, stats.gameObject);
+            damageable.InflictDamage(totalDamage, false, stats.gameObject);
             //this.enabled= false;
             Destroy(gameObject);
         }

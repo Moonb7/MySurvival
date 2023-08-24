@@ -12,12 +12,19 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private bool hideFullHealthBar = true;
 
+    [Tooltip("HealthBar가 쳐다볼지 말지 정한다.")]
+    [SerializeField]
+    private bool lookHealthBar;
+
     private void Update()
     {
         healthImage.fillAmount = characterStats.CurrentHealth / characterStats.maxHealth.GetValue();
 
-        enemyHpbar.LookAt(Camera.main.transform);
-
+        if (lookHealthBar)
+        {
+            if (enemyHpbar != null)
+                enemyHpbar.LookAt(Camera.main.transform);
+        }
         if (hideFullHealthBar)
         {
             enemyHpbar.gameObject.SetActive(healthImage.fillAmount != 1); // 1이면 false 아니면 ture

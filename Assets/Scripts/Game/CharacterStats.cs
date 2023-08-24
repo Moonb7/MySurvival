@@ -90,9 +90,12 @@ public class CharacterStats : MonoBehaviour
         audioSource.Play();
 
         int randm = Random.Range(0,2);
-        GameObject instanc = Instantiate(hitEff, hitPos[randm]); // 위치는 다시 확인 하기 맞은 부위를 지정하여 찾아서 생성 하게 할수도 있다.
-        instanc.transform.SetParent(null);
-        Destroy(instanc, 2f);
+        if(hitPos.Length > 0)
+        {
+            GameObject instanc = Instantiate(hitEff, hitPos[randm]); // 위치는 다시 확인 하기 맞은 부위를 지정하여 찾아서 생성 하게 할수도 있다.
+            instanc.transform.SetParent(null);
+            Destroy(instanc, 2f);
+        }
     }
 
     // 마나사용
