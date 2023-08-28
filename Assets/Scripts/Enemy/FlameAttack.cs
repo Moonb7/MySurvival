@@ -6,10 +6,15 @@ using UnityEngine;
 public class FlameAttack : MonoBehaviour
 {
     public CharacterStats stats;
-
     public LayerMask targetMask;
     public float damageTime;
     private float countDown;
+    private ParticleSystem ps;
+
+    private void Start()
+    {
+        ps = GetComponent<ParticleSystem>();
+    }
 
     private void Update()
     {
@@ -19,6 +24,13 @@ public class FlameAttack : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
+        if (stats.isDeath)
+        {
+            var mainModule = ps.main; // 파티클 시스템의 main 모듈을 가져옴
+            mainModule.loop = false; // loop 속성 설정
+            return;
+        }
+
         int otherLayer = other.layer;
         LayerMask targeMaskValue = targetMask;
 

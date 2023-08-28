@@ -8,7 +8,7 @@ public class CharacterStats : MonoBehaviour
     public float CurrentStamina { get; private set; }
     public Stats attack;
     public Stats defence;
-    public bool isDeath = false;
+    public bool isDeath { get; protected set; }
     [SerializeField]
     protected float DeathDelay = 3f;
     protected Animator animator;
@@ -59,6 +59,9 @@ public class CharacterStats : MonoBehaviour
         if (Invincible)
             return;
 
+        if (isDeath)
+            return;
+
         float beforeHealth = CurrentHealth;
         CurrentHealth = CurrentHealth - (damage - defence.GetValue());
         if(CurrentHealth >= beforeHealth) // 데미지가 없으면
@@ -73,6 +76,7 @@ public class CharacterStats : MonoBehaviour
                 animator.SetTrigger(AnimString.Instance.hit);
             }
         }
+
         OnDeath();
     }
 

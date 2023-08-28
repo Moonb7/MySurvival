@@ -1,18 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class StatusUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public PlayerStats playerStats;
+    public TextMeshProUGUI goldText;
+    public Image expImage;
+    public TextMeshProUGUI expText;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        goldText.text = playerStats.gold.ToString();
+
+        double expfillAmount = Convert.ToDouble(playerStats.exp) / Convert.ToDouble(playerStats.GetLevelupExp(playerStats.level)); // 형변환 해볼까?
+        expImage.fillAmount = (float)expfillAmount;
+        expText.text = $"{playerStats.exp}   /   {playerStats.GetLevelupExp(playerStats.level)}";
     }
 }

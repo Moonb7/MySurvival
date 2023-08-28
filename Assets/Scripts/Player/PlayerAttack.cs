@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private float totalAttack = 0;
-
+    private float totalDamage = 0;
     private CharacterStats stats;
     private Damageable damageable;
+
+    public LayerMask enemyLayer;
 
     private void Start()
     {
@@ -18,9 +19,12 @@ public class PlayerAttack : MonoBehaviour
         if (stats.isDeath)
             return;
 
-        if(other.gameObject.tag == "Enemy")
+        int otherLayer = other.gameObject.layer;
+        LayerMask targeMaskValue = enemyLayer;
+
+        if ((targeMaskValue.value & (1 << otherLayer)) != 0) // targetLayerMaskValue와 충돌하는 레이어를 판단
         {
-            totalAttack = stats.attack.GetValue() + WeaponManager.activeWeapon.weaponScriptable.atk; // 캐릭터의 공격 스텟과 현재 장착중인 무기의 공격력을 더한 값
+            totalDamage = stats.attack.GetValue() + WeaponManager.activeWeapon.weaponScriptable.atk; // 캐릭터의 공격 스텟과 현재 장착중인 무기의 공격력을 더한 값
 
             damageable = other.GetComponent<Damageable>();
             if (damageable == null)
@@ -29,7 +33,7 @@ public class PlayerAttack : MonoBehaviour
             }
 
             damageable.damageMultiplier = WeaponManager.activeWeapon.AttackStatedamageMultiplier();  // 공격상태에 따라 데미지 계수 강화
-            damageable.InflictDamage(totalAttack, false, this.gameObject);
+            damageable.InflictDamage(totalDamage, false, this.gameObject);
             //this.enabled= false;
         }
     }

@@ -1,18 +1,15 @@
 using UnityEngine;
 
-public class ProjectileStandard : MonoBehaviour
+public class PlayerProjectileStandard : MonoBehaviour
 {
     private Collider projectileCollider;
 
     public GameObject Owner { get; private set; } // 주인설정
-    public string targetTag;                      //적중 시킬 적 설정하기
+    public LayerMask targetLayer;                 // 타켓레이어 설정
 
     private float totalAttack = 0;
     private CharacterStats stats;
     private Damageable damageable;
-
-    // --------------
-
 
     private void OnEnable()
     {
@@ -31,8 +28,13 @@ public class ProjectileStandard : MonoBehaviour
         if (projectileCollider == null)
             return;
 
+        if (stats.isDeath)
+            return;
 
-        if (other.gameObject.CompareTag(targetTag))
+        int otherLayer = other.gameObject.layer;
+        LayerMask targeMaskValue = targetLayer;
+
+        if ((targeMaskValue.value & (1 << otherLayer)) != 0) // targetLayerMaskValue와 충돌하는 레이어를 판단
         {
             totalAttack = stats.attack.GetValue() + WeaponManager.activeWeapon.weaponScriptable.atk; // 캐릭터의 공격 스텟과 현재 장착중인 무기의 공격력을 더한 값
 
@@ -54,7 +56,10 @@ public class ProjectileStandard : MonoBehaviour
         if (stats.isDeath)
             return;
 
-        if (other.gameObject.CompareTag(targetTag))
+        int otherLayer = other.layer;
+        LayerMask targeMaskValue = targetLayer;
+
+        if ((targeMaskValue.value & (1 << otherLayer)) != 0) // targetLayerMaskValue와 충돌하는 레이어를 판단
         {
             totalAttack = stats.attack.GetValue() + WeaponManager.activeWeapon.weaponScriptable.atk; // 캐릭터의 공격 스텟과 현재 장착중인 무기의 공격력을 더한 값
 
@@ -68,5 +73,6 @@ public class ProjectileStandard : MonoBehaviour
             damageable.InflictDamage(totalAttack, false, this.gameObject);
             //this.enabled= false;
         }
+        Debug.Log(other.gameObject.name);
     }
 }

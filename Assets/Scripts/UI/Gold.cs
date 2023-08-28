@@ -6,13 +6,8 @@ using UnityEngine;
 public class Gold : MonoBehaviour
 {
     public PlayerStats playerStats;
-    private TextMeshProUGUI goldText;
-    void Start()
-    {
-        goldText = GetComponent<TextMeshProUGUI>();
-    }
+    public TextMeshProUGUI goldText;
 
-    // Update is called once per frame
     void Update()
     {
         goldText.text = playerStats.gold.ToString();

@@ -29,5 +29,19 @@ public class HealthBar : MonoBehaviour
         {
             enemyHpbar.gameObject.SetActive(healthImage.fillAmount != 1); // 1이면 false 아니면 ture
         }
+
+        CanvasGroup canvasGroup = enemyHpbar.GetComponent<CanvasGroup>();
+        if (characterStats.isDeath)
+        {
+            if(canvasGroup != null && canvasGroup.alpha >= 0)
+            {
+                float countDonw =+ Time.deltaTime;
+                canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, 0, countDonw/1); // 헬스바가 점점 사라지는 연출 효과
+                if(canvasGroup.alpha >= 0.01f && canvasGroup.alpha <= 0.1f)
+                {
+                    canvasGroup.alpha = 0;
+                }
+            }
+        }
     }
 }

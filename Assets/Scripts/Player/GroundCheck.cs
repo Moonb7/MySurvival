@@ -24,7 +24,6 @@ public class GroundCheck : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        
     }
    
     private void Update()

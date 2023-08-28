@@ -56,7 +56,8 @@ public class Slash_GrvityPoint : MonoBehaviour
 
         if(WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime <= InputManager.chargingEnergy)
         {
-            ps.loop = false;
+            var mainModule = ps.main; // 파티클 시스템의 main 모듈을 가져옴
+            mainModule.loop = false;  // loop 속성 설정
         }
 
         ps.SetParticles(particles, particleCount);

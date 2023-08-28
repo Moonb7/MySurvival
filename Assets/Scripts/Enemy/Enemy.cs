@@ -20,35 +20,34 @@ public enum EnemyTypes
 public class Enemy : CharacterStats
 {
     public EnemyTypes enemyTypes;
-    
-    private NavMeshAgent agent;
+    protected NavMeshAgent agent;
 
-    private GameObject player;
-    private LayerMask playerMask;       // Player의 레이어지정
+    protected GameObject player;
+    protected LayerMask playerMask;       // Player의 레이어지정
     public float checkRadius = 0.5f;    // Physics.CheckSphere의 감지할 범위
     public bool drawGizmo;              // 기즈모를 그릴지 말지 정하기
 
-    private EnemyState currentStats = EnemyState.Idle; // 이거는 어떠한 상태 행동이다
-    private EnemyState beforStats;
-    private float attackRange;
-    private float countDown = 10f;
+    protected EnemyState currentStats = EnemyState.Idle; // 이거는 어떠한 상태 행동이다
+    protected EnemyState beforStats;
+    protected float attackRange;
+    protected float countDown = 10f;
     public float attackTime = 3f;
     public float closeAttackTime = 3f;
     
     public int deathGold;               // 죽으면 플레이어가 갖게될 골드량
     public int deathExp;                // 죽으면 플레이어가 갖게될 경험치량
-    public Item[] deathItem;            // 죽으면 떨어트리는 아이템 전리품
+    public Item[] deathItem;            // 죽으면 떨어트리는 아이템 전리품 예) 물약이나 강화영약등 총알박스
 
     public Transform arrowPos;          // 화살 생성위치 임시부모역할을 할것이다. 처음 생성될떄는 Enemy의 자식오브젝트로 만들고 애니메이션의 화살을 쏘는 시점에서 자식오브젝트말고 외부로 빠져 날아가게 만들예정이다.
     public GameObject arrowPrefab;      // 화살 오브젝트프리팹
 
-    private bool IsAttack // 공격하는지체크와 애니메이션파라미터를 같이 주었다.
+    protected bool IsAttack // 공격하는지체크와 애니메이션파라미터를 같이 주었다.
     {
         get { return animator.GetBool(AnimString.Instance.isAttack); }
         set { animator.SetBool(AnimString.Instance.isAttack,value); }
     }
 
-    private bool IsClose // 원거리적에게만 근접공격이 가능하게 만들었다.
+    protected bool IsClose // 원거리적에게만 근접공격이 가능하게 만들었다.
     {
         get {
             if (enemyTypes != EnemyTypes.RangedEnemy)
@@ -64,7 +63,7 @@ public class Enemy : CharacterStats
             animator.SetBool(AnimString.Instance.isClose, value); }
     }
 
-    private bool CanMove //애니메이션파라미터를 같이 주었다.
+    protected bool CanMove //애니메이션파라미터를 같이 주었다.
     {
         get {return animator.GetBool(AnimString.Instance.canMove);}
     }
@@ -79,7 +78,7 @@ public class Enemy : CharacterStats
         SetState(EnemyState.Chase);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (isDeath)
             return;
@@ -146,7 +145,7 @@ public class Enemy : CharacterStats
         }
     }
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         if (enemyTypes != EnemyTypes.RangedEnemy || !drawGizmo)
             return;
@@ -155,7 +154,7 @@ public class Enemy : CharacterStats
         Gizmos.DrawSphere(transform.position, checkRadius);
     }
 
-    IEnumerator LookTargetAttack(Vector3 target)
+    protected virtual IEnumerator LookTargetAttack(Vector3 target)
     {
         transform.LookAt(target); // 공격할때 한번 쳐다봐야하는데
         IsAttack = true;
@@ -163,7 +162,7 @@ public class Enemy : CharacterStats
         IsAttack = false;
     }
 
-    void SetState(EnemyState newState)
+    protected virtual void SetState(EnemyState newState)
     {
         if (currentStats == newState) return;
 
@@ -206,11 +205,7 @@ public class Enemy : CharacterStats
                 animator.SetTrigger(AnimString.Instance.isDie);
                 Debug.Log("죽음");
             }
-
-            if (gameObject.tag != "Player")
-            {
-                Destroy(this.gameObject, DeathDelay);
-            }
+            Destroy(this.gameObject, DeathDelay);
         }
     }
     

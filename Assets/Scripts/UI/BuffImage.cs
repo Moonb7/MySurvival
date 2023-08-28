@@ -8,6 +8,7 @@ public class BuffImage : MonoBehaviour
     private TextMeshProUGUI buffDownTimeText;
     private float buffcoolDown;
     private float buffTime;
+    private WeaponBase activeWeapon;
 
     private void OnEnable()
     {
@@ -18,18 +19,19 @@ public class BuffImage : MonoBehaviour
     private void Start()
     {
         buffTime = WeaponManager.activeWeapon.weaponScriptable.buffTime;
+        activeWeapon = WeaponManager.activeWeapon;
     }
 
     private void Update()
     {
         buffcoolDown += Time.deltaTime;
-        if (WeaponManager.activeWeapon!= null)
+        if (activeWeapon != null)
         {
             float bufftime = buffTime - buffcoolDown;
             buffDownTimeText.text = bufftime.ToString("0.0");
         }
 
-        buffImage.fillAmount = 1 - (buffcoolDown / WeaponManager.activeWeapon.weaponScriptable.buffTime);
+        buffImage.fillAmount = 1 - (buffcoolDown / activeWeapon.weaponScriptable.buffTime);
 
         if(buffImage.fillAmount <= 0)
         {

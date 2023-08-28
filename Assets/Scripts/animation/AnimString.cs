@@ -33,5 +33,7 @@ public class AnimString : Singleton<AnimString>
     [Header("Enemy")]
     public string isClose = "IsClose";
     public string enemyState = "EnemyState";
+    public string isScream = "IsScream";
+    public string isFlying = "IsFlying";
 
 }

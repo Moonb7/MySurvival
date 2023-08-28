@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using static UnityEngine.ParticleSystem;
 
 public class InputManager : Singleton<InputManager>
 {
@@ -137,11 +138,16 @@ public class InputManager : Singleton<InputManager>
                 chargingEnergy = 0;
                 Debug.Log("취소");
                 WeaponManager.activeWeapon.weaponAudioSource.loop = false;
-                /*ParticleSystem particle = chagingEff.GetComponent<ParticleSystem>(); 갑작기 오류 발생
-                if (particle != null)
-                    particle.loop = false;*/
 
-                Destroy(chagingEff, 1f);
+                if(chagingEff!= null)
+                {
+                    ParticleSystem ps = chagingEff.GetComponentInChildren<ParticleSystem>(); // 잘 안됨 고민
+
+                    var mainModule = ps.main; // 파티클 시스템의 main 모듈을 가져옴
+                    mainModule.loop = false;  // loop 속성 설정
+                }
+
+                Destroy(chagingEff, 3f);
             }
 
             if (context.interaction is PressInteraction) // 일반 공격

@@ -7,10 +7,9 @@ public class PlayerStats : CharacterStats
 {
     [SerializeField]
     private int startGold = 500;
-    public int gold;
-    public int exp;
-    private int nextExp;            // 다음 레벨업에 도달할 경험치 설정
-    public int level;
+    public int gold { get; private set; }
+    public int exp { get; private set; }
+    public int level { get; private set; }
 
     public static UnityAction OnLevelup; // 레벨업시에 실행할것들 추가 하기 위해 보상이나 기타 이벤트추가하기
 
@@ -61,6 +60,8 @@ public class PlayerStats : CharacterStats
         {
             // 레벨업 효과 이펙트같은거나
         }
+
+        Debug.Log($"Player가 갖고 있는 경험치 : {exp}");
     }
     public int GetLevelupExp(int nowLevel)  
     {
