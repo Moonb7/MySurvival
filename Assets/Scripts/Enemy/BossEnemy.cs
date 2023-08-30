@@ -146,12 +146,8 @@ public class BossEnemy : Enemy
             rig.weight= 0;
             // Á×À½ ±¸Çö ¾Ö´Ï¸ÅÀÌ¼ÇÀÌ¶ó´øÁö ½¦ÀÌ´õ¸¦ È°¿ëÇÏ¿©
 
-            PlayerStats playerStats = player.GetComponent<PlayerStats>();
-            if (playerStats != null)
-            {
-                playerStats.AddGold(deathGold); // °ñµå È¹µæ    
-                playerStats.AddExp(deathExp);   // °æÇèÄ¡ È¹µæ
-            }
+            PlayerStats.Instance.AddGold(deathGold); // °ñµå È¹µæ    
+            PlayerStats.Instance.AddExp(deathExp);   // °æÇèÄ¡ È¹µæ
 
             audioSource.clip = deathSound;      // Á×´Â ¼Ò¸® ÇÃ·¹ÀÌ
             audioSource.Play();

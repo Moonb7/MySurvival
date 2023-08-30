@@ -27,7 +27,7 @@ public class Enemy : CharacterStats
     public float checkRadius = 0.5f;    // Physics.CheckSphere의 감지할 범위
     public bool drawGizmo;              // 기즈모를 그릴지 말지 정하기
 
-    protected EnemyState currentStats = EnemyState.Idle; // 이거는 어떠한 상태 행동이다
+    public EnemyState currentStats = EnemyState.Idle; // 이거는 어떠한 상태 행동이다
     protected EnemyState beforStats;
     protected float attackRange;
     protected float countDown = 10f;
@@ -182,12 +182,8 @@ public class Enemy : CharacterStats
             isDeath = true;
             // 죽음 구현 애니매이션이라던지 쉐이더를 활용하여
 
-            PlayerStats playerStats = player.GetComponent<PlayerStats>();
-            if(playerStats != null)
-            {
-                playerStats.AddGold(deathGold); // 골드 획득    
-                playerStats.AddExp(deathExp);   // 경험치 획득
-            }
+            PlayerStats.Instance.AddGold(deathGold); // 골드 획득    
+            PlayerStats.Instance.AddExp(deathExp);   // 경험치 획득
 
             audioSource.clip = deathSound;      // 죽는 소리 플레이
             audioSource.Play();

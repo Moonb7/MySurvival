@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
-        PlayerStats = GetComponent<PlayerStats>();
+        PlayerStats = GetComponent<CharacterStats>();
     }
     private void Start()
     {

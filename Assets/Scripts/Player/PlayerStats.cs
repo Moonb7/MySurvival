@@ -1,30 +1,21 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static Cinemachine.DocumentationSortingAttribute;
 
-public class PlayerStats : CharacterStats 
+// 저장할 데이터 및 Player 스텟
+public class PlayerStats : PersistentSingleton<PlayerStats>
 {
-    [SerializeField]
-    private int startGold = 500;
-    public int gold { get; private set; }
+    public int gold { get; set; }
     public int exp { get; private set; }
     public int level { get; private set; }
+    public int ammoCount { get; private set; } // 총알 갯수
 
     public static UnityAction OnLevelup; // 레벨업시에 실행할것들 추가 하기 위해 보상이나 기타 이벤트추가하기
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-        gold = startGold;
         level = 1;
-    }
-
-    public override void HitEffect()
-    {
-        base.HitEffect();    
-        PlayerController.animator.SetBool(AnimString.Instance.isAttack, false);     // 스킬밑 공격을 할때마마다 true시켜준걸 false로 변환해주어 공격을 끝낸다.
-        PlayerController.animator.SetInteger(AnimString.Instance.attackStats, -1);  // 플레이어가 공격을 당하면 공격 중인것을 초기화 시켜주었다.
     }
 
     public void AddGold(int amount) // 골드 획득
@@ -40,6 +31,7 @@ public class PlayerStats : CharacterStats
         gold -= amount;
         return true;
     }
+
     public void AddExp(int amount)
     {
         exp += amount;
@@ -63,7 +55,7 @@ public class PlayerStats : CharacterStats
 
         Debug.Log($"Player가 갖고 있는 경험치 : {exp}");
     }
-    public int GetLevelupExp(int nowLevel)  
+    public int GetLevelupExp(int nowLevel)
     {
         return nowLevel * 100; // 레벨업에 도달할 경험치 설정 1레벨에 100,2렙에 200 이런식으로 설정해 놨지만
         /*int prev = 0;
@@ -75,5 +67,18 @@ public class PlayerStats : CharacterStats
             current = nextExp;
         }
         return nextExp;*/
+    }
+    public void AddAmmor(int amount)
+    {
+        ammoCount += amount;
+    }
+
+    public bool UseAmmor(int amount)
+    {
+        if (ammoCount < amount)
+            return false;
+
+        ammoCount -= amount;
+        return true;
     }
 }

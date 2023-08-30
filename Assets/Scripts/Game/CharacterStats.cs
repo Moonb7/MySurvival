@@ -100,6 +100,12 @@ public class CharacterStats : MonoBehaviour
             instanc.transform.SetParent(null);
             Destroy(instanc, 2f);
         }
+
+        if (gameObject.tag == "Player")
+        {
+            PlayerController.animator.SetBool(AnimString.Instance.isAttack, false);     // 스킬 및 공격을 할때마마다 true시켜준걸 false로 변환해주어 공격을 끝낸다.
+            PlayerController.animator.SetInteger(AnimString.Instance.attackStats, -1);  // 플레이어가 공격을 당하면 공격 중인것을 초기화 시켜주었다.
+        }
     }
 
     // 마나사용
