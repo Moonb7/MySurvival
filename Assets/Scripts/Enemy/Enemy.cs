@@ -20,10 +20,11 @@ public enum EnemyTypes
 public class Enemy : CharacterStats
 {
     public EnemyTypes enemyTypes;
-    protected NavMeshAgent agent;
+    public NavMeshAgent agent;
+    public float beforSpeed;           // 일시정지후 다시 이동하기위해 스피드 저장값
 
     protected GameObject player;
-    protected LayerMask playerMask;       // Player의 레이어지정
+    protected LayerMask playerMask;     // Player의 레이어지정
     public float checkRadius = 0.5f;    // Physics.CheckSphere의 감지할 범위
     public bool drawGizmo;              // 기즈모를 그릴지 말지 정하기
 
@@ -76,6 +77,8 @@ public class Enemy : CharacterStats
         playerMask = LayerMask.GetMask("Player");
         attackRange = agent.stoppingDistance - 0.1f; // agent네비에서 스탑하는 범위에 지정하여 범위를 맟춰주었다.
         SetState(EnemyState.Chase);
+        EnemyManager.Instance.AddEnemy(this);
+        beforSpeed = agent.speed;
     }
 
     protected virtual void Update()

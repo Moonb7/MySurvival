@@ -12,9 +12,16 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private bool hideFullHealthBar = true;
 
-    [Tooltip("HealthBar가 쳐다볼지 말지 정한다.")]
+    [Tooltip("HealthBar가 카메라를 쳐다볼지 말지 정한다.")]
     [SerializeField]
     private bool lookHealthBar;
+
+    private CanvasGroup canvasGroup;
+
+    private void Start()
+    {
+        canvasGroup = enemyHpbar.GetComponent<CanvasGroup>();
+    }
 
     private void Update()
     {
@@ -30,17 +37,23 @@ public class HealthBar : MonoBehaviour
             enemyHpbar.gameObject.SetActive(healthImage.fillAmount != 1); // 1이면 false 아니면 ture
         }
 
-        CanvasGroup canvasGroup = enemyHpbar.GetComponent<CanvasGroup>();
+        
         if (characterStats.isDeath)
         {
-            if(canvasGroup != null && canvasGroup.alpha >= 0)
+            FadeOutHealthBar();
+        }
+    }
+
+    private void FadeOutHealthBar()
+    {
+        if (canvasGroup != null && canvasGroup.alpha > 0)
+        {
+            float countDonw = +Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, 0, 1); // 헬스바가 점점 사라지는 연출 효과
+            if (canvasGroup.alpha >= 0.01f && canvasGroup.alpha <= 0.1f)
             {
-                float countDonw =+ Time.deltaTime;
-                canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, 0, countDonw/1); // 헬스바가 점점 사라지는 연출 효과
-                if(canvasGroup.alpha >= 0.01f && canvasGroup.alpha <= 0.1f)
-                {
-                    canvasGroup.alpha = 0;
-                }
+                canvasGroup.alpha = 0;
+                gameObject.SetActive(false);
             }
         }
     }

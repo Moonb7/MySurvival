@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : Singleton<EnemyManager>
 {
     public List<Enemy> enemies = new List<Enemy>();
 
@@ -16,6 +16,7 @@ public class EnemyManager : MonoBehaviour
         foreach (Enemy enemy in enemies)
         {
             enemy.currentStats = EnemyState.Idle;
+            enemy.agent.speed= 0;
         }
     }
 
@@ -24,6 +25,7 @@ public class EnemyManager : MonoBehaviour
         foreach (Enemy enemy in enemies)
         {
             enemy.currentStats = EnemyState.Chase;
+            enemy.agent.speed = enemy.beforSpeed;
         }
     }
 }

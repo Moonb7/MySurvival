@@ -16,6 +16,8 @@ public class InputManager : Singleton<InputManager>
     public bool sprintKey;
     [HideInInspector]
     public bool rollKey;
+    [HideInInspector]
+    public bool isPause = false;
 
     // 직접 구한 값을 통해 할것인가
     public bool analogMovement;
@@ -41,6 +43,9 @@ public class InputManager : Singleton<InputManager>
 
     public void OnMove(InputAction.CallbackContext context) // 움직임 값
     {
+        if (isPause)
+            return;
+
         move = context.ReadValue<Vector2>();
     }
 
@@ -54,6 +59,9 @@ public class InputManager : Singleton<InputManager>
 
     public void OnJump(InputAction.CallbackContext context) // 점프 키
     {
+        if (isPause)
+            return;
+
         if (context.started)
         {
             jumpKey = true;
@@ -66,6 +74,9 @@ public class InputManager : Singleton<InputManager>
 
     public void OnSprint(InputAction.CallbackContext context) // 달리기 키
     {
+        if (isPause)
+            return;
+
         if (context.performed)
         {
             sprintKey = true;
@@ -80,6 +91,9 @@ public class InputManager : Singleton<InputManager>
 
     public void OnRoll(InputAction.CallbackContext context) // 구르기키
     {
+        if (isPause)
+            return;
+
         if (context.performed)
         {
             if (context.interaction is PressInteraction)
@@ -102,12 +116,16 @@ public class InputManager : Singleton<InputManager>
     {
         if (context.started)
         {
-            //FindAnyObjectByType<PauseUI>().togle();
+            FindAnyObjectByType<PauseUI>().togle();
+            isPause = !isPause;
         }
     }
 
     public void OnAttack(InputAction.CallbackContext context) // 기본 공격
     {
+        if (isPause)
+            return;
+
         if (WeaponManager.activeWeapon != null && WeaponManager.isWeaponSwichReady &&
             PlayerController.animator.GetBool(AnimString.Instance.isAttack) == false &&
             PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false) // 땅에 있는지체크 다른 행동을 취하고 있는지
@@ -182,6 +200,9 @@ public class InputManager : Singleton<InputManager>
 
     public void OnTargetting(InputAction.CallbackContext context) // 고정할 타켓 설정 자세한건 PlayerTargetting 참고
     {
+        if (isPause)
+            return;
+
         if (context.started)
         {
             PlayerTargeting.targetEnemy = PlayerTargeting.enemy; // 키를 누를 때마다 고정할 적을 갱신
@@ -190,6 +211,9 @@ public class InputManager : Singleton<InputManager>
     }
     public void OnWeapon1(InputAction.CallbackContext context)
     {
+        if (isPause)
+            return;
+
         if (context.performed)
         {
             StartCoroutine(weaponManager.SwichWeapon(weaponManager.weaponSlots[0]));
@@ -197,6 +221,9 @@ public class InputManager : Singleton<InputManager>
     }
     public void OnWeapon2(InputAction.CallbackContext context)
     {
+        if (isPause)
+            return;
+
         if (context.performed)
         {
             StartCoroutine(weaponManager.SwichWeapon(weaponManager.weaponSlots[1]));
@@ -204,6 +231,9 @@ public class InputManager : Singleton<InputManager>
     }
     public void OnSkill1(InputAction.CallbackContext context)
     {
+        if (isPause)
+            return;
+
         if (WeaponManager.activeWeapon != null && WeaponManager.isWeaponSwichReady &&
             PlayerController.animator.GetBool(AnimString.Instance.isAttack) == false &&
             PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false &&
@@ -226,6 +256,9 @@ public class InputManager : Singleton<InputManager>
 
     public void OnSkill2(InputAction.CallbackContext context)
     {
+        if (isPause)
+            return;
+
         if (WeaponManager.activeWeapon != null && WeaponManager.isWeaponSwichReady &&
             PlayerController.animator.GetBool(AnimString.Instance.isAttack) == false &&
             PlayerController.animator.GetBool(AnimString.Instance.isGround) && jumpKey == false && rollKey == false &&
