@@ -43,9 +43,6 @@ public class InputManager : Singleton<InputManager>
 
     public void OnMove(InputAction.CallbackContext context) // 움직임 값
     {
-        if (isPause)
-            return;
-
         move = context.ReadValue<Vector2>();
     }
 
@@ -109,6 +106,9 @@ public class InputManager : Singleton<InputManager>
     
     public void OnScrollWheel(InputAction.CallbackContext context) // 마우스 스크롤값
     {
+        if (isPause)
+            return;
+
         scrollWheel = context.ReadValue<float>();
     }
 

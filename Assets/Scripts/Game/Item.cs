@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Item   : MonoBehaviour
+public class Item
 {
     public int number;
     public ItemType itemType;
@@ -17,13 +17,31 @@ public class Item   : MonoBehaviour
     public int stackMax = 99; // 최대 수량은 99개로 지정했다.
     public int value;         // 무언가 증가시킬 추가할값 공격력이나 방어력 총알 갯수 등등
     public float buffTime;    // 버프 지속시간
+    public int sellPrice;     // 판매 가격
 
     public Item()
     {
         number = -1;
     }
 
-    public Item(Item itemDate)
+    public Item(ItemScriptable itemDate)
+    {
+        number = itemDate.number;
+        itemType = itemDate.itemType;
+        itemName = itemDate.itemName;
+        description = itemDate.description;
+        itemImage = itemDate.itemImage;
+        value = itemDate.value;
+        buffTime = itemDate.buffTime;
+        sellPrice = itemDate.sellPrice;
+
+        if (IsStackable() == true)  // 쌓을 수 있으면 amount 1개
+            amount = 1;
+        else
+            amount = -1;
+    }
+
+    public Item(Item itemDate) // json이나 xml고민후 실행하자
     {
         number = itemDate.number;
         itemType = itemDate.itemType;
@@ -33,6 +51,7 @@ public class Item   : MonoBehaviour
         itemImage = Resources.Load<Sprite>(itemDate.itemRoute); // 경로를 통해 이미지 적용
         value = itemDate.value;
         buffTime = itemDate.buffTime;
+        sellPrice = itemDate.sellPrice;
 
         if (IsStackable() == true)  // 쌓을 수 있으면 amount 1개
             amount = 1;
@@ -42,7 +61,7 @@ public class Item   : MonoBehaviour
 
     public void Use()
     {
-        CharacterStats playerStat = GameObject.Find("Player").GetComponent<CharacterStats>();
+        CharacterStats characterStats = GameObject.Find("Player").GetComponent<CharacterStats>();
 
         ItemName _itemName = (ItemName)number;
         switch (_itemName)
@@ -54,29 +73,29 @@ public class Item   : MonoBehaviour
                 PlayerStats.Instance.AddGold(value);
                 break;
             case ItemName.HPPotion:
-                playerStat.Heal(value);
+                characterStats.Heal(value);
                 break;
             case ItemName.AttackBuffPotion:
-                StartCoroutine(AttBufPotion());
+                characterStats.UseBuffItem(this);
                 break;
             case ItemName.DefenceBuffPotion:
-                StartCoroutine(DefBufPotion());
+                characterStats.UseBuffItem(this);
                 break;
         }
 
-        IEnumerator AttBufPotion()
+        /*IEnumerator AttBufPotion()
         {
-            playerStat.attack.AddValue(value);
+            characterStats.attack.AddValue(value);
             yield return new WaitForSecondsRealtime(buffTime);
-            playerStat.attack.RemoveValue(value);
+            characterStats.attack.RemoveValue(value);
         }
 
         IEnumerator DefBufPotion()
         {
-            playerStat.defence.AddValue(value);
+            characterStats.defence.AddValue(value);
             yield return new WaitForSecondsRealtime(buffTime);
-            playerStat.defence.RemoveValue(value);
-        }
+            characterStats.defence.RemoveValue(value);
+        }*/
     }
     
 

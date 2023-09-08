@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour 
 {
-    private Item item;
+    public Item item { get; private set; }
 
     public GameObject itemImage;
     public GameObject selectImage;
@@ -43,7 +43,7 @@ public class ItemSlot : MonoBehaviour
         item = null;
 
         itemImage.SetActive(false);
-        item.GetComponent<Image>().sprite = null;
+        itemImage.GetComponent<Image>().sprite = null;
         selectImage.SetActive(false);
         amount.gameObject.SetActive(false);
     }

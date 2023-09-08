@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class SceneFader : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class SceneFader : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(FadeIn());
+        InFade(); 
     }
     
     public void InFade()
@@ -29,7 +30,7 @@ public class SceneFader : MonoBehaviour
         {
             a -= Time.deltaTime;
             float cValue = curve.Evaluate(a);
-            faderimage.color = new Color(0, 0, 0, cValue);
+            faderimage.color = new Color(0, 0, 0, cValue); // 알파값을 조절하였다
             yield return 0;
         }
     }

@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PauseUI : MonoBehaviour
 {
     public GameObject pauseUI;
+    public GameObject inventoryUI;
 
     [SerializeField]
     private string mainScene = "MainScene";
@@ -20,16 +21,24 @@ public class PauseUI : MonoBehaviour
         if (isPause)
         {
             pauseUI.SetActive(true);
+            Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
-            EnemyManager.Instance.PauseEnemies();
+            //EnemyManager.Instance.PauseEnemies();
         }
         else
         {
             pauseUI.SetActive(false);
+            inventoryUI.SetActive(false);
+            Time.timeScale = 1.0f;
             Cursor.lockState = CursorLockMode.Locked;
-            EnemyManager.Instance.ResumeEnemies();
+            //EnemyManager.Instance.ResumeEnemies();
         }
 
+    }
+
+    public void OnInventoryButton()
+    {
+        inventoryUI.SetActive(true);
     }
 
     public void OnResumeButton()

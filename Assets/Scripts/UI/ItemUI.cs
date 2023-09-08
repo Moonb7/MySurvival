@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class ItemUI : MonoBehaviour
 {
     public Transform thisUI; // 자기 자신 UI
-    public bool isOpen { get; private set; }
+    protected bool isOpen;
 
     public virtual void Toggle()
     {
@@ -24,14 +24,14 @@ public class ItemUI : MonoBehaviour
     public virtual void OpenUI()
     {
         isOpen = true;
-        gameObject.SetActive(isOpen);
-        Animator animator = thisUI.GetComponent<Animator>();
+        thisUI.gameObject.SetActive(isOpen);
+        /*Animator animator = thisUI.GetComponent<Animator>();
         if (animator != null)
         {
             animator.SetBool("IsOpen", isOpen);
-        }
+        }*/
 
-        EnemyManager.Instance.PauseEnemies();
+        //EnemyManager.Instance.PauseEnemies();  // 적 움직임 막음
 
         //마우스 커서
         Cursor.lockState = CursorLockMode.None;
@@ -41,18 +41,18 @@ public class ItemUI : MonoBehaviour
     public virtual void CloseUI()
     {
         isOpen = false;
-
-        Animator animator = thisUI.GetComponent<Animator>();
+        thisUI.gameObject.SetActive(isOpen);
+        /*Animator animator = thisUI.GetComponent<Animator>();
         if(animator != null)
         {
             animator.SetBool("IsOpen", isOpen);
-        }
+        }*/
 
-        EnemyManager.Instance.ResumeEnemies();
+        //EnemyManager.Instance.ResumeEnemies();
 
-        //마우스 커서
+        /*//마우스 커서
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = false;*/
     }
 
     public virtual IEnumerator Close()

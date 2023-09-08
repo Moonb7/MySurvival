@@ -2209,7 +2209,8 @@ AudioSource:
   m_GameObject: {fileID: 2886051482832159251}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3695950180276666186, guid: a35c1e983307b254f9d7c5b0b438eeef,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2221,7 +2222,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -2358,13 +2359,15 @@ MonoBehaviour:
   - {fileID: 2438931443013005101}
   - {fileID: 8399654898338835578}
   enemyTypes: 0
+  agent: {fileID: 0}
+  beforSpeed: 0
   checkRadius: 0.5
   drawGizmo: 0
+  currentStats: 0
   attackTime: 3
   closeAttackTime: 3
   deathGold: 100
   deathExp: 100
-  deathItem: []
   arrowPos: {fileID: 0}
   arrowPrefab: {fileID: 0}
 --- !u!114 &8477653496479269589

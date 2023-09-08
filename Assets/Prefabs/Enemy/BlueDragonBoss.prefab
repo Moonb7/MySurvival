@@ -3101,7 +3101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4102133170829131034
 Transform:
   m_ObjectHideFlags: 0
@@ -3150,9 +3150,10 @@ AudioSource:
   m_GameObject: {fileID: 4102133170828894522}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3695950180276666186, guid: a35c1e983307b254f9d7c5b0b438eeef,
+    type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3162,7 +3163,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -3197,7 +3198,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.902
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3266,7 +3267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth:
-    startValue: 500
+    startValue: 10
     values: []
   maxStamina:
     startValue: 0
@@ -3284,13 +3285,15 @@ MonoBehaviour:
   hitEff: {fileID: 6112007891956044430, guid: 8847d39a3884dba4db13b5d11950ae9f, type: 3}
   hitPos: []
   enemyTypes: 1
+  agent: {fileID: 0}
+  beforSpeed: 0
   checkRadius: 10
   drawGizmo: 0
+  currentStats: 0
   attackTime: 3
   closeAttackTime: 3
   deathGold: 10000
   deathExp: 2000
-  deathItem: []
   arrowPos: {fileID: 0}
   arrowPrefab: {fileID: 0}
   bossUI: {fileID: 0}

@@ -1,4 +1,8 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEditor.Progress;
+using static UnityEngine.Rendering.DebugUI;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -143,5 +147,32 @@ public class CharacterStats : MonoBehaviour
             Destroy(this.gameObject, DeathDelay);
         }
     }
-    
+
+    public void UseBuffItem(Item item)
+    {
+        ItemName itemName = (ItemName)item.number;
+        switch (itemName)
+        {
+            case ItemName.AttackBuffPotion:
+                StartCoroutine(AttBufPotion(item));
+                break;
+            case ItemName.DefenceBuffPotion:
+                StartCoroutine(DefBufPotion(item));
+                break;
+        }
+    }
+
+    IEnumerator AttBufPotion(Item item) // 버프아이템 
+    {
+        attack.AddValue(item.value);
+        yield return new WaitForSecondsRealtime(item.buffTime);
+        attack.RemoveValue(item.value);
+    }
+
+    IEnumerator DefBufPotion(Item item) // 힐 아이템
+    {
+        defence.AddValue(item.value);
+        yield return new WaitForSecondsRealtime(item.buffTime);
+        defence.RemoveValue(item.value);
+    }
 }

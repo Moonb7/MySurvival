@@ -6,10 +6,13 @@ using UnityEngine.Events;
 // 저장할 데이터 및 Player 스텟
 public class PlayerStats : PersistentSingleton<PlayerStats>
 {
-    public int gold { get; set; }
+    // 저장할 데이터들
+    public int gold { get; set; } 
+    public int ammoCount { get; private set; } // 총알 갯수
+
+
     public int exp { get; private set; }
     public int level { get; private set; }
-    public int ammoCount { get; private set; } // 총알 갯수
 
     public static UnityAction OnLevelup; // 레벨업시에 실행할것들 추가 하기 위해 보상이나 기타 이벤트추가하기
 

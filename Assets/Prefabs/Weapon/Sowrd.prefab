@@ -160,7 +160,7 @@ AudioSource:
   m_GameObject: {fileID: 7828547735636017855}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: a35c1e983307b254f9d7c5b0b438eeef,
+  OutputAudioMixerGroup: {fileID: -3695950180276666186, guid: a35c1e983307b254f9d7c5b0b438eeef,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -281,6 +281,10 @@ MonoBehaviour:
   skill2Sound: {fileID: 8300000, guid: 77f915874954ad4408efd69549a0a40f, type: 3}
   buffImage: {fileID: 7449179162368727741, guid: 65d5f11300f17bd4db8e47cb733a02cc,
     type: 3}
+  isSkill1Ready: 0
+  isSkill2Ready: 0
+  skill1CoolTimedown: 100
+  skill2CoolTimedown: 100
 --- !u!1 &8570827522862914011
 GameObject:
   m_ObjectHideFlags: 0

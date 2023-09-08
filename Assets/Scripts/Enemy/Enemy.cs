@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Xml.XPath;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -37,7 +38,7 @@ public class Enemy : CharacterStats
     
     public int deathGold;               // 죽으면 플레이어가 갖게될 골드량
     public int deathExp;                // 죽으면 플레이어가 갖게될 경험치량
-    public Item[] deathItem;            // 죽으면 떨어트리는 아이템 전리품 예) 물약이나 강화영약등 총알박스
+    private Item deathItem;            // 죽으면 플레이어가 갖게될 아이템
 
     public Transform arrowPos;          // 화살 생성위치 임시부모역할을 할것이다. 처음 생성될떄는 Enemy의 자식오브젝트로 만들고 애니메이션의 화살을 쏘는 시점에서 자식오브젝트말고 외부로 빠져 날아가게 만들예정이다.
     public GameObject arrowPrefab;      // 화살 오브젝트프리팹
@@ -188,6 +189,15 @@ public class Enemy : CharacterStats
             PlayerStats.Instance.AddGold(deathGold); // 골드 획득    
             PlayerStats.Instance.AddExp(deathExp);   // 경험치 획득
 
+            // 확률을 구현해서 만들자
+            float random = Random.Range(0,100);
+            if(random <= 30) // 아이탬 얻기 30% 확률
+            {
+                int itemRandNum  = Random.Range(0 , ItemDataManager.Instance.items.Count); // 가장 첫번째 아이템 마지막 아이템 
+                deathItem = ItemDataManager.Instance.items[itemRandNum];
+
+                Inventory.Instance.AddItem(deathItem);
+            }
             audioSource.clip = deathSound;      // 죽는 소리 플레이
             audioSource.Play();
 

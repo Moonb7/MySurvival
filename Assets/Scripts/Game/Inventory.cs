@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Inventory : PersistentSingleton<Inventory>
+public class Inventory : Singleton<Inventory>
 {
     public List<Item> items = new List<Item>();  // 인벤토리 아이템 리스트
 
