@@ -6,12 +6,20 @@ using UnityEngine.Audio;
 public class AudioManager : PersistentSingleton<AudioManager>
 {
     public AudioMixer audioMixer;
+    //public AudioSource bgmSound; // 일단 사용 안함
 
-    public AudioSource bgmSound; // 일단 사용 안함
-
-    public void BGSoundVolume(float value)
+    public void MasterSoundVolume(float value)
+    {
+        //audioMixer.GetFloat("Master", out value);
+        audioMixer.SetFloat("Master", Mathf.Log10(value) * 20);
+    }
+    public void BGMSoundVolume(float value)
     {
         audioMixer.SetFloat("BGSound",Mathf.Log10(value) * 20);
+    }
+    public void SFXSoundVolume(float value)
+    {
+        audioMixer.SetFloat("SFX", Mathf.Log10(value) * 20);
     }
 
     public void SFXPlay(string sfxName, AudioClip clip)
@@ -25,12 +33,12 @@ public class AudioManager : PersistentSingleton<AudioManager>
         Destroy(audioSource, clip.length); // 다 재생되면 삭제
     }
 
-    public void BGMSoundPlay(AudioClip clip)
+    /*public void BGMSoundPlay(AudioClip clip)
     {
         bgmSound.outputAudioMixerGroup = audioMixer.FindMatchingGroups("BGSound")[0];
         bgmSound.clip = clip;
         bgmSound.loop = true;
         bgmSound.volume = 0.1f; // 이거는 다시 확인하기
         bgmSound.Play();
-    }
+    }*/
 }

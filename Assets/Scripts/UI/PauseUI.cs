@@ -5,6 +5,7 @@ public class PauseUI : MonoBehaviour
 {
     public GameObject pauseUI;
     public GameObject inventoryUI;
+    public GameObject optionUI;
 
     [SerializeField]
     private string mainScene = "MainScene";
@@ -29,6 +30,7 @@ public class PauseUI : MonoBehaviour
         {
             pauseUI.SetActive(false);
             inventoryUI.SetActive(false);
+            optionUI.SetActive(false);
             Time.timeScale = 1.0f;
             Cursor.lockState = CursorLockMode.Locked;
             //EnemyManager.Instance.ResumeEnemies();
@@ -59,6 +61,9 @@ public class PauseUI : MonoBehaviour
         Time.timeScale = 1f;
         fader.FadeTo(mainMenu);
     }
-
+    public void OnOptionButton()
+    {
+        optionUI.SetActive(true);
+    }
 
 }
