@@ -9,6 +9,7 @@ public class EnemyProjectileStandard : MonoBehaviour
 
     public string targetTag;                       // 적중 시킬 적 설정하기
     public float speed;                            // 날아갈 속도
+    public float destoryDelay;
 
     private float totalDamage = 0;
     private CharacterStats stats;
@@ -22,13 +23,12 @@ public class EnemyProjectileStandard : MonoBehaviour
         {
             projectileCollider = null;
         }
-
         stats = GetComponent<CharacterStats>();   
         if (stats == null)
             stats = GetComponentInParent<CharacterStats>();
-
         rb = GetComponent<Rigidbody>();
-        Destroy(gameObject, 4f);
+
+        Destroy(gameObject, destoryDelay);
     }
     private void Update()
     {
@@ -36,7 +36,6 @@ public class EnemyProjectileStandard : MonoBehaviour
         if (transform.parent == null)
         {
             rb.velocity = transform.forward * speed * Time.deltaTime; // 앞으로 힘을 주어 날아 가게 만들었고 날아갈 방향은 애니메이션의 방향을 조절하여 설정했다.
-            // 생각해 보니깐 이거 업데이트라서 계속 곱해주는 거였네
         }
     }
 

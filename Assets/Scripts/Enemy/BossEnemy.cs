@@ -37,30 +37,27 @@ public class BossEnemy : Enemy
         Vector3 target = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         float distance = Vector3.Distance(target, transform.position);
 
-        switch (bossPattern)
+        switch (currentStats)
         {
-            case BossPattern.Pattern1:
-                switch (currentStats)
+            case EnemyState.Idle:
+                break;
+            case EnemyState.Chase:
+                IsFlying = false;       // 날지않는 패턴입니다.
+                rig.weight = 1;
+                if (CanMove)
                 {
-                    case EnemyState.Idle:
-                        break;
-
-                    case EnemyState.Chase:
-                        IsFlying = false;       // 날지않는 패턴입니다.
-                        rig.weight = 1;
-
-                        if (CanMove)
-                        {
-                            transform.LookAt(target);
-                            agent.SetDestination(target);
-                        }
-                        if (distance <= attackRange) // 공격 범위에 있으면
-                        {
-                            SetState(EnemyState.Attack);
-                        }
-                        break;
-                        
-                    case EnemyState.Attack:
+                    transform.LookAt(target);
+                    agent.SetDestination(target);
+                }
+                if (distance <= attackRange) // 공격 범위에 있으면
+                {
+                    SetState(EnemyState.Attack);
+                }
+                break;
+            case EnemyState.Attack:
+                switch (bossPattern)
+                {
+                    case BossPattern.Pattern1:
                         if (countDown > attackTime)
                         {
                             StartCoroutine(LookTargetAttack(target));
@@ -71,65 +68,15 @@ public class BossEnemy : Enemy
                             SetState(EnemyState.Chase);
                         }
                         break;
-                        
-                    case EnemyState.IsClose:
+                    case BossPattern.Pattern2:
+
+                        break;
+                    case BossPattern.Pattern3:
+
                         break;
                 }
                 break;
-
-            case BossPattern.Pattern2:
-                switch (currentStats)
-                {
-                    case EnemyState.Idle:
-                        break;
-
-                    case EnemyState.Chase:
-                        IsFlying = true;       // 날지않는 패턴입니다.
-                        rig.weight = 1;
-
-                        if (CanMove)
-                        {
-                            transform.LookAt(target);
-                            agent.SetDestination(target);
-                        }
-                        if (distance <= attackRange) // 공격 범위에 있으면
-                        {
-                            SetState(EnemyState.Attack);
-                        }
-                        break;
-
-                    case EnemyState.Attack:
-                        if (countDown > attackTime)
-                        {
-                            StartCoroutine(LookTargetAttack(target));
-                            countDown = 0;
-                        }
-                        if (distance > attackRange)  //다시 멀어지면
-                        {
-                            SetState(EnemyState.Chase);
-                        }
-                        break;
-
-                    case EnemyState.IsClose:
-                        break;
-                }
-                break;
-
-            case BossPattern.Pattern3:
-                switch (currentStats)
-                {
-                    case EnemyState.Idle:
-                        break;
-
-                    case EnemyState.Chase:
-                        break;
-
-                    case EnemyState.Attack:
-                        break;
-
-                    case EnemyState.IsClose:
-                        break;
-                }
+            case EnemyState.IsClose:
                 break;
         }
         countDown += Time.deltaTime;
@@ -146,8 +93,8 @@ public class BossEnemy : Enemy
             rig.weight= 0;
             // 죽음 구현 애니매이션이라던지 쉐이더를 활용하여
 
-            PlayerStats.Instance.AddGold(deathGold); // 골드 획득    
-            PlayerStats.Instance.AddExp(deathExp);   // 경험치 획득
+            DataManager.Instance.AddGold(deathGold); // 골드 획득
+            PlayerStats.instance.AddExp(deathExp); // 경험치 획득
 
             audioSource.clip = deathSound;      // 죽는 소리 플레이
             audioSource.Play();

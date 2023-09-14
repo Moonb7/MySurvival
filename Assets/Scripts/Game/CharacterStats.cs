@@ -7,9 +7,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class CharacterStats : MonoBehaviour
 {
     public Stats maxHealth;
-    public float CurrentHealth { get; private set; }
-    public Stats maxStamina;
-    public float CurrentStamina { get; private set; }
+    public float CurrentHealth { get; protected set; }
     public Stats attack;
     public Stats defence;
     public bool isDeath { get; protected set; }
@@ -29,14 +27,10 @@ public class CharacterStats : MonoBehaviour
 
     protected virtual void Start()
     {
-        SetStats();
+        CurrentHealth = maxHealth.GetValue();
+
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-    }
-    protected virtual void SetStats()
-    {
-        CurrentHealth = maxHealth.GetValue();
-        CurrentStamina = maxStamina.GetValue();
     }
 
     public virtual void Heal(float amount)
@@ -68,8 +62,9 @@ public class CharacterStats : MonoBehaviour
 
         float beforeHealth = CurrentHealth;
         CurrentHealth = CurrentHealth - (damage - defence.GetValue());
-        if(CurrentHealth >= beforeHealth) // 데미지가 없으면
-            CurrentHealth = beforeHealth; // 그냥 무데미지 적용
+        if (CurrentHealth >= beforeHealth) // 데미지가 없으면
+            //CurrentHealth = beforeHealth; // 그냥 무데미지 적용
+            CurrentHealth -= 1; // 데미지 1이라도 입히게 하기
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, maxHealth.GetValue());
         float realDamageAcount = beforeHealth - CurrentHealth; // real Damage구하기 데미지 입었는지 확인
         if (realDamageAcount > 0) // 데미지 구현 어떤 움직이나 맞았을때의 효과
@@ -110,14 +105,6 @@ public class CharacterStats : MonoBehaviour
             PlayerController.animator.SetBool(AnimString.Instance.isAttack, false);     // 스킬 및 공격을 할때마마다 true시켜준걸 false로 변환해주어 공격을 끝낸다.
             PlayerController.animator.SetInteger(AnimString.Instance.attackStats, -1);  // 플레이어가 공격을 당하면 공격 중인것을 초기화 시켜주었다.
         }
-    }
-
-    // 마나사용
-    public virtual void UseMana(float amount)
-    {
-        float beforeMana = CurrentStamina;
-        CurrentStamina -= amount;
-        CurrentStamina = Mathf.Clamp(CurrentStamina, 0, maxStamina.GetValue());
     }
 
     // 죽음

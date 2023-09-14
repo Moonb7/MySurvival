@@ -17,10 +17,12 @@ public class HealthBar : MonoBehaviour
     private bool lookHealthBar;
 
     private CanvasGroup canvasGroup;
+    private Animator UIanimator;
 
     private void Start()
     {
         canvasGroup = enemyHpbar.GetComponent<CanvasGroup>();
+        UIanimator = enemyHpbar.GetComponent<Animator>();
     }
 
     private void Update()
@@ -31,30 +33,33 @@ public class HealthBar : MonoBehaviour
         {
             if (enemyHpbar != null)
                 enemyHpbar.LookAt(Camera.main.transform);
+                //enemyHpbar.LookAt(enemyHpbar.position + Camera.main.transform.rotation * Vector3.forward,Camera.main.transform.rotation * Vector3.up);
         }
         if (hideFullHealthBar)
         {
             enemyHpbar.gameObject.SetActive(healthImage.fillAmount != 1); // 1이면 false 아니면 ture
         }
 
-        
-        if (characterStats.isDeath)
+
+        if (canvasGroup != null && UIanimator != null && characterStats.isDeath)
         {
+            UIanimator.SetBool("IsDeath", true);
             FadeOutHealthBar();
         }
     }
 
     private void FadeOutHealthBar()
     {
-        if (canvasGroup != null && canvasGroup.alpha > 0)
+        /*if (canvasGroup != null && canvasGroup.alpha > 0)
         {
-            float countDonw = +Time.deltaTime;
-            canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, 0, 1); // 헬스바가 점점 사라지는 연출 효과
-            if (canvasGroup.alpha >= 0.01f && canvasGroup.alpha <= 0.1f)
-            {
-                canvasGroup.alpha = 0;
-                gameObject.SetActive(false);
-            }
+            float fadeSpeed = 0.5f; // 페이드 속도 조절
+            float alpha = canvasGroup.alpha - fadeSpeed * Time.deltaTime;
+            canvasGroup.alpha = Mathf.Max(alpha, 0); // 알파값이 음수가 되지 않도록 처리
+        }*/
+        if (canvasGroup.alpha <= 0.1f)
+        {
+            canvasGroup.alpha = 0;
+            enemyHpbar.gameObject.SetActive(false);
         }
     }
 }

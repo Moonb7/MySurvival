@@ -1701,7 +1701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6725284947235149903
 Transform:
   m_ObjectHideFlags: 0
@@ -1885,16 +1885,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth:
-    startValue: 100
-    values: []
-  maxStamina:
-    startValue: 0
+    startValue: 300
     values: []
   attack:
-    startValue: 5
+    startValue: 10
     values: []
   defence:
-    startValue: 0
+    startValue: 2
     values: []
   DeathDelay: 3
   hitSound1: {fileID: 8300000, guid: c3c95ac93a858ea478fa667958f84f8c, type: 3}
@@ -1912,8 +1909,8 @@ MonoBehaviour:
   currentStats: 0
   attackTime: 0.8
   closeAttackTime: 3
-  deathGold: 100
-  deathExp: 20
+  deathGold: 1000
+  deathExp: 1000
   arrowPos: {fileID: 1239801376443383101}
   arrowPrefab: {fileID: 4487121527689730659, guid: 0a3e1407da450dd4396f7fbc4fc83817,
     type: 3}

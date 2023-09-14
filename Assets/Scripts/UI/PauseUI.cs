@@ -5,7 +5,6 @@ public class PauseUI : MonoBehaviour
 {
     public GameObject pauseUI;
     public GameObject inventoryUI;
-    public GameObject optionUI;
 
     [SerializeField]
     private string mainScene = "MainScene";
@@ -15,6 +14,10 @@ public class PauseUI : MonoBehaviour
     private SceneFader fader;
     private bool isPause;
 
+    private void Start()
+    {
+        OptionUI.Instance.optionButton.SetActive(false);
+    }
     // Input Mnaget에서 실행
     public void togle()
     {
@@ -22,6 +25,8 @@ public class PauseUI : MonoBehaviour
         if (isPause)
         {
             pauseUI.SetActive(true);
+            if (OptionUI.Instance.gameObject != null)
+                 OptionUI.Instance.optionButton.SetActive(true);
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
             //EnemyManager.Instance.PauseEnemies();
@@ -30,7 +35,11 @@ public class PauseUI : MonoBehaviour
         {
             pauseUI.SetActive(false);
             inventoryUI.SetActive(false);
-            optionUI.SetActive(false);
+            if(OptionUI.Instance.gameObject != null)
+            {
+                OptionUI.Instance.CloseUI();
+                OptionUI.Instance.optionButton.SetActive(false);
+            }
             Time.timeScale = 1.0f;
             Cursor.lockState = CursorLockMode.Locked;
             //EnemyManager.Instance.ResumeEnemies();
@@ -59,11 +68,7 @@ public class PauseUI : MonoBehaviour
         togle();
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 1f;
+        OptionUI.Instance.optionButton.SetActive(true);
         fader.FadeTo(mainMenu);
     }
-    public void OnOptionButton()
-    {
-        optionUI.SetActive(true);
-    }
-
 }

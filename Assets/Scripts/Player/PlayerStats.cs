@@ -1,53 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Events;
 
 // 저장할 데이터 및 Player 스텟
-public class PlayerStats : PersistentSingleton<PlayerStats>
+public class PlayerStats : CharacterStats
 {
-    // 저장할 데이터들
-    public int gold { get; set; } 
-    public int ammoCount { get; private set; } // 총알 갯수
-
-
+    public static PlayerStats instance; // 싱글톤으로 만들기
     public int exp { get; private set; }
     public int level { get; private set; }
 
-    public static UnityAction OnLevelup; // 레벨업시에 실행할것들 추가 하기 위해 보상이나 기타 이벤트추가하기
+    public UnityAction OnLevelup; // 레벨업시에 실행할것들 추가 하기 위해 보상이나 기타 이벤트추가하기
 
-    private void Start()
+    private void Awake()
     {
-        level = 1;
-    }
-
-    public void AddGold(int amount) // 골드 획득
-    {
-        gold += amount;
-        Debug.Log($"Player가 갖고 있는 골드량 : {gold}");
-    }
-    public bool UseGold(int amount) // 골드 사용
-    {
-        if (gold < amount)
-            return false;
-
-        gold -= amount;
-        return true;
-    }
-
-    public void AddExp(int amount)
-    {
-        exp += amount;
-
-        // 레벨업 체크
-        bool isLevelup = false;
-        while (exp >= GetLevelupExp(level))
+        #region 싱글톤
+        if (instance == null)
         {
-            exp -= GetLevelupExp(level);
-            level++;
+            instance = this;
+        }
+        else if(instance != null)
+        {
+            Destroy(instance.gameObject);
+        }
+        #endregion
+    }
+
+    protected override void Start()
+    {
+        maxHealth.SetValue( DataManager.Instance.playerData.maxHealth);
+        attack.SetValue(DataManager.Instance.playerData.attack);
+        defence.SetValue(DataManager.Instance.playerData.defence);
+        level = 1;
+
+        base.Start();
+    }
+
+    private void Update()
+    {
+        bool isLevelup = false;
+        if (exp >= GetLevelupExp(level))
+        {
+            if(LevelUpUI.isReceived == false)
+                return;
 
             // 레벨업 보상
             OnLevelup?.Invoke();
+
+            exp -= GetLevelupExp(level);
+            level++;
 
             isLevelup = true;
         }
@@ -55,6 +57,31 @@ public class PlayerStats : PersistentSingleton<PlayerStats>
         {
             // 레벨업 효과 이펙트같은거나
         }
+    }
+
+    public void AddExp(int amount)
+    {
+        exp += amount;
+
+        /*// 레벨업 체크
+        bool isLevelup = false;
+        while (exp >= GetLevelupExp(level))
+        {
+            *//*if (LevelUpUI.isReceived == false)
+                continue;*//*
+
+            // 레벨업 보상
+            OnLevelup?.Invoke();
+
+            exp -= GetLevelupExp(level);
+            level++;
+
+            isLevelup = true;
+        }
+        if (isLevelup)
+        {
+            // 레벨업 효과 이펙트같은거나
+        }*/
 
         Debug.Log($"Player가 갖고 있는 경험치 : {exp}");
     }
@@ -71,17 +98,5 @@ public class PlayerStats : PersistentSingleton<PlayerStats>
         }
         return nextExp;*/
     }
-    public void AddAmmor(int amount)
-    {
-        ammoCount += amount;
-    }
-
-    public bool UseAmmor(int amount)
-    {
-        if (ammoCount < amount)
-            return false;
-
-        ammoCount -= amount;
-        return true;
-    }
+    
 }

@@ -13,18 +13,22 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public void PauseEnemies() // 일시정지에 적들을 멈추게 하기위해
     {
+        GameManager.notSpawn = true;
+        GameManager.BGMaudio.Stop();
         foreach (Enemy enemy in enemies)
         {
-            enemy.currentStats = EnemyState.Idle;
+            enemy.SetState(EnemyState.Idle);
             enemy.agent.speed= 0;
         }
     }
 
     public void ResumeEnemies() // 정지 풀릴시
     {
+        GameManager.notSpawn = false;
+        GameManager.BGMaudio.Play();
         foreach (Enemy enemy in enemies)
         {
-            enemy.currentStats = EnemyState.Chase;
+            enemy.SetState(EnemyState.Chase);
             enemy.agent.speed = enemy.beforSpeed;
         }
     }

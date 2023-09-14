@@ -10,6 +10,11 @@ public class Stats
 
     public List<float> values = new List<float>();
 
+    public void SetValue(float value)
+    {
+        startValue = value;
+    }
+
     public float GetValue()
     {
         float result = startValue;

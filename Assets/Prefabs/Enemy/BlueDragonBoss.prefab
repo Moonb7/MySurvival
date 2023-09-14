@@ -3101,7 +3101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4102133170829131034
 Transform:
   m_ObjectHideFlags: 0
@@ -3267,13 +3267,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth:
-    startValue: 10
-    values: []
-  maxStamina:
-    startValue: 0
+    startValue: 2000
     values: []
   attack:
-    startValue: 10
+    startValue: 13
     values: []
   defence:
     startValue: 5
@@ -3292,8 +3289,8 @@ MonoBehaviour:
   currentStats: 0
   attackTime: 3
   closeAttackTime: 3
-  deathGold: 10000
-  deathExp: 2000
+  deathGold: 5000
+  deathExp: 0
   arrowPos: {fileID: 0}
   arrowPrefab: {fileID: 0}
   bossUI: {fileID: 0}

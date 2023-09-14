@@ -21,7 +21,9 @@ public enum EnemyTypes
 public class Enemy : CharacterStats
 {
     public EnemyTypes enemyTypes;
+    [HideInInspector]
     public NavMeshAgent agent;
+    [HideInInspector]
     public float beforSpeed;           // 일시정지후 다시 이동하기위해 스피드 저장값
 
     protected GameObject player;
@@ -38,7 +40,7 @@ public class Enemy : CharacterStats
     
     public int deathGold;               // 죽으면 플레이어가 갖게될 골드량
     public int deathExp;                // 죽으면 플레이어가 갖게될 경험치량
-    private Item deathItem;            // 죽으면 플레이어가 갖게될 아이템
+    private Item deathItem;             // 죽으면 플레이어가 갖게될 아이템
 
     public Transform arrowPos;          // 화살 생성위치 임시부모역할을 할것이다. 처음 생성될떄는 Enemy의 자식오브젝트로 만들고 애니메이션의 화살을 쏘는 시점에서 자식오브젝트말고 외부로 빠져 날아가게 만들예정이다.
     public GameObject arrowPrefab;      // 화살 오브젝트프리팹
@@ -166,7 +168,7 @@ public class Enemy : CharacterStats
         IsAttack = false;
     }
 
-    protected virtual void SetState(EnemyState newState)
+    public virtual void SetState(EnemyState newState)
     {
         if (currentStats == newState) return;
 
@@ -186,8 +188,8 @@ public class Enemy : CharacterStats
             isDeath = true;
             // 죽음 구현 애니매이션이라던지 쉐이더를 활용하여
 
-            PlayerStats.Instance.AddGold(deathGold); // 골드 획득    
-            PlayerStats.Instance.AddExp(deathExp);   // 경험치 획득
+            DataManager.Instance.AddGold(deathGold); // 골드 획득
+            PlayerStats.instance.AddExp(deathExp); // 경험치 획득
 
             // 확률을 구현해서 만들자
             float random = Random.Range(0,100);
@@ -224,13 +226,13 @@ public class Enemy : CharacterStats
         instance.transform.SetParent(arrowPos);
         instance.transform.localPosition = Vector3.zero;
         instance.transform.localRotation = Quaternion.identity;
-        instance.GetComponent<Collider>().enabled = false;
+        //instance.GetComponent<Collider>().enabled = false;
     }
     private void ArrowShot() // 애니메이션 이벤트함수에 포함해 특정 구간에서 화살 발사
     {
         foreach (Transform childTransform in arrowPos.transform)
         {
-            childTransform.GetComponent<Collider>().enabled = true;
+            //childTransform.GetComponent<Collider>().enabled = true;
             childTransform.SetParent(null); // 자식 오브젝트 분리
         }
     }

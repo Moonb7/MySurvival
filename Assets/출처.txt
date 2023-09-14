@@ -19,4 +19,4 @@ Main Menu 버튼 이미지 : 출처 <a href="https://kr.freepik.com/free-vector/
 
 타켓 이미지 : https://opengameart.org/content/crosshairs-and-reticles
 
-포션 아이템 이미지 : <a href="https://kr.freepik.com/free-vector/colorful-game-magic-potions-in-different-bottles-realistic-set-isolated-on-transparent-background-vector-illustration_26762365.htm#query=Potion&position=2&from_view=search&track=sph">작가 macrovector</a> 출처 Freepik
+DragonShoutingSound : https://freesound.org/s/532156/

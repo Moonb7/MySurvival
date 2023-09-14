@@ -67,10 +67,10 @@ public class Item
         switch (_itemName)
         {
             case ItemName.AmmoBox:
-                PlayerStats.Instance.AddAmmor(value);
+                DataManager.Instance.AddAmmor(value);
                 break;
             case ItemName.Gold:
-                PlayerStats.Instance.AddGold(value);
+                DataManager.Instance.AddGold(value); // °ñµå È¹µæ
                 break;
             case ItemName.HPPotion:
                 characterStats.Heal(value);

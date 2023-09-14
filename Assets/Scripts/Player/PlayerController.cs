@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     private GameObject mainCamera;
     private PlayerInput playerInput;
-    private CharacterStats PlayerStats;
+    private CharacterStats characterStats;
 
     // 애니메이션 스피드 파라미터값
     private float blendSpeed;
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
-        PlayerStats = GetComponent<CharacterStats>();
+        characterStats = GetComponent<CharacterStats>();
     }
     private void Start()
     {
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(PlayerStats.isDeath == true)
+        if(characterStats.isDeath == true)
         {
             // 죽었을떄 기능
             return;
@@ -275,6 +275,7 @@ public class PlayerController : MonoBehaviour
         if (InputManager.Instance.rollKey && InputManager.Instance.move != Vector2.zero && animator.GetBool(AnimString.Instance.isGround) && CanMove)
         {
             hasroll = true;
+            characterStats.Invincible = true;
             rollVec = moveVec;
         }
     }

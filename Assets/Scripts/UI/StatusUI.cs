@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class StatusUI : MonoBehaviour
 {
@@ -9,12 +10,21 @@ public class StatusUI : MonoBehaviour
     public Image expImage;
     public TextMeshProUGUI expText;
 
-    void Update()
+    private void Update()
     {
-        goldText.text = PlayerStats.Instance.gold.ToString();
+        SetGoldText();
+        SetExpText();
+    }
 
-        double expfillAmount = Convert.ToDouble(PlayerStats.Instance.exp) / Convert.ToDouble(PlayerStats.Instance.GetLevelupExp(PlayerStats.Instance.level)); // 형변환 해볼까?
+    public void SetGoldText()
+    {
+        goldText.text = DataManager.Instance.playerData.gold.ToString();
+    }
+
+    public void SetExpText()
+    {
+        double expfillAmount = Convert.ToDouble(PlayerStats.instance.exp) / Convert.ToDouble(PlayerStats.instance.GetLevelupExp(PlayerStats.instance.level)); // int형태라서 형변환하여 만들었다
         expImage.fillAmount = (float)expfillAmount;
-        expText.text = $"{PlayerStats.Instance.exp}   /   {PlayerStats.Instance.GetLevelupExp(PlayerStats.Instance.level)}";
+        expText.text = $"{PlayerStats.instance.exp}   /   {PlayerStats.instance.GetLevelupExp(PlayerStats.instance.level)}";
     }
 }

@@ -106,7 +106,7 @@ public class InventoryUI : ItemUI
     public void ItemSell()
     {
         //판매 보상 구현
-        PlayerStats.Instance.AddGold(Inventory.Instance.items[selectIndex].sellPrice);
+        DataManager.Instance.AddGold(Inventory.Instance.items[selectIndex].sellPrice);
         Debug.Log("TODO: " + Inventory.Instance.items[selectIndex].itemName + "아이템을 팔았습니다");
 
         //선택한 아이템을 인벤토리 리스트에서 제거

@@ -2,43 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class AudioManager : PersistentSingleton<AudioManager>
 {
     public AudioMixer audioMixer;
-    //public AudioSource bgmSound; // 일단 사용 안함
+    public Slider masterSlider;
+    public Slider bgmSlider;
+    public Slider sfxSlider;
+
+    private void Start()
+    {
+        LoadOption();
+    }
+
+    void LoadOption()
+    {
+        float masterVolume = PlayerPrefs.GetFloat("MasterVolume", 0);
+        MasterSoundVolume(masterVolume);
+        masterSlider.value = masterVolume;
+
+        float BGMVolume = PlayerPrefs.GetFloat("BGMVolume", 0);
+        BGMSoundVolume(BGMVolume);
+        bgmSlider.value = BGMVolume;
+
+        float SFXVolume = PlayerPrefs.GetFloat("SFXVolume", 0);
+        SFXSoundVolume(SFXVolume);
+        sfxSlider.value = SFXVolume;
+    }
 
     public void MasterSoundVolume(float value)
     {
-        //audioMixer.GetFloat("Master", out value);
+        // 로그 스케일로 설정
         audioMixer.SetFloat("Master", Mathf.Log10(value) * 20);
+        PlayerPrefs.SetFloat("MasterVolume", value);
     }
     public void BGMSoundVolume(float value)
     {
         audioMixer.SetFloat("BGSound",Mathf.Log10(value) * 20);
+        PlayerPrefs.SetFloat("BGMVolume", value);
     }
     public void SFXSoundVolume(float value)
     {
         audioMixer.SetFloat("SFX", Mathf.Log10(value) * 20);
+        PlayerPrefs.SetFloat("SFXVolume", value);
     }
-
-    public void SFXPlay(string sfxName, AudioClip clip)
-    {
-        GameObject go = new GameObject(sfxName + "Sound"); // 오브젝트 생성해서 소리 
-        AudioSource audioSource = go.AddComponent<AudioSource>(); // 생성한 오브젝트에 AudioSource 추가 하기
-        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("SFX")[0];
-        audioSource.clip = clip;
-        audioSource.Play();
-
-        Destroy(audioSource, clip.length); // 다 재생되면 삭제
-    }
-
-    /*public void BGMSoundPlay(AudioClip clip)
-    {
-        bgmSound.outputAudioMixerGroup = audioMixer.FindMatchingGroups("BGSound")[0];
-        bgmSound.clip = clip;
-        bgmSound.loop = true;
-        bgmSound.volume = 0.1f; // 이거는 다시 확인하기
-        bgmSound.Play();
-    }*/
 }

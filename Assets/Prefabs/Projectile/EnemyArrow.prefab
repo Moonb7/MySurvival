@@ -129,3 +129,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTag: Player
   speed: 1000
+  destoryDelay: 4

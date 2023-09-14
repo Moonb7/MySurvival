@@ -10,6 +10,8 @@ public class HandleAnimationEvents : MonoBehaviour
     void FinishedRoll() // 구르기 애니매이션 끝날때쯤 이벤트 함수를 썻다
     {
         PlayerController.hasroll = false;
+        CharacterStats characterStats = GetComponent<CharacterStats>();
+        characterStats.Invincible = false;
     }
 
     void FinishAttack() // 공격끝난 시점 처리

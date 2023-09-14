@@ -2341,11 +2341,8 @@ MonoBehaviour:
   maxHealth:
     startValue: 100
     values: []
-  maxStamina:
-    startValue: 0
-    values: []
   attack:
-    startValue: 10
+    startValue: 7
     values: []
   defence:
     startValue: 0
