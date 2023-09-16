@@ -56,7 +56,7 @@ public class InputManager : Singleton<InputManager>
 
     public void OnJump(InputAction.CallbackContext context) // 점프 키
     {
-        if (isPause)
+        if (isPause || GameManager.notSpawn)
             return;
 
         if (context.started)
@@ -71,7 +71,7 @@ public class InputManager : Singleton<InputManager>
 
     public void OnSprint(InputAction.CallbackContext context) // 달리기 키
     {
-        if (isPause)
+        if (isPause || GameManager.notSpawn)
             return;
 
         if (context.performed)
@@ -88,7 +88,7 @@ public class InputManager : Singleton<InputManager>
 
     public void OnRoll(InputAction.CallbackContext context) // 구르기키
     {
-        if (isPause)
+        if (isPause || GameManager.notSpawn)
             return;
 
         if (context.performed)
@@ -106,7 +106,7 @@ public class InputManager : Singleton<InputManager>
     
     public void OnScrollWheel(InputAction.CallbackContext context) // 마우스 스크롤값
     {
-        if (isPause)
+        if (isPause || GameManager.notSpawn)
             return;
 
         scrollWheel = context.ReadValue<float>();
@@ -123,7 +123,7 @@ public class InputManager : Singleton<InputManager>
 
     public void OnAttack(InputAction.CallbackContext context) // 기본 공격
     {
-        if (isPause)
+        if (isPause || GameManager.notSpawn)
             return;
 
         if (WeaponManager.activeWeapon != null && WeaponManager.isWeaponSwichReady &&
@@ -200,7 +200,7 @@ public class InputManager : Singleton<InputManager>
 
     public void OnTargetting(InputAction.CallbackContext context) // 고정할 타켓 설정 자세한건 PlayerTargetting 참고
     {
-        if (isPause)
+        if (isPause || GameManager.notSpawn)
             return;
 
         if (context.started)
@@ -211,7 +211,7 @@ public class InputManager : Singleton<InputManager>
     }
     public void OnWeapon1(InputAction.CallbackContext context)
     {
-        if (isPause)
+        if (isPause || GameManager.notSpawn)
             return;
 
         if (context.performed)
@@ -221,7 +221,7 @@ public class InputManager : Singleton<InputManager>
     }
     public void OnWeapon2(InputAction.CallbackContext context)
     {
-        if (isPause)
+        if (isPause || GameManager.notSpawn)
             return;
 
         if (context.performed)
@@ -231,7 +231,7 @@ public class InputManager : Singleton<InputManager>
     }
     public void OnSkill1(InputAction.CallbackContext context)
     {
-        if (isPause)
+        if (isPause || GameManager.notSpawn)
             return;
 
         if (WeaponManager.activeWeapon != null && WeaponManager.isWeaponSwichReady &&
@@ -256,7 +256,7 @@ public class InputManager : Singleton<InputManager>
 
     public void OnSkill2(InputAction.CallbackContext context)
     {
-        if (isPause)
+        if (isPause || GameManager.notSpawn)
             return;
 
         if (WeaponManager.activeWeapon != null && WeaponManager.isWeaponSwichReady &&

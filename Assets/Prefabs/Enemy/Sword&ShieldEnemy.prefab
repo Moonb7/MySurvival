@@ -2339,7 +2339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth:
-    startValue: 100
+    startValue: 50
     values: []
   attack:
     startValue: 7

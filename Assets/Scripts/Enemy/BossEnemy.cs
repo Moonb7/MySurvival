@@ -95,6 +95,7 @@ public class BossEnemy : Enemy
 
             DataManager.Instance.AddGold(deathGold); // °ñµå È¹µæ
             PlayerStats.instance.AddExp(deathExp); // °æÇèÄ¡ È¹µæ
+            EnemyManager.Instance.RemoveEnemy(this); // Á×À½½Ã ²À »èÁ¦ÇØÁÖ±â
 
             audioSource.clip = deathSound;      // Á×´Â ¼Ò¸® ÇÃ·¹ÀÌ
             audioSource.Play();

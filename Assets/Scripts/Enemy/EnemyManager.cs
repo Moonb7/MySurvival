@@ -10,6 +10,10 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         enemies.Add(enemy);
     }
+    public void RemoveEnemy(Enemy enemy)
+    {
+        enemies.Remove(enemy);
+    }
 
     public void PauseEnemies() // 일시정지에 적들을 멈추게 하기위해
     {

@@ -21,6 +21,9 @@ public class PauseUI : MonoBehaviour
     // Input Mnaget에서 실행
     public void togle()
     {
+        if (GameManager.notSpawn) // 컷신이 나오는 타이밍이다
+            return;
+
         isPause = !isPause;
         if (isPause)
         {
@@ -29,6 +32,7 @@ public class PauseUI : MonoBehaviour
                  OptionUI.Instance.optionButton.SetActive(true);
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             //EnemyManager.Instance.PauseEnemies();
         }
         else
@@ -42,6 +46,7 @@ public class PauseUI : MonoBehaviour
             }
             Time.timeScale = 1.0f;
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             //EnemyManager.Instance.ResumeEnemies();
         }
 
@@ -67,6 +72,7 @@ public class PauseUI : MonoBehaviour
     {
         togle();
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         Time.timeScale = 1f;
         OptionUI.Instance.optionButton.SetActive(true);
         fader.FadeTo(mainMenu);

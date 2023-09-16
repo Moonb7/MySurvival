@@ -1,8 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEditor.Progress;
-using static UnityEngine.Rendering.DebugUI;
 
 public class CharacterStats : MonoBehaviour
 {

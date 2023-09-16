@@ -48,4 +48,6 @@ public class AudioManager : PersistentSingleton<AudioManager>
         audioMixer.SetFloat("SFX", Mathf.Log10(value) * 20);
         PlayerPrefs.SetFloat("SFXVolume", value);
     }
+
+
 }

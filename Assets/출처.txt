@@ -20,3 +20,9 @@ Main Menu 버튼 이미지 : 출처 <a href="https://kr.freepik.com/free-vector/
 타켓 이미지 : https://opengameart.org/content/crosshairs-and-reticles
 
 DragonShoutingSound : https://freesound.org/s/532156/
+
+GameClearSound : https://freesound.org/s/410578/
+
+GameOverSound : https://freesound.org/s/483471/
+
+EndingSound : https://freesound.org/s/593497/

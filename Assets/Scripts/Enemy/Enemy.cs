@@ -190,6 +190,7 @@ public class Enemy : CharacterStats
 
             DataManager.Instance.AddGold(deathGold); // °ñµå È¹µæ
             PlayerStats.instance.AddExp(deathExp); // °æÇèÄ¡ È¹µæ
+            EnemyManager.Instance.RemoveEnemy(this); // Á×À½½Ã ²À »èÁ¦ÇØÁÖ±â
 
             // È®·üÀ» ±¸ÇöÇØ¼­ ¸¸µéÀÚ
             float random = Random.Range(0,100);
