@@ -13,6 +13,12 @@ PlayerHealthBar - 출처 <a href="https://kr.freepik.com/free-vector/gradient-co
 
 Anton구글 폰트 : https://fonts.google.com/specimen/Anton?preview.text=START&preview.text_type=custom
 
+East_Sea_Dokdo구글 폰트 : https://fonts.google.com/specimen/East+Sea+Dokdo?subset=korean
+
+Gugi구글 폰드 : https://fonts.google.com/specimen/Gugi?subset=korean
+
+Diphylleia구글 폰트 : https://fonts.google.com/specimen/Diphylleia
+
 Main Menu 버튼 이미지 : 출처 <a href="https://kr.freepik.com/free-vector/twitch-stream-panels_9158953.htm#page=4&query=Button&position=2&from_view=search&track=sph">Freepik</a>
 
 팔라딘 (검이랑 방패들고있는 Enemy) 모델링 및 애니메이션 : 믹스아모
@@ -26,3 +32,5 @@ GameClearSound : https://freesound.org/s/410578/
 GameOverSound : https://freesound.org/s/483471/
 
 EndingSound : https://freesound.org/s/593497/
+
+2D파티클 별 이미지 : 출처 <a href="https://kr.freepik.com/free-vector/realistic-sparkling-star-collection_15695345.htm#query=Star&position=21&from_view=search&track=sph">Freepik</a>

@@ -3101,7 +3101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4102133170829131034
 Transform:
   m_ObjectHideFlags: 0
@@ -3270,7 +3270,7 @@ MonoBehaviour:
     startValue: 2000
     values: []
   attack:
-    startValue: 13
+    startValue: 10
     values: []
   defence:
     startValue: 5

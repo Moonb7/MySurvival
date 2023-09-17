@@ -6,6 +6,12 @@ public class OptionUI : PersistentSingleton<OptionUI>
 {
     public GameObject thisUI;
     public GameObject optionButton;
+
+    private void Start()
+    {
+        optionButton.SetActive(true);
+    }
+
     public void OpenUI()
     {
         thisUI.gameObject.SetActive(true);

@@ -23,7 +23,7 @@ public class UpgradeUI : MonoBehaviour
     {
         for (int i = 0; i < currentLevel.Length; i++) // 저장 데이터 가져오기
         {
-            currentLevel[i] = DataManager.Instance.playerData.currentLevel[i];
+            currentLevel[i] = DataManager.Instance.playerData.upgradeLevel[i];
         }
         SetText();
     }
@@ -80,7 +80,7 @@ public class UpgradeUI : MonoBehaviour
         }
         SetText();
 
-        DataManager.Instance.playerData.currentLevel[num] = currentLevel[num]; // 데이터 저장
+        DataManager.Instance.playerData.upgradeLevel[num] = currentLevel[num]; // 데이터 저장
     }
 
     public int GetUpgradePrice(int nowLevel)

@@ -17813,12 +17813,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData:
-    currentLevel: 000000000000000000000000
+    upgradeLevel: 000000000000000000000000
     gold: 0
     ammoCount: 0
     maxHealth: 100
     attack: 5
     defence: 0
+    isGameClear: 0
   path: 
 --- !u!4 &1540781126
 Transform:
@@ -17922,9 +17923,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2031878477}
-        m_TargetAssemblyTypeName: PauseUI, Assembly-CSharp
-        m_MethodName: OnMenuButton
+      - m_Target: {fileID: 2031878482}
+        m_TargetAssemblyTypeName: GameClearUI, Assembly-CSharp
+        m_MethodName: OnCheckButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21542,6 +21543,7 @@ GameObject:
   - component: {fileID: 2031878479}
   - component: {fileID: 2031878480}
   - component: {fileID: 2031878481}
+  - component: {fileID: 2031878482}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -21660,6 +21662,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisUI: {fileID: 948547563}
+--- !u!114 &2031878482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031878474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423eec5575fddb043b812c3027c9f07f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisUI: {fileID: 1873991337}
+  fader: {fileID: 2064089171}
+  endScene: EndScene
 --- !u!1 &2053523723
 GameObject:
   m_ObjectHideFlags: 0
@@ -25091,11 +25108,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BowEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 6205630070632727285, guid: 045216c710b4f264591cacb3db74bce2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6725284947235149903, guid: 045216c710b4f264591cacb3db74bce2,
         type: 3}
@@ -31789,11 +31801,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BlueDragonBoss
-      objectReference: {fileID: 0}
-    - target: {fileID: 4102133170828894522, guid: fda0fda74272b2045aad5c55872e21d3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4102133170829131034, guid: fda0fda74272b2045aad5c55872e21d3,
         type: 3}
