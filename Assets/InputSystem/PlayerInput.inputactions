@@ -24,6 +24,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "XboxLook",
+                    "type": "Value",
+                    "id": "e12eb474-cd04-411e-80f7-0cdce5e90b29",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "d5ad33e1-8c84-42b8-835d-69fa245216aa",
@@ -189,6 +198,61 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Xbox",
+                    "id": "6b208ce4-1048-4398-b43a-8f89ad68f42b",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "f557c8a0-5583-4c69-a337-fca75933de22",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "49623b95-500a-4d3b-bfa4-1b7ffe2b8c59",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "2fa907c3-4a53-4e51-baf9-b1b9bb9bdbca",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "dfe03acc-14c9-477a-bdd2-2f02aaa17768",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "6e0a29d7-7a6c-4a3b-882c-e8e39b73a461",
                     "path": "<Keyboard>/f",
@@ -206,6 +270,17 @@
                     "interactions": "",
                     "processors": "InvertVector2(invertX=false),ScaleVector2(x=0.05,y=0.05)",
                     "groups": "PC",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5cf5b654-4ea7-4db7-a437-6a23bd124805",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "InvertVector2(invertX=false),ScaleVector2(x=0.05,y=0.05)",
+                    "groups": "Xbox",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -374,6 +449,17 @@
                     "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "425835c0-1f9c-45e5-aef2-1f7a5268138c",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "InvertVector2(invertX=false),ScaleVector2(x=0.05,y=0.05)",
+                    "groups": "Xbox",
+                    "action": "XboxLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -390,6 +476,17 @@
                 },
                 {
                     "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Xbox",
+            "bindingGroup": "Xbox",
+            "devices": [
+                {
+                    "devicePath": "<XInputController>",
                     "isOptional": false,
                     "isOR": false
                 }
