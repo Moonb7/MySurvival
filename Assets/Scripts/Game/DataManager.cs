@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.IO;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class DataManager : PersistentSingleton<DataManager>
     {
         base.Awake();
         path = Application.persistentDataPath + "/saveFile";
+        Debug.Log(path);
         if (File.Exists(path))
         {
             LoadData();
@@ -39,7 +41,9 @@ public class DataManager : PersistentSingleton<DataManager>
     {
         playerData.gold += amount;
         Debug.Log($"Player가 갖고 있는 골드량 : {playerData.gold}");
+        
     }
+
     public bool UseGold(int amount) // 골드 사용
     {
         if (playerData.gold < amount)

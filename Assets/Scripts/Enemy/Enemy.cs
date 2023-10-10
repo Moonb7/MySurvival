@@ -37,7 +37,9 @@ public class Enemy : CharacterStats
     protected float countDown = 10f;
     public float attackTime = 3f;
     public float closeAttackTime = 3f;
-    
+    protected float distance;
+
+
     public int deathGold;               // 죽으면 플레이어가 갖게될 골드량
     public int deathExp;                // 죽으면 플레이어가 갖게될 경험치량
     private Item deathItem;             // 죽으면 플레이어가 갖게될 아이템
@@ -90,7 +92,7 @@ public class Enemy : CharacterStats
             return;
 
         Vector3 target = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-        float distance = Vector3.Distance(target, transform.position);
+        distance = Vector3.Distance(target, transform.position);
 
         switch (currentStats)
         {
@@ -151,14 +153,6 @@ public class Enemy : CharacterStats
         }
     }
 
-    protected virtual void OnDrawGizmos()
-    {
-        if (enemyTypes != EnemyTypes.RangedEnemy || !drawGizmo)
-            return;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, checkRadius);
-    }
 
     protected virtual IEnumerator LookTargetAttack(Vector3 target)
     {
@@ -186,15 +180,14 @@ public class Enemy : CharacterStats
         if (CurrentHealth <= 0)
         {
             isDeath = true;
-            // 죽음 구현 애니매이션이라던지 쉐이더를 활용하여
 
             DataManager.Instance.AddGold(deathGold); // 골드 획득
             PlayerStats.instance.AddExp(deathExp); // 경험치 획득
             EnemyManager.Instance.RemoveEnemy(this); // 죽음시 꼭 삭제해주기
 
             // 확률을 구현해서 만들자
-            float random = Random.Range(0,100);
-            if(random <= 30) // 아이탬 얻기 30% 확률
+            float random = Random.Range(0,10);
+            if(random <= 3) // 아이탬 얻기 30% 확률
             {
                 int itemRandNum  = Random.Range(0 , ItemDataManager.Instance.items.Count); // 가장 첫번째 아이템 마지막 아이템 
                 deathItem = ItemDataManager.Instance.items[itemRandNum];
@@ -203,9 +196,6 @@ public class Enemy : CharacterStats
             }
             audioSource.clip = deathSound;      // 죽는 소리 플레이
             audioSource.Play();
-
-            // 그리고 랙돌 오브젝트를 생성하여 트랜스폼을 똑같이 생성하여 죽음시 날라가는 이벤트를 만들어도 좋을거 같다 몸통쪽의 RigidBody를 활용하여 날라가게 하면될거 같다.
-            // 이거는 좀 고민 중 이렇게 할지 아님 디졸브를 이용해서 사라지게할지 디졸브가나은거 같기도하다
 
             Collider collider = GetComponent<Collider>();
             if (collider != null)
@@ -220,7 +210,16 @@ public class Enemy : CharacterStats
             Destroy(this.gameObject, DeathDelay);
         }
     }
-    
+
+    protected virtual void OnDrawGizmos()
+    {
+        if (enemyTypes != EnemyTypes.RangedEnemy || !drawGizmo)
+            return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, checkRadius);
+    }
+
     private void CreativeArrow() // 애니메이션 이벤트함수에 포함해 특정 구간에서 화살 생성
     {
         GameObject instance = Instantiate(arrowPrefab);

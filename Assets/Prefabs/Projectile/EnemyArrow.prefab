@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1459925939806521021}
   - component: {fileID: 1558486950673055359}
   - component: {fileID: 8408951822487164194}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,4 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTag: Player
   speed: 1000
-  destoryDelay: 4
+  rotatSpeed: 0
+  destoryDelay: 30
+  rotatProjectile: 0
+  scaleUpProjectile: 0

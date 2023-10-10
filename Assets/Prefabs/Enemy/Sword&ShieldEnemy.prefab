@@ -2348,7 +2348,7 @@ MonoBehaviour:
   defence:
     startValue: 0
     values: []
-  DeathDelay: 3
+  DeathDelay: 2
   hitSound1: {fileID: 8300000, guid: c3c95ac93a858ea478fa667958f84f8c, type: 3}
   hitSound2: {fileID: 8300000, guid: 0260006e09adeee41b189134a1673138, type: 3}
   deathSound: {fileID: 8300000, guid: 22ce1b3482d404b45b854ac4e6e0122a, type: 3}
@@ -2364,8 +2364,8 @@ MonoBehaviour:
   currentStats: 0
   attackTime: 3
   closeAttackTime: 3
-  deathGold: 100
-  deathExp: 100
+  deathGold: 50
+  deathExp: 20
   arrowPos: {fileID: 0}
   arrowPrefab: {fileID: 0}
 --- !u!114 &8477653496479269589

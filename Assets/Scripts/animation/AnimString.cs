@@ -35,5 +35,5 @@ public class AnimString : Singleton<AnimString>
     public string enemyState = "EnemyState";
     public string isScream = "IsScream";
     public string isFlying = "IsFlying";
-
+    public string isShouting = "IsShouting";
 }

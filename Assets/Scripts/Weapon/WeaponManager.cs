@@ -87,6 +87,11 @@ public class WeaponManager : MonoBehaviour
 
     public IEnumerator SwichWeapon(WeaponBase weapon)
     {
+        if(activeWeapon == weapon)
+        {
+            yield break;
+        }
+
         if (isWeaponSwichReady)
         {
             isWeaponSwichReady = false;
@@ -113,8 +118,8 @@ public class WeaponManager : MonoBehaviour
 
         activeWeapon = weapon;
         activeWeapon.transform.parent = weaponEquipPos;
-        activeWeapon.transform.localPosition = Vector3.zero;
-        activeWeapon.transform.localRotation = Quaternion.identity;
+        activeWeapon.transform.localPosition = weapon.weaponPos;
+        activeWeapon.transform.localRotation = Quaternion.Euler(weapon.weaponRot);
 
         PlayerController.animator.SetInteger(AnimString.Instance.weaponNum, activeWeapon.weaponScriptable.weaponNum);
         OnSwichWeapon?.Invoke();

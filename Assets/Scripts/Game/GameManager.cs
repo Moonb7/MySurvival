@@ -65,15 +65,19 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Alpha6))
         {
-            Time.timeScale = 1.0f;
+            Time.timeScale = 0f;
         }
         if (Input.GetKey(KeyCode.Alpha7))
         {
-            EnemyManager.Instance.ResumeEnemies();
+            Time.timeScale = 1.0f;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha8))
+        if (Input.GetKey(KeyCode.Alpha8))
         {
             EnemyManager.Instance.PauseEnemies();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            EnemyManager.Instance.ResumeEnemies();
         }
         #endregion
 

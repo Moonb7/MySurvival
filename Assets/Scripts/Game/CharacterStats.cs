@@ -61,8 +61,8 @@ public class CharacterStats : MonoBehaviour
         CurrentHealth = CurrentHealth - (damage - defence.GetValue());
         if (CurrentHealth >= beforeHealth) // 데미지가 없으면
         {
-            //CurrentHealth = beforeHealth; // 그냥 무데미지 적용
-            CurrentHealth -= 1; // 데미지 1이라도 입히게 하기 ------------------------------------------------------------ 확인
+            CurrentHealth = beforeHealth; // 그냥 무데미지 적용
+            CurrentHealth -= 1; // 데미지 1이라도 입히게 하기 확인
         }
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, maxHealth.GetValue());
         float realDamageAcount = beforeHealth - CurrentHealth; // real Damage구하기 데미지 입었는지 확인

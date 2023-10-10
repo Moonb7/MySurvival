@@ -24,6 +24,8 @@ public class ChangeMaterial : MonoBehaviour
     private bool isSpwan;
     private bool isDissolve;
 
+    private List<Material> dissolveMaterials = new List<Material>(); // activeMaterial을 이용해서 할라했더니 약간의 버그가 발생하여 변수를 추가하여 해결했다.
+
     void Start()
     {
         characterStats = GetComponent<CharacterStats>();
@@ -43,17 +45,6 @@ public class ChangeMaterial : MonoBehaviour
         if (isSpwan)
         {
             SpawnObj();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            foreach (var part in bodyParts)
-            {
-                part.GetComponent<SkinnedMeshRenderer>().material = spwanMaterial;
-            }
-
-            getValue = minValue;
-            isSpwan = true;
         }
 
         if (characterStats.isDeath) // 죽으면 디졸브 머트리얼로 변경하여 값설정
@@ -86,16 +77,17 @@ public class ChangeMaterial : MonoBehaviour
         }
     }
 
-    private void DissolveObj() // 버그있다 얼굴이랑 칼 방패 는 사라지지 않음 각각의 머티리얼이 조정이 안된거 같다. 확인 해야 곘다.
+    private void DissolveObj() // 이거 버그 있음 얼굴이랑 칼 방패는 안된다 머트리얼을 각각 조절이 필요해 보임
     {
         if(isDissolve == false)
         {
+            
             foreach (var part in bodyParts)
             {
                 var renderer = part.GetComponent<SkinnedMeshRenderer>();
                 renderer.material = new Material(dissolveMaterial);
 
-                activeMaterial = renderer.material;
+                dissolveMaterials.Add(renderer.material);
             }
             isDissolve = true;
         }
@@ -104,11 +96,17 @@ public class ChangeMaterial : MonoBehaviour
 
         if(getValue > minValue) // 현재 값이  minValue 보다 크면
         {
-            activeMaterial.SetFloat("_Value", getValue);
+            foreach (var material in dissolveMaterials)
+            {
+                material.SetFloat("_Value", getValue);
+            }
         }
         else
         {
-            activeMaterial.SetFloat("_Value", minValue);
+            foreach (var material in dissolveMaterials)
+            {
+                material.SetFloat("_Value", minValue);
+            }
         }
     }
 }
