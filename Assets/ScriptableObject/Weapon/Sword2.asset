@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46bbadeaedc9294391aebe0dd92fadd, type: 3}
+  m_Name: Sword2
+  m_EditorClassIdentifier: 
+  weaponType: 0
+  weaponNum: 1
+  weaponName: Sword2
+  weapondescription: This is Sword2
+  weaponImage: {fileID: 21300000, guid: 8efc51177e3493843bb5e4a999a795cb, type: 3}
+  skillImage1: {fileID: 21300000, guid: a30fb0171bb8d1c4cba8ad4c2e837e53, type: 3}
+  skillImage2: {fileID: 21300000, guid: 86e025dd905069f4b83f64bee0f75871, type: 3}
+  atk: 5
+  chargingEnergyTime: 2
+  skill1Cool: 4.5
+  skill2Cool: 4.5
+  buffValue: 0
+  buffTime: 0

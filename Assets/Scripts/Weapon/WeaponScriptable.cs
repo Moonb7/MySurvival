@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon")]
 public class WeaponScriptable : ScriptableObject // 이 클래스는 무기마다의 특징 정보들 입력하기위해
 {
-    public WeaponType attackType;           // 무기 타입
+    public WeaponType weaponType;           // 무기 타입
     public int weaponNum;                   // 무기 번호
     public string weaponName;               // 무기 이름
     public string weapondescription;        // 무기 설명

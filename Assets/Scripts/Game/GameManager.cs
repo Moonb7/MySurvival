@@ -99,6 +99,8 @@ public class GameManager : MonoBehaviour
             if (Time.time - bossCutSceneTime >= bosscutTime) // 컷신이 약 11초 정도 여서 12초 동안만 실행
             {
                 EnemyManager.Instance.ResumeEnemies(); // 적들 다시 움직이기
+                EnemyManager.Instance.DieEnemy();
+
                 BossSpawnEnemy();
                 BossSpawn = true;
             }
@@ -108,6 +110,9 @@ public class GameManager : MonoBehaviour
             return;
 
         OnPlayTime();
+
+        if (BossSpawn)
+            return;
 
         countDown += Time.deltaTime;
         if (countDown >= spawnTime[0])        // 10 초마다 생성 일반 몹을 생성하기 위해
@@ -163,6 +168,9 @@ public class GameManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        EnemyManager.Instance.PauseEnemies();
+        EnemyManager.Instance.enemies.Clear(); // 마무리로 초기화 시켜주기
 
         isGameOver = true;
         notSpawn = true; // 더이상 스폰도 안되게 만들기

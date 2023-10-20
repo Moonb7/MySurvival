@@ -1,7 +1,9 @@
 플레이어 메인 모델링 - 사이트(cgtrader) Roman Yuldashev
 https://www.cgtrader.com/free-3d-models/character/sci-fi-character/robot-01a69f32-a54d-475a-a6cc-7708879c2f34
 
-검 - "Sci-fi sword" (https://skfb.ly/oETZq) by Tronin Dmitry is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+첫번째 무기 - "Sci-fi sword" (https://skfb.ly/oETZq) by Tronin Dmitry is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+두번째 무기 - "K28 Sword" (https://skfb.ly/6SEPH) by Long Nguyễn is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
 EnemyHealth Bar - https://opengameart.org/content/animated-loading-bar
 

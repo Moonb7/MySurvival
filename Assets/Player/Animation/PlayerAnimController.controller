@@ -168,7 +168,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SowrdAttack1
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7402276192764092163}
@@ -183,7 +183,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 403db13f0bbd04f40b03caf99d056391, type: 2}
+  m_Motion: {fileID: 7400000, guid: d60920560b2c8694ca3f59c6f816b61d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -197,7 +197,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SowrdAttack2
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8403205909904517164}
@@ -212,7 +212,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 403db13f0bbd04f40b03caf99d056391, type: 2}
+  m_Motion: {fileID: 7400000, guid: ad241992be0477b4f8c6f9ab462b2237, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: IsGround
@@ -294,7 +294,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d1cc51ac4b651194780edc99d49e5766, type: 2}
+  m_Motion: {fileID: 7400000, guid: d595a55357bdb594a8194ae4b9ebe56a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -320,7 +320,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.1
+  m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 1
@@ -528,7 +528,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 94871e9ccc6411f4cb013e5e68b4c905, type: 2}
+    m_Motion: {fileID: 7400000, guid: f3a933eb8acfb634ca2790b9d125255d, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -536,7 +536,7 @@ BlendTree:
     m_DirectBlendParameter: Speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: a03d58b21591ef449a93e2378ed20810, type: 2}
+    m_Motion: {fileID: 7400000, guid: 78fa1f35d2ce4804a97d01b63ae52768, type: 2}
     m_Threshold: 2
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -544,7 +544,7 @@ BlendTree:
     m_DirectBlendParameter: Speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 1fa95d8d707382b41aae416318b53c89, type: 2}
+    m_Motion: {fileID: 7400000, guid: 7b108bc36b68bb54081924d7c98e2ec2, type: 2}
     m_Threshold: 5.5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -2072,7 +2072,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SowrdAttack3
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -1773277937506229821}
@@ -2086,7 +2086,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 403db13f0bbd04f40b03caf99d056391, type: 2}
+  m_Motion: {fileID: 7400000, guid: 8d9561e179312d741a4b634b953cdbe3, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2485,7 +2485,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9d11ccd1f35627d408c05ce76e7c2b57, type: 2}
+  m_Motion: {fileID: 7400000, guid: 67c44762d708e33449bc201affa0c68c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2864,7 +2864,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 403db13f0bbd04f40b03caf99d056391, type: 2}
+  m_Motion: {fileID: 7400000, guid: 8490c57a245c0f147ae9976fd255aed1, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3219,7 +3219,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Gun
+  m_Name: Sword2
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 5651417103858196360}
@@ -3346,7 +3346,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e7b32efba8ec0ef4abf918a9dfa396d7, type: 2}
+  m_Motion: {fileID: 7400000, guid: 435e74120f6888543b73ff935843d41c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3519,7 +3519,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 94871e9ccc6411f4cb013e5e68b4c905, type: 2}
+  m_Motion: {fileID: 7400000, guid: f3a933eb8acfb634ca2790b9d125255d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -4034,7 +4034,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.1
+  m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 1
@@ -4226,7 +4226,7 @@ AnimatorStateMachine:
     m_Position: {x: -60, y: -220, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 5272945203037612277}
-    m_Position: {x: 310, y: -240, z: 0}
+    m_Position: {x: 300, y: -240, z: 0}
   m_AnyStateTransitions:
   - {fileID: 2135391320202185229}
   m_EntryTransitions: []

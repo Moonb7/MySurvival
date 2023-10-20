@@ -26,6 +26,9 @@ public class PlayerTargeting : MonoBehaviour
     private Camera cam;
     private Plane[] planes;
 
+    private float distanceToTarget;
+    public float toTarget; // 확인용
+
     private void Start()
     {
         cam = Camera.main;
@@ -60,14 +63,15 @@ public class PlayerTargeting : MonoBehaviour
             for (int i = 0; i < collider.Length; i++)
             {
                 float distance = Vector3.Distance(transform.position, collider[i].transform.position);
-                
+
                 if (distance < minDistance) 
                 {
                     minDistance = distance;
                     enemy = collider[i].gameObject;
                 }
-            }
 
+            }
+            
             /*if (InputManager.Instance.attackKey)  // 범위 안 적을 공격할떄 자동으로 가까운 적을 지정을 정해서 때린다 // 이제는 자동으로 쳐다보게 고정해서 쓸일이 없을거 같다.
             {
                 if (fastentageting && targetEnemy) // 고정을 하면 마지막으로 고정한 적만 떄리게 설정
@@ -94,20 +98,34 @@ public class PlayerTargeting : MonoBehaviour
 
     void SetTargetImage()
     {
-        if (fastentargeting && targetEnemy)
+        if (WeaponManager.activeWeapon.weaponScriptable.weaponType == WeaponType.meleeweapon) // 근거리 일때의 타켓팅
         {
-            targetImage.gameObject.SetActive(true);
-            Vector3 targetCenter = targetEnemy.GetComponent<Collider>().bounds.center; // 콜라이더의 센터위치값 확인
-            Vector3 viewportPosition = Camera.main.WorldToViewportPoint(targetCenter); // 카메라에 보이게 하기위해 뷰포트포인터로 변환
+            if (fastentargeting && targetEnemy)
+            {
+                targetImage.gameObject.SetActive(true);
+                Vector3 targetCenter = targetEnemy.GetComponent<Collider>().bounds.center; // 콜라이더의 센터위치값 확인
+                Vector3 viewportPosition = Camera.main.WorldToViewportPoint(targetCenter); // 카메라에 보이게 하기위해 뷰포트포인터로 변환
 
-            Vector2 canvasSize = targetUI.sizeDelta;
-            Vector2 anchoredPosition = new Vector2(viewportPosition.x * canvasSize.x - canvasSize.x * 0.5f, viewportPosition.y * canvasSize.y - canvasSize.y * 0.5f);
+                Vector2 canvasSize = targetUI.sizeDelta;
+                Vector2 anchoredPosition = new Vector2(viewportPosition.x * canvasSize.x - canvasSize.x * 0.5f, viewportPosition.y * canvasSize.y - canvasSize.y * 0.5f);
 
-            targetImage.rectTransform.anchoredPosition = anchoredPosition;
+                targetImage.rectTransform.anchoredPosition = anchoredPosition;
+            }
+            else
+            {
+                targetImage.gameObject.SetActive(false);
+            }
         }
-        else
+        else if (WeaponManager.activeWeapon.weaponScriptable.weaponType == WeaponType.rangedweapon) // 원거리 일때의 타켓팅
         {
-            targetImage.gameObject.SetActive(false);
+            /*RaycastHit hit;
+            //Physics.Raycast(레이저를 발사할 위치, 발사방향, 히트 충돌체 정보, 최대거리)
+            if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit))
+            {
+                distanceToTarget = hit.distance;
+                toTarget = distanceToTarget;
+            }*/
         }
     }
+    
 }

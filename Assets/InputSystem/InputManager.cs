@@ -21,7 +21,6 @@ public class InputManager : Singleton<InputManager>
 
     // 직접 구한 값을 통해 할것인가
     public bool analogMovement;
-
     public bool cursorLocked = true;        // 커서상태를 물어보는것 
     public bool cursorInputForLook = true;  // 마우스의 값을 줄것인가
     
@@ -43,6 +42,8 @@ public class InputManager : Singleton<InputManager>
 
     public void OnMove(InputAction.CallbackContext context) // 움직임 값
     {
+        if (isPause || GameManager.notSpawn)
+            return;
         move = context.ReadValue<Vector2>();
     }
 
@@ -71,7 +72,7 @@ public class InputManager : Singleton<InputManager>
 
     public void OnSprint(InputAction.CallbackContext context) // 달리기 키
     {
-        if (isPause || GameManager.notSpawn)
+        if (isPause)
             return;
 
         if (context.performed)
@@ -147,8 +148,8 @@ public class InputManager : Singleton<InputManager>
                 isCharging = false;
                 chargingEnergy = 0;
                 WeaponManager.activeWeapon.weaponAudioSource.loop = false;
-                Destroy(chagingEff, 1f);
-                Destroy(chargingFullEff, 1.5f);
+                Destroy(chagingEff);
+                Destroy(chargingFullEff);
             }
             else if (context.canceled)
             {
@@ -189,7 +190,7 @@ public class InputManager : Singleton<InputManager>
             if (chargingEnergy >= WeaponManager.activeWeapon.weaponScriptable.chargingEnergyTime)
             {
                 // 차징에너지가 다모였다는 효과 이펙트가 더화려해 진다던다 그런거
-                chargingFullEff = Instantiate(WeaponManager.activeWeapon.chagingFullEff, weaponEquipPos);
+                chargingFullEff = Instantiate(WeaponManager.activeWeapon.chagingFullEff, weaponManager.chagingFullEffPos);
                 chargingFullEff.transform.localPosition = Vector3.zero;
                 chargingFullEff.transform.localRotation = Quaternion.identity;
                 WeaponManager.activeWeapon.weaponAudioSource.loop = false;
@@ -200,7 +201,9 @@ public class InputManager : Singleton<InputManager>
 
     public void OnTargetting(InputAction.CallbackContext context) // 고정할 타켓 설정 자세한건 PlayerTargetting 참고
     {
-        if (isPause || GameManager.notSpawn)
+        if (isPause)
+            return;
+        if (WeaponManager.activeWeapon.weaponScriptable.weaponType == WeaponType.rangedweapon) // 원거리 무기는 타겟팅 하지 않기
             return;
 
         if (context.started)
@@ -211,7 +214,7 @@ public class InputManager : Singleton<InputManager>
     }
     public void OnWeapon1(InputAction.CallbackContext context)
     {
-        if (isPause || GameManager.notSpawn)
+        if (isPause)
             return;
 
         if (context.performed)
@@ -221,7 +224,7 @@ public class InputManager : Singleton<InputManager>
     }
     public void OnWeapon2(InputAction.CallbackContext context)
     {
-        if (isPause || GameManager.notSpawn)
+        if (isPause)
             return;
 
         if (context.performed)
@@ -231,7 +234,7 @@ public class InputManager : Singleton<InputManager>
     }
     public void OnSkill1(InputAction.CallbackContext context)
     {
-        if (isPause || GameManager.notSpawn)
+        if (isPause)
             return;
 
         if (WeaponManager.activeWeapon != null && WeaponManager.isWeaponSwichReady &&
@@ -256,7 +259,7 @@ public class InputManager : Singleton<InputManager>
 
     public void OnSkill2(InputAction.CallbackContext context)
     {
-        if (isPause || GameManager.notSpawn)
+        if (isPause)
             return;
 
         if (WeaponManager.activeWeapon != null && WeaponManager.isWeaponSwichReady &&

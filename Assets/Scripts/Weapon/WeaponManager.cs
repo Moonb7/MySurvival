@@ -12,6 +12,7 @@ public class WeaponManager : MonoBehaviour
     public WeaponBase[] weaponSlots = new WeaponBase[2];                // 게임 기획에 맞게 2개제한
     public Transform defaultWeaponPos;                                  // 무기 대기위치
     public Transform weaponEquipPos;                                    // 무기 장착위치
+    public Transform chagingFullEffPos;                                 // 풀차징 했을때의 이펙트 위치
     public static WeaponBase activeWeapon;                              // 현재 장착 무기
 
     [SerializeField]
@@ -31,10 +32,16 @@ public class WeaponManager : MonoBehaviour
     public float weaponSwitchDelay = 1f;                                // 처음 무기변겅 딜레이시간 무기변경할 때의 시각적인 시점을 보이기위해 만들었다.
     public float weaponSwitchDelay2 = 1f;                               // 두번쨰 무기변겅 딜레이 시간
 
-    private void Start()
+    private PlayerTargeting playerTargeting;
+
+    private void Awake()
     {
         characterStats = GetComponent<CharacterStats>();
+        playerTargeting = GetComponent<PlayerTargeting>();
+    }
 
+    private void Start()
+    {
         foreach (var w in startingWeapons)
         {
             AddWeapon(w);
@@ -120,8 +127,16 @@ public class WeaponManager : MonoBehaviour
         activeWeapon.transform.parent = weaponEquipPos;
         activeWeapon.transform.localPosition = weapon.weaponPos;
         activeWeapon.transform.localRotation = Quaternion.Euler(weapon.weaponRot);
+        if(weapon.weaponScriptable.weaponType == WeaponType.rangedweapon)
+        {
+            playerTargeting.targetImage.gameObject.SetActive(true);
+        }
+        else if(weapon.weaponScriptable.weaponType == WeaponType.meleeweapon)
+        {
+            playerTargeting.targetImage.gameObject.SetActive(false);
+        }
 
-        PlayerController.animator.SetInteger(AnimString.Instance.weaponNum, activeWeapon.weaponScriptable.weaponNum);
+        PlayerController.animator.SetInteger(AnimString.Instance.weaponNum, weapon.weaponScriptable.weaponNum);
         OnSwichWeapon?.Invoke();
     }
 

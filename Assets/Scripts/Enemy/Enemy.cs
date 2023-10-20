@@ -28,14 +28,14 @@ public class Enemy : CharacterStats
 
     protected GameObject player;
     protected LayerMask playerMask;     // Player의 레이어지정
-    public float checkRadius = 0.5f;    // Physics.CheckSphere의 감지할 범위
+    public float closeCheckRadius = 0.5f;    // 플레이어가 어느정도 가까이 왔을때 감지할 범위
     public bool drawGizmo;              // 기즈모를 그릴지 말지 정하기
 
     public EnemyState currentStats = EnemyState.Idle; // 이거는 어떠한 상태 행동이다
     protected EnemyState beforStats;
     protected float attackRange;
     protected float countDown = 10f;
-    public float attackTime = 3f;
+    public float attackDelayTime = 3f;
     public float closeAttackTime = 3f;
     protected float distance;
 
@@ -115,7 +115,7 @@ public class Enemy : CharacterStats
                 break;
 
             case EnemyState.Attack:          // 공격모드로 변경
-                if (countDown > attackTime)
+                if (countDown > attackDelayTime)
                 {
                     StartCoroutine(LookTargetAttack(target));
                     countDown = 0;
@@ -149,7 +149,7 @@ public class Enemy : CharacterStats
 
         if (enemyTypes == EnemyTypes.RangedEnemy) // 원거리적에게 플레이어가 가까이 오면 근접공격하게 변경
         {
-            IsClose = Physics.CheckSphere(transform.position, checkRadius, playerMask, QueryTriggerInteraction.Ignore);
+            IsClose = Physics.CheckSphere(transform.position, closeCheckRadius, playerMask, QueryTriggerInteraction.Ignore);
         }
     }
 
@@ -211,13 +211,25 @@ public class Enemy : CharacterStats
         }
     }
 
+    public void DieEnemy() // 보스 등장시 일반 몹들은 일부러 죽일 것이다.
+    {
+        isDeath = true;
+
+        if (animator != null)
+        {
+            animator.SetTrigger(AnimString.Instance.isDie);
+            Debug.Log("죽음");
+        }
+        Destroy(this.gameObject, DeathDelay);
+    }
+
     protected virtual void OnDrawGizmos()
     {
         if (enemyTypes != EnemyTypes.RangedEnemy || !drawGizmo)
             return;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, checkRadius);
+        Gizmos.DrawSphere(transform.position, closeCheckRadius);
     }
 
     private void CreativeArrow() // 애니메이션 이벤트함수에 포함해 특정 구간에서 화살 생성

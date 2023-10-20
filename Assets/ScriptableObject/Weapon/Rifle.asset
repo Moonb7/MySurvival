@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46bbadeaedc9294391aebe0dd92fadd, type: 3}
   m_Name: Rifle
   m_EditorClassIdentifier: 
-  attackType: 1
-  weaponNum: 1
+  weaponType: 1
+  weaponNum: 2
   weaponName: Gun
   weapondescription: This is Gun
   weaponImage: {fileID: 21300000, guid: 29e3c3aaf9cf38849b1ef7f29285efba, type: 3}
@@ -21,7 +21,7 @@ MonoBehaviour:
   skillImage2: {fileID: 21300000, guid: 27fda1a8a09a8f842a190a93aeb62d43, type: 3}
   atk: 3
   chargingEnergyTime: 1.5
-  skill1Cool: 15
-  skill2Cool: 15
+  skill1Cool: 3
+  skill2Cool: 3
   buffValue: 0
   buffTime: 0

@@ -36,4 +36,12 @@ public class EnemyManager : Singleton<EnemyManager>
             enemy.agent.speed = enemy.beforSpeed;
         }
     }
+
+    public void DieEnemy()
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.DieEnemy();
+        }
+    }
 }

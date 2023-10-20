@@ -5,19 +5,20 @@ public abstract class WeaponBase : MonoBehaviour
 {
     [Tooltip("무기 기본정보가 들어있는 무기 ScriptableObject")]
     public WeaponScriptable weaponScriptable;
+    [HideInInspector]
     public AudioSource weaponAudioSource;
     public Vector3 weaponPos;
     public Vector3 weaponRot;
     protected WeaponManager weaponManager;
     protected CharacterStats characterStats;
     
-
     public float damageMultiplier { get; set; }
     public float startDamageMultiplier { get; set; }
     public AttackState attackState { get; set; }
 
     private void Start()
     {
+        weaponAudioSource = GetComponent<AudioSource>();
         weaponManager = GetComponentInParent<WeaponManager>();
         characterStats = GetComponentInParent<CharacterStats>();
     }
@@ -69,6 +70,15 @@ public abstract class WeaponBase : MonoBehaviour
         {
             isSkill1Ready = WeaponManager.activeWeapon.weaponScriptable.skill1Cool <= skill1CoolTimedown;
             isSkill2Ready = WeaponManager.activeWeapon.weaponScriptable.skill2Cool <= skill2CoolTimedown;
+            if (isSkill1Ready)
+            {
+                skill1CoolTimedown = 100;
+            }
+
+            if (isSkill2Ready)
+            {
+                skill2CoolTimedown = 100;
+            }
         }
     }
 
