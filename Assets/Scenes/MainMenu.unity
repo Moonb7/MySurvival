@@ -4339,7 +4339,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items: []
   itemScriptables:
-  - {fileID: 11400000, guid: 178eb5e4ebd2cbb4fafb09d43017a38a, type: 2}
   - {fileID: 11400000, guid: 8a1f3115e6c5b4843906ff3ae87e83fd, type: 2}
   - {fileID: 11400000, guid: 3187b760dabd03a4b89cf8b1a528c20b, type: 2}
   - {fileID: 11400000, guid: a66a714f4e5b5e74baea4adb3811e42f, type: 2}

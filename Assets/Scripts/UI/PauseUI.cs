@@ -14,6 +14,8 @@ public class PauseUI : MonoBehaviour
     private SceneFader fader;
     private bool isPause;
 
+    private bool isScenemove = false;
+
     private void Start()
     {
         OptionUI.Instance.optionButton.SetActive(false);
@@ -21,7 +23,7 @@ public class PauseUI : MonoBehaviour
     // Input Mnaget에서 실행
     public void togle()
     {
-        if (GameManager.notSpawn) // 컷신이 나오는 타이밍이다
+        if (GameManager.notSpawn || isScenemove) // 컷신이 나올떄랑 씬이동할떄는 사용 금지
             return;
 
         isPause = !isPause;
@@ -65,6 +67,7 @@ public class PauseUI : MonoBehaviour
     public void OnReStartButton()
     {
         togle();
+        isScenemove = true;
         fader.FadeTo(mainScene);
     }
 
@@ -75,6 +78,7 @@ public class PauseUI : MonoBehaviour
         Cursor.visible = true;
         Time.timeScale = 1f;
         OptionUI.Instance.optionButton.SetActive(true);
+        isScenemove = true;
         fader.FadeTo(mainMenu);
     }
 }
