@@ -63,5 +63,9 @@ public class SkillUI : Singleton<SkillUI>
         }
     }
 
-    
+    protected override void OnDestroy()
+    {
+        WeaponManager.OnSwichWeapon -= SetskillImage;
+        base.OnDestroy();
+    }
 }
