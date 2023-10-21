@@ -33,7 +33,7 @@ public class Enemy : CharacterStats
 
     public EnemyState currentStats = EnemyState.Idle; // 이거는 어떠한 상태 행동이다
     protected EnemyState beforStats;
-    protected float attackRange;
+    public float attackRange;
     protected float countDown = 10f;
     public float attackDelayTime = 3f;
     public float closeAttackTime = 3f;
@@ -80,7 +80,6 @@ public class Enemy : CharacterStats
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerMask = LayerMask.GetMask("Player");
-        attackRange = agent.stoppingDistance - 0.1f; // agent네비에서 스탑하는 범위에 지정하여 범위를 맟춰주었다.
         SetState(EnemyState.Chase);
         EnemyManager.Instance.AddEnemy(this);
         beforSpeed = agent.speed;

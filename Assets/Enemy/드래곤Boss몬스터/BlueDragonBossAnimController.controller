@@ -112,6 +112,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsShouting
     m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: EnemyState
+    m_EventTreshold: 2
   - m_ConditionMode: 1
     m_ConditionEvent: IsAttack
     m_EventTreshold: 0
@@ -288,6 +291,12 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsFlying
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsAttack
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: EnemyState
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7753806720339170631}
   m_Solo: 0
@@ -470,7 +479,7 @@ AnimatorStateMachine:
     m_Position: {x: -290, y: -430, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4363168825271684856}
-    m_Position: {x: 540, y: -390, z: 0}
+    m_Position: {x: 600, y: -400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6039307477052114310}
     m_Position: {x: 470, y: -670, z: 0}
@@ -537,10 +546,13 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: IsAttack
+    m_ConditionEvent: IsClose
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: EnemyState
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: IsClose
+    m_ConditionEvent: IsAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4363168825271684856}

@@ -2359,10 +2359,11 @@ MonoBehaviour:
   enemyTypes: 0
   agent: {fileID: 0}
   beforSpeed: 0
-  checkRadius: 0.5
+  closeCheckRadius: 0.5
   drawGizmo: 0
   currentStats: 0
-  attackTime: 3
+  attackRange: 1.4
+  attackDelayTime: 3
   closeAttackTime: 3
   deathGold: 50
   deathExp: 20

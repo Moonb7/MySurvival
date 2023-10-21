@@ -43,5 +43,6 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             enemy.DieEnemy();
         }
+        enemies.Clear();
     }
 }

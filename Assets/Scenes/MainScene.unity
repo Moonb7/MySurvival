@@ -31659,6 +31659,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4102133170829131027, guid: fda0fda74272b2045aad5c55872e21d3,
+        type: 3}
+      propertyPath: m_StoppingDistance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4102133170829131034, guid: fda0fda74272b2045aad5c55872e21d3,
         type: 3}
       propertyPath: m_RootOrder
@@ -31719,6 +31724,21 @@ PrefabInstance:
       propertyPath: bossUI
       value: 
       objectReference: {fileID: 1313254961}
+    - target: {fileID: 4102133170829131041, guid: fda0fda74272b2045aad5c55872e21d3,
+        type: 3}
+      propertyPath: attackRange
+      value: 19.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102133170829131041, guid: fda0fda74272b2045aad5c55872e21d3,
+        type: 3}
+      propertyPath: closeCheckRadius
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102133170829131041, guid: fda0fda74272b2045aad5c55872e21d3,
+        type: 3}
+      propertyPath: shoutingAtkSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 13174490a50832e419eca815ffa5dce9, type: 3}
     - target: {fileID: 4102133170829131045, guid: fda0fda74272b2045aad5c55872e21d3,
         type: 3}
       propertyPath: enemyHpbar

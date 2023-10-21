@@ -2,10 +2,20 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
+
+public enum BossPattern
+{
+    Pattern1,
+    Pattern2,
+    Pattern3,
+    MaxNullPattern // 아무것도 없는것 초기화를 위해 만들었다
+}
 public class BossEnemy : Enemy
 {
     public GameObject bossUI;
     public Rig rig;
+
+    public AudioClip shoutingAtkSound;
     protected bool IsShouting // 공격하는지체크와 애니메이션파라미터를 같이 주었다.
     {
         get { return animator.GetBool(AnimString.Instance.isShouting); }
@@ -69,7 +79,7 @@ public class BossEnemy : Enemy
     IEnumerator Think() // 패턴을 입력할 함수 // 공격중이면 이 함수를 사용하면 안된다.
     {
         countDown += Time.deltaTime;
-        if (IsAttack && countDown < attackDelayTime)
+        if (IsAttack && countDown < attackDelayTime) // 공격중이고 공격대기시간이 지나지 않으면 실행하지 않기
         {
             yield break;
         }
@@ -83,28 +93,21 @@ public class BossEnemy : Enemy
             case 1:
                 if(IsClose) // 근접 공격 범위에 있으면
                 {
-                    Pattern1(); // 확률 40%
+                    Pattern1();
                 }
                 else
                 {
-                    int rand = Random.Range(0, 2); // 나머지 패턴 실행
-                    switch (rand)
-                    {
-                        case 0:
-                            Pattern2();
-                            break;
-                        case 1:
-                            Pattern3();
-                            break;
-                    }
+                    Pattern3();
                 }
                 break;
             case 2:
+                Pattern3();
+                break;
             case 3:
-                Pattern2(); // 40%
+                Pattern2(); // 나는 패턴만 확률 20%센트로 조절
                 break;
             case 4:
-               Pattern3(); // 20%
+               Pattern3();
                 break;
         }
 
@@ -112,26 +115,39 @@ public class BossEnemy : Enemy
 
     void Pattern1() // 근접 공격 패턴
     {
-        
+        //IsAttack = true;
+
+        animator.SetInteger("EnemyState", (int)BossPattern.Pattern1);
+        // 확실하게 하기위해 초기화
+        IsFlying = false;
+        IsShouting = false;
     }
 
     void Pattern2() // 날아서 불뿜는 패턴
     {
-        IsFlying= true;
+        animator.SetInteger("EnemyState", (int)BossPattern.Pattern2);
+        IsFlying = true;
         Collider collider = GetComponent<Collider>();
         collider.enabled= false;
         
     }
 
-    void Pattern3() // 바위를 소환 하여 유도 발사하는 패턴
+    void Pattern3() // 샤우팅하며 바위를 소환 하여 유도 발사하는 패턴
     {
+        animator.SetInteger("EnemyState", (int)BossPattern.Pattern3);
         IsShouting = true;
+        audioSource.clip = shoutingAtkSound;
+        audioSource.Play();
+
+        IsFlying = false;
     }
 
     void OutIsAttack() // 공격이 끝난 시점에 false시켜 줄거다 애니메이션 이벤트에 추가할 함수 
     {
         IsAttack = false; 
         IsShouting = false;
+
+        animator.SetInteger("EnemyState", (int)BossPattern.MaxNullPattern);
     }
 
     void OutIsFlying()
@@ -141,6 +157,8 @@ public class BossEnemy : Enemy
 
         IsAttack = false;
         IsFlying = false;
+
+        animator.SetInteger("EnemyState", (int)BossPattern.MaxNullPattern);
     }
 
     public override void OnDeath()

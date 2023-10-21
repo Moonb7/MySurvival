@@ -111,16 +111,6 @@ public class GameManager : MonoBehaviour
 
         OnPlayTime();
 
-        if (BossSpawn)
-            return;
-
-        countDown += Time.deltaTime;
-        if (countDown >= spawnTime[0])        // 10 초마다 생성 일반 몹을 생성하기 위해
-        {
-            DefaultSpawnEnemy();
-            countDown = 0;
-        }
-
         // 클리어
         if (elapsedTime >= clearTime || bossEnemyStats.isDeath && !isGameClear) // 클리어 타임까지 살아 남거나 보스를 잡으면 클리어 한걸로 표시
         {
@@ -131,6 +121,17 @@ public class GameManager : MonoBehaviour
         if (PlayerStats.instance.isDeath && !isGameOver)
         {
             GameOver();
+        }
+
+
+        if (BossSpawn)
+            return;
+
+        countDown += Time.deltaTime;
+        if (countDown >= spawnTime[0])        // 10 초마다 생성 일반 몹을 생성하기 위해
+        {
+            DefaultSpawnEnemy();
+            countDown = 0;
         }
     }
 
