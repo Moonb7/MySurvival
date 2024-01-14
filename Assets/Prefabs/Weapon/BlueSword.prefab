@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3159719950177944599}
   - component: {fileID: 3159719950177944592}
   m_Layer: 8
-  m_Name: Sword2
+  m_Name: BlueSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,10 +143,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4735150e701cee34cbbe930a576acd27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aniController: {fileID: 9100000, guid: 4a3e141caa10123488fe344f87a30cf2, type: 2}
   weaponScriptable: {fileID: 11400000, guid: 56a3c8ad666615e40ae778b75d875052, type: 2}
   weaponAudioSource: {fileID: 3159719950177944599}
   weaponPos: {x: 0.065, y: 0.021, z: 0.388}
   weaponRot: {x: -20.965, y: 12.859, z: -2.72}
+  normalAttackDamageMultiplier: 1
+  chagingAttackDamageMultiplier: 1.7
+  skill1AttackDamageMultiplier: 1.5
+  skill2AttackDamageMultiplier: 1.2
   attackEffect: {fileID: 206906933502295669, guid: e00c2e046e40bde47ad58142dc6a74f6,
     type: 3}
   chargingEffect: {fileID: 448892067746066297, guid: b71eee2339a6f8049952e1e3e227e1d4,

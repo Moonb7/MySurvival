@@ -9,8 +9,7 @@ public class SwordWeapon : WeaponBase
     {
         AttackSetStats(AttackState.attack);
 
-        startDamageMultiplier = 1;
-        if(attackState == AttackState.attack)
+        if (AttackState == AttackState.attack)
         {
             comboCount++;
             if (comboCount >= 4)
@@ -29,11 +28,11 @@ public class SwordWeapon : WeaponBase
     public override void Skill1() // 버프 스킬
     {
         AttackSetStats(AttackState.skill1);
-        
+
         StartCoroutine(PowerUpSkill1());
         CreateBuff();
     }
-    
+
     IEnumerator PowerUpSkill1()
     {
         characterStats.attack.AddValue(weaponScriptable.buffValue);             // 일단 이렇게 테스트로 하고 스크랩터블오브젝트에 변수 생성할지 고민하자
@@ -60,28 +59,28 @@ public class SwordWeapon : WeaponBase
 
     public override float AttackStatedamageMultiplier()
     {
-        switch (attackState)
+        switch (AttackState)
         {
             case AttackState.attack:
-                if(comboCount == 3)
+                if (comboCount == 3)
                 {
-                    damageMultiplier = 1.3f;
+                    DamageMultiplier = 1.3f;
                 }
                 else
                 {
-                    damageMultiplier = startDamageMultiplier;
+                    DamageMultiplier = normalAttackDamageMultiplier;
                 }
                 break;
             case AttackState.chargingAttack:
-                damageMultiplier = 1.5f;
+                DamageMultiplier = chagingAttackDamageMultiplier;
                 break;
             case AttackState.skill1:
-                
+                DamageMultiplier = skill1AttackDamageMultiplier;
                 break;
             case AttackState.skill2:
-                damageMultiplier = 1.7f;
+                DamageMultiplier = skill2AttackDamageMultiplier;
                 break;
         }
-        return damageMultiplier;
+        return DamageMultiplier;
     }
 }

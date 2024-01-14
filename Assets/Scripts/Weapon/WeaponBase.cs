@@ -1,20 +1,29 @@
+using UnityEditor.Animations;
 using UnityEngine;
 
 // 무기 오브젝트 프리팹에 넣을 컴포넌트 클래스이다. WeaponController 이다.
 public abstract class WeaponBase : MonoBehaviour
 {
+    [Tooltip("해당 무기의 플레이어 행동 애니메이션 컨트롤러")]
+    public AnimatorController aniController;
     [Tooltip("무기 기본정보가 들어있는 무기 ScriptableObject")]
     public WeaponScriptable weaponScriptable;
     [HideInInspector]
     public AudioSource weaponAudioSource;
-    public Vector3 weaponPos;
-    public Vector3 weaponRot;
+    public Vector3 weaponPos; // 무기 장착위치
+    public Vector3 weaponRot; // 장착 방향
     protected WeaponManager weaponManager;
     protected CharacterStats characterStats;
-    
-    public float damageMultiplier { get; set; }
-    public float startDamageMultiplier { get; set; }
-    public AttackState attackState { get; set; }
+
+    [Header("각 공격의 데미지 계수")]
+    public float normalAttackDamageMultiplier = 1;
+    public float chagingAttackDamageMultiplier = 1;
+    public float skill1AttackDamageMultiplier = 1;
+    public float skill2AttackDamageMultiplier = 1;
+
+    public float DamageMultiplier { get; set; }
+    public float StartDamageMultiplier { get; set; }
+    public AttackState AttackState { get; set; }
 
     private void Start()
     {
@@ -84,9 +93,9 @@ public abstract class WeaponBase : MonoBehaviour
 
     public void AttackSetStats(AttackState _attackState) // 이 함수를 통해 공격을 시작하고 그냥 일반공격인지 무슨스킬공격인지 분별하여 실행 하게 만들었다. 공격종로 시점은 애니매이션 이벤트 함수로 실행하였다.
     {
-        attackState = _attackState;
+        AttackState = _attackState;
         PlayerController.animator.SetBool(AnimString.Instance.isAttack, true);
-        PlayerController.animator.SetInteger(AnimString.Instance.attackStats, (int)attackState);
+        PlayerController.animator.SetInteger(AnimString.Instance.attackStats, (int)AttackState);
     }
 }
 public enum AttackState

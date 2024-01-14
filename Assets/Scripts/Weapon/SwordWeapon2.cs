@@ -8,8 +8,7 @@ public class SwordWeapon2 : WeaponBase
     {
         AttackSetStats(AttackState.attack);
 
-        startDamageMultiplier = 1;
-        if (attackState == AttackState.attack)
+        if (AttackState == AttackState.attack)
         {
             comboCount++;
             if (comboCount >= 4)
@@ -59,28 +58,28 @@ public class SwordWeapon2 : WeaponBase
 
     public override float AttackStatedamageMultiplier()
     {
-        switch (attackState)
+        switch (AttackState)
         {
             case AttackState.attack:
                 if (comboCount == 3)
                 {
-                    damageMultiplier = 1.3f;
+                    DamageMultiplier = 1.3f;
                 }
                 else
                 {
-                    damageMultiplier = startDamageMultiplier;
+                    DamageMultiplier = normalAttackDamageMultiplier;
                 }
                 break;
             case AttackState.chargingAttack:
-                damageMultiplier = 1.5f;
+                DamageMultiplier = chagingAttackDamageMultiplier;
                 break;
             case AttackState.skill1:
-                damageMultiplier = 1f;
+                DamageMultiplier = skill1AttackDamageMultiplier;
                 break;
             case AttackState.skill2:
-                damageMultiplier = 1.7f;
+                DamageMultiplier = skill2AttackDamageMultiplier;
                 break;
         }
-        return damageMultiplier;
+        return DamageMultiplier;
     }
 }

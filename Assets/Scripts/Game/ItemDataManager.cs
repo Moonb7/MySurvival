@@ -12,7 +12,7 @@ public class ItemDataManager : PersistentSingleton<ItemDataManager>
     protected override void Awake()
     {
         base.Awake();
-
+        
         for(int i = 0; i < itemScriptables.Count; i++) // 등록된 아이템 수 만큼
         {
             Item item = new Item(itemScriptables[i]);

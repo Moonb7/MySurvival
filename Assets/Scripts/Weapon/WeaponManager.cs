@@ -136,6 +136,7 @@ public class WeaponManager : MonoBehaviour
             playerTargeting.targetImage.gameObject.SetActive(false);
         }
 
+        PlayerController.animator.runtimeAnimatorController = weapon.aniController;
         PlayerController.animator.SetInteger(AnimString.Instance.weaponNum, weapon.weaponScriptable.weaponNum);
         OnSwichWeapon?.Invoke();
     }

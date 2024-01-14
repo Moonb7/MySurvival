@@ -194,11 +194,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa809b90a3b3e14b86d80c9ba6b497a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aniController: {fileID: 9100000, guid: 5933196cb255f6c43a0958515117bda6, type: 2}
   weaponScriptable: {fileID: 11400000, guid: 63579ddb1ea46ab4dac5e64a15925a86, type: 2}
   weaponAudioSource: {fileID: 6718811557878356055}
   weaponPos: {x: -0.032, y: -0.034, z: 0.009}
   weaponRot: {x: 72.13, y: 52.827, z: 46.847}
-  chagingFullEffPos: {fileID: 0}
   attackEffect: {fileID: 206906933502295669, guid: 86f6990ec880fac40a2f7d3253cc8d79,
     type: 3}
   chargingEffect: {fileID: 448892067746066297, guid: b71eee2339a6f8049952e1e3e227e1d4,
