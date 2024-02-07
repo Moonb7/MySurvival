@@ -1,13 +1,13 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerTargeting : MonoBehaviour
 {
-    private Vector3 spherePosition;
     [SerializeField] 
     private float aroundOffset;
     [SerializeField]
-    private LayerMask EnemyLayer;
+    private LayerMask enemyLayer;
     [SerializeField] 
     private float radius; // 캐릭터 컨트롤러 스크립트의 Radius랑 같아야한다.
 
@@ -16,45 +16,34 @@ public class PlayerTargeting : MonoBehaviour
 
     public new Collider[] collider;
 
-    public static GameObject enemy = null;
-    public static bool fastentargeting;
-    public static GameObject targetEnemy = null;
+    public GameObject enemy = null;
+    public bool fastentargeting;
+    public GameObject targetEnemy = null;
 
     public RectTransform targetUI;
     public RawImage targetImage; // 타겟 이미지를 가리키는 Image 컴포넌트를 저장할 변수
-
-    private Camera cam;
     private Plane[] planes;
 
-    private float distanceToTarget;
-    public float toTarget; // 확인용
+    [Header("Aim 총무기시 이용할 예정")]
+    [SerializeField] // 조준 할떄 쓸 카메라 총무기를 들떄만 이용할 거다
+    private CinemachineVirtualCamera aimCam;
+    [SerializeField]
+    private GameObject aimImage;
 
-    private void Start()
-    {
-        cam = Camera.main;
-    }
+    //private float distanceToTarget;
+    //public float toTarget; // 확인용
 
     private void Update()
     {
-        Targeting();
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (!drawGizmo) return;
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(transform.position - transform.up * aroundOffset, radius);
+        SetTargetImage();
+        AimCheck();
     }
    
-    public void Targeting() // 가장가까운 타켓잡기 공격할떄만 타겟을 잡았다. //델리게이트로 공격 헀으때의 이벤트로 포함 시키면 될거 같다.
+    public void Targeting() // 가장가까운 타켓잡기 공격할떄만 타겟을 잡았다. // 이거는 업데이트 보단 한번 실행으로 하는게 좋을거 같다
     {
-        spherePosition = new Vector3(transform.position.x, transform.position.y - aroundOffset,
-            transform.position.z);
-
-        collider = Physics.OverlapSphere(spherePosition, radius, EnemyLayer,
+        collider = Physics.OverlapSphere(transform.position, radius, enemyLayer,
             QueryTriggerInteraction.Ignore);        
-        planes = GeometryUtility.CalculateFrustumPlanes(cam); // 시야에 보이는 적만 찾기위해
+        planes = GeometryUtility.CalculateFrustumPlanes(Camera.main); // 카메라 시야에 보이는 적만 찾기위해
 
         float minDistance = float.MaxValue;
 
@@ -71,7 +60,6 @@ public class PlayerTargeting : MonoBehaviour
                 }
 
             }
-            
             /*if (InputManager.Instance.attackKey)  // 범위 안 적을 공격할떄 자동으로 가까운 적을 지정을 정해서 때린다 // 이제는 자동으로 쳐다보게 고정해서 쓸일이 없을거 같다.
             {
                 if (fastentageting && targetEnemy) // 고정을 하면 마지막으로 고정한 적만 떄리게 설정
@@ -92,8 +80,6 @@ public class PlayerTargeting : MonoBehaviour
             fastentargeting = false;
             targetEnemy = null;
         }
-
-        SetTargetImage(); // 타겟팅된 적Enemy에 타겟 이미지 보이게 설정
     }
 
     void SetTargetImage()
@@ -116,7 +102,7 @@ public class PlayerTargeting : MonoBehaviour
                 targetImage.gameObject.SetActive(false);
             }
         }
-        else if (WeaponManager.activeWeapon.weaponScriptable.weaponType == WeaponType.rangedweapon) // 원거리 일때의 타켓팅
+        else if (WeaponManager.activeWeapon.weaponScriptable.weaponType == WeaponType.rangedweapon) // 원거리 일때의 타켓팅은 하지않는게 좋을거 같다
         {
             /*RaycastHit hit;
             //Physics.Raycast(레이저를 발사할 위치, 발사방향, 히트 충돌체 정보, 최대거리)
@@ -127,5 +113,33 @@ public class PlayerTargeting : MonoBehaviour
             }*/
         }
     }
-    
+    private void AimCheck()
+    {
+        Transform camTransform = Camera.main.transform;
+        RaycastHit hit;
+
+        if (Physics.Raycast(camTransform.position, camTransform.forward, out hit, Mathf.Infinity,enemyLayer))
+        {
+            Debug.Log("Name : " + hit.transform.gameObject.name);
+        }
+
+        if (InputManager.Instance.AimKey) // 조건 추가 해야 한다 총무기를 들었을때만 이용하게 만들예정
+        {
+            aimCam.gameObject.SetActive(true);
+            aimImage.SetActive(true);
+        }
+        else
+        {
+            aimCam.gameObject.SetActive(false);
+            aimImage.SetActive(false);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!drawGizmo) return;
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(transform.position - transform.up * aroundOffset, radius);
+    }
 }

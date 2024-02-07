@@ -718,11 +718,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Weapon suvival
+  m_text: Clues of the Stars
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 875d62979ffefb344a40bd10ca91e570, type: 2}
-  m_sharedMaterial: {fileID: -1067638289884770756, guid: 875d62979ffefb344a40bd10ca91e570,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -733,10 +732,10 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 1
   m_fontColorGradient:
-    topLeft: {r: 0.8584906, g: 0.16602883, b: 0.17987804, a: 1}
-    topRight: {r: 0.9056604, g: 0, b: 0.40669626, a: 1}
-    bottomLeft: {r: 0.8584906, g: 0.16602883, b: 0.17987804, a: 1}
-    bottomRight: {r: 0.9056604, g: 0, b: 0.40669626, a: 1}
+    topLeft: {r: 0, g: 1, b: 0.114498615, a: 0.8}
+    topRight: {r: 0.75197625, g: 0, b: 0.99215686, a: 0.4117647}
+    bottomLeft: {r: 0, g: 1, b: 0.114498615, a: 0.8}
+    bottomRight: {r: 0.75197625, g: 0, b: 0.99215686, a: 0.4117647}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -746,8 +745,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 110
-  m_fontSizeBase: 110
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

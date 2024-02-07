@@ -15,6 +15,8 @@ public class InputManager : Singleton<InputManager>
     [HideInInspector]
     public bool sprintKey;
     [HideInInspector]
+    public bool AimKey;
+    [HideInInspector]
     public bool rollKey;
     [HideInInspector]
     public bool isPause = false;
@@ -32,12 +34,14 @@ public class InputManager : Singleton<InputManager>
 
     public Transform weaponEquipPos;
 
-    WeaponManager weaponManager;
+    private WeaponManager weaponManager;
+    private PlayerTargeting playerTargeting;
 
     private void Start()
     {
         SetCursorState(cursorLocked);
         weaponManager = GetComponent<WeaponManager>();
+        playerTargeting = GetComponent<PlayerTargeting>();
     }
 
     public void OnMove(InputAction.CallbackContext context) // 움직임 값
@@ -84,6 +88,23 @@ public class InputManager : Singleton<InputManager>
         {
             sprintKey = false;
             PlayerController.animator.SetBool(AnimString.instance.sprint, false);
+        }
+    }
+
+    public void OnAim(InputAction.CallbackContext context) // 조준 키 총무기 이용시 사용
+    {
+        if (isPause)
+            return;
+
+        if (context.performed)
+        {
+            AimKey = true;
+            //PlayerController.animator.SetBool(AnimString.instance.sprint, true); // 상태 체크
+        }
+        else if (context.canceled)
+        {
+            AimKey = false;
+            //PlayerController.animator.SetBool(AnimString.instance.sprint, false);
         }
     }
 
@@ -208,8 +229,9 @@ public class InputManager : Singleton<InputManager>
 
         if (context.started)
         {
-            PlayerTargeting.targetEnemy = PlayerTargeting.enemy; // 키를 누를 때마다 고정할 적을 갱신
-            PlayerTargeting.fastentargeting = !PlayerTargeting.fastentargeting;
+            playerTargeting.targetEnemy = playerTargeting.enemy; // 키를 누를 때마다 고정할 적을 갱신
+            playerTargeting.fastentargeting = !playerTargeting.fastentargeting;
+            playerTargeting.Targeting();
         }
     }
     public void OnWeapon1(InputAction.CallbackContext context)

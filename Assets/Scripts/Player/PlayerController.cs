@@ -1,3 +1,5 @@
+using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private GameObject mainCamera;
     private PlayerInput playerInput;
     private CharacterStats characterStats;
+    private PlayerTargeting playerTargeting;
 
     // 애니메이션 스피드 파라미터값
     private float blendSpeed;
@@ -39,12 +42,12 @@ public class PlayerController : MonoBehaviour
     [Tooltip("카메라가 따라갈 Camera Root 게임 오브젝트 설정")]
     public GameObject cinemachineCameraTarget;
 
-    [Tooltip("카메라 로테이션 위치조절 Y")]
+    [Tooltip("위에 어느정도까지 쳐다 볼지 이값 이상은 올려보지 않는다 사용 90도 이상은 주의")]
     public float topClamp = 70.0f;
-    [Tooltip("카메라 로테이션 위치조절 Y")]
+    [Tooltip("적을 타겟팅 할때 고정할 위치")]
     public float fastenTopClamp = 25.0f;
 
-    [Tooltip("카메라 로테이션 위치조절 Y")]
+    [Tooltip("아래는 어느정도 쳐다 볼지 이값 이하로는 내려보지 않는다")]
     public float bottomClamp = -30.0f;
 
     private float targetRotation;
@@ -87,6 +90,7 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         characterStats = GetComponent<CharacterStats>();
+        playerTargeting = GetComponent<PlayerTargeting>();
     }
     private void Start()
     {
@@ -137,11 +141,11 @@ public class PlayerController : MonoBehaviour
             cinemachineCameraTarget.transform.rotation = beforCameraRotation;
         }
 
-        if (PlayerTargeting.fastentargeting && PlayerTargeting.targetEnemy)
+        if (playerTargeting.fastentargeting && playerTargeting.targetEnemy)
         {
             lockCameraPosition = true;
 
-            Vector3 tadir = PlayerTargeting.targetEnemy.transform.position - cinemachineCameraTarget.transform.position;
+            Vector3 tadir = playerTargeting.targetEnemy.transform.position - cinemachineCameraTarget.transform.position;
 
             cinemachineCameraTarget.transform.forward = tadir;
             Quaternion lookRot = cinemachineCameraTarget.transform.rotation;
@@ -235,11 +239,11 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, rotation, 0f); // 플레이어가 카메라랑 같은 방향 회전
         }
 
-        if (PlayerTargeting.fastentargeting && PlayerTargeting.targetEnemy && InputManager.Instance.sprintKey == false && hasroll == false) // 고정 하고 적이 있으면 그리고 달리기 키를 누르지 않으면
+        if (playerTargeting.fastentargeting && playerTargeting.targetEnemy && InputManager.Instance.sprintKey == false && hasroll == false) // 고정 하고 적이 있으면 그리고 달리기 키를 누르지 않으면
         {
             //animator.SetLayerWeight(3, 1);
             animator.SetBool(AnimString.Instance.fasten, true);
-            transform.LookAt(PlayerTargeting.targetEnemy.transform);
+            transform.LookAt(playerTargeting.targetEnemy.transform);
         }
         else
         {
@@ -312,4 +316,6 @@ public class PlayerController : MonoBehaviour
             verticalVelocity += gravity * Time.deltaTime;
         }
     }
+
+    
 }
