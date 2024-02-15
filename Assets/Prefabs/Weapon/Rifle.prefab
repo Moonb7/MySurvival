@@ -199,6 +199,10 @@ MonoBehaviour:
   weaponAudioSource: {fileID: 6718811557878356055}
   weaponPos: {x: -0.032, y: -0.034, z: 0.009}
   weaponRot: {x: 72.13, y: 52.827, z: 46.847}
+  normalAttackDamageMultiplier: 1
+  chagingAttackDamageMultiplier: 5
+  skill1AttackDamageMultiplier: 5
+  skill2AttackDamageMultiplier: 5
   attackEffect: {fileID: 206906933502295669, guid: 86f6990ec880fac40a2f7d3253cc8d79,
     type: 3}
   chargingEffect: {fileID: 448892067746066297, guid: b71eee2339a6f8049952e1e3e227e1d4,

@@ -1,5 +1,6 @@
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PlayerTargeting : MonoBehaviour
@@ -115,18 +116,27 @@ public class PlayerTargeting : MonoBehaviour
     }
     private void AimCheck()
     {
-        Transform camTransform = Camera.main.transform;
-        RaycastHit hit;
-
-        if (Physics.Raycast(camTransform.position, camTransform.forward, out hit, Mathf.Infinity,enemyLayer))
-        {
-            Debug.Log("Name : " + hit.transform.gameObject.name);
-        }
-
         if (InputManager.Instance.AimKey) // 조건 추가 해야 한다 총무기를 들었을때만 이용하게 만들예정
         {
             aimCam.gameObject.SetActive(true);
             aimImage.SetActive(true);
+
+            Vector3 targetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
+                Input.mousePosition.y, Camera.main.transform.position.z));
+
+            /*Transform camTransform = Camera.main.transform;
+            RaycastHit hit;
+
+            if (Physics.Raycast(camTransform.position, camTransform.forward, out hit, Mathf.Infinity, enemyLayer))
+            {
+                targetPosition = hit.point;
+            }*/
+
+            //Vector3 targetAim = targetPosition; // 캐릭터가 쳐다볼 Vector3값
+            //targetAim.y = transform.position.y;
+            Vector3 aimDir = (targetPosition - transform.position).normalized; // normaliazed로 하면 방향값만 가지게 된다.
+
+            transform.forward = Vector3.Lerp(transform.forward,aimDir,Time.deltaTime * 50f);
         }
         else
         {
