@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerTargeting : MonoBehaviour
 {
-    [SerializeField] 
-    private float aroundOffset;
     [SerializeField]
     private LayerMask enemyLayer;
     [SerializeField] 
@@ -17,9 +15,11 @@ public class PlayerTargeting : MonoBehaviour
 
     public new Collider[] collider;
 
+    [HideInInspector]
     public GameObject enemy = null;
-    public bool fastentargeting;
+    [HideInInspector]
     public GameObject targetEnemy = null;
+    public bool fastentargeting;
 
     public RectTransform targetUI;
     public RawImage targetImage; // 타겟 이미지를 가리키는 Image 컴포넌트를 저장할 변수
@@ -30,6 +30,10 @@ public class PlayerTargeting : MonoBehaviour
     private CinemachineVirtualCamera aimCam;
     [SerializeField]
     private GameObject aimImage;
+    [SerializeField]
+    private GameObject aimObj;
+    [SerializeField]
+    private float aimObjDis;
 
     //private float distanceToTarget;
     //public float toTarget; // 확인용
@@ -124,16 +128,22 @@ public class PlayerTargeting : MonoBehaviour
             Vector3 targetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
                 Input.mousePosition.y, Camera.main.transform.position.z));
 
-            /*Transform camTransform = Camera.main.transform;
+            Transform camTransform = Camera.main.transform;
             RaycastHit hit;
 
             if (Physics.Raycast(camTransform.position, camTransform.forward, out hit, Mathf.Infinity, enemyLayer))
             {
                 targetPosition = hit.point;
-            }*/
+                aimObj.transform.position = hit.point;
+            }
+            else
+            {
+                targetPosition = camTransform.position + camTransform.forward * aimObjDis;
+                aimObj.transform.position = camTransform.position + camTransform.forward * aimObjDis;
+            }
 
-            //Vector3 targetAim = targetPosition; // 캐릭터가 쳐다볼 Vector3값
-            //targetAim.y = transform.position.y;
+            Vector3 targetAim = targetPosition; // 캐릭터가 쳐다볼 Vector3값
+            targetAim.y = transform.position.y;
             Vector3 aimDir = (targetPosition - transform.position).normalized; // normaliazed로 하면 방향값만 가지게 된다.
 
             transform.forward = Vector3.Lerp(transform.forward,aimDir,Time.deltaTime * 50f);
@@ -143,13 +153,5 @@ public class PlayerTargeting : MonoBehaviour
             aimCam.gameObject.SetActive(false);
             aimImage.SetActive(false);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (!drawGizmo) return;
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(transform.position - transform.up * aroundOffset, radius);
     }
 }
